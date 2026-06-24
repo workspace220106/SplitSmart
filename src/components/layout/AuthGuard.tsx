@@ -10,6 +10,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = pathname === '/auth';
   const isSetupProfilePage = pathname === '/setup-profile';
+  const isWelcomePage = pathname === '/welcome';
+  const isRootPage = pathname === '/';
   const { firebaseUser, user, isLoading, isInitialized, initialize } = useAuthStore();
 
   useEffect(() => {
@@ -22,14 +24,14 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     if (!isInitialized || isLoading) return;
 
     if (!firebaseUser) {
-      // If not logged in and not on the auth page, redirect to /auth
-      if (!isAuthPage) {
+      // If not logged in and not on public pages, redirect to /auth
+      if (!isAuthPage && !isWelcomePage && !isRootPage) {
         router.push('/auth');
       }
     } else {
       // If logged in but the Firestore profile does not exist, redirect to /setup-profile
       if (!user) {
-        if (!isSetupProfilePage) {
+        if (!isSetupProfilePage && !isRootPage) {
           router.push('/setup-profile');
         }
       } else {
@@ -39,7 +41,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
         }
       }
     }
-  }, [firebaseUser, user, isInitialized, isLoading, pathname, router, isAuthPage, isSetupProfilePage]);
+  }, [firebaseUser, user, isInitialized, isLoading, pathname, router, isAuthPage, isSetupProfilePage, isWelcomePage, isRootPage]);
 
   // Show a dark screen loader while checking authentication state
   if (!isInitialized || isLoading) {

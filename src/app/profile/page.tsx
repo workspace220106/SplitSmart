@@ -76,8 +76,8 @@ export default function ProfilePage() {
           {/* Avatar Ring */}
           <div className="relative shrink-0 select-none group">
             <div className="w-24 h-24 rounded-full p-[3px] bg-gradient-to-tr from-primary via-secondary to-tertiary animate-[spin_8s_linear_infinite] group-hover:animate-[spin_4s_linear_infinite] transition-all">
-              <div className="w-full h-full rounded-full border-4 border-black bg-zinc-900 overflow-hidden">
-                <img src="/avatar_a.png" alt="Profile" className="w-full h-full object-cover" />
+              <div className="w-full h-full rounded-full border-4 border-black bg-zinc-900 overflow-hidden flex items-center justify-center cursor-pointer hover:bg-zinc-800/80 transition-colors">
+                <span className="material-symbols-outlined text-zinc-500 text-[28px] group-hover:text-primary group-hover:scale-110 transition-all duration-300 select-none">add_a_photo</span>
               </div>
             </div>
             {/* Level badge */}
