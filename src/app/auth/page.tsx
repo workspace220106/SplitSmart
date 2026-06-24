@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   loginWithEmail, 
@@ -19,6 +19,33 @@ export default function AuthPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
+
+  // Boot sequence states
+  const [booting, setBooting] = useState(true);
+  const [bootProgress, setBootProgress] = useState(0);
+  const [bootText, setBootText] = useState('INITIALIZING SECURE PORT...');
+
+  useEffect(() => {
+    const steps = [
+      { progress: 15, text: 'LAUNCHING CREDENTIAL KEYRING...' },
+      { progress: 38, text: 'TESTING AUTH CRYPTO SHIELD... OK' },
+      { progress: 62, text: 'ESTABLISHING SECURE GATEWAY SOCKET... OK' },
+      { progress: 85, text: 'SYNCHRONIZING WITH AUTH_MATRIX... OK' },
+      { progress: 100, text: 'OPENING SECURE NODE PORT... READY' },
+    ];
+    let stepIdx = 0;
+    const interval = setInterval(() => {
+      if (stepIdx < steps.length) {
+        setBootProgress(steps[stepIdx].progress);
+        setBootText(steps[stepIdx].text);
+        stepIdx++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => setBooting(false), 200);
+      }
+    }, 220); // Smooth and swift retro boot sequence
+    return () => clearInterval(interval);
+  }, []);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,6 +107,43 @@ export default function AuthPage() {
       router.push('/split');
     }, 1200);
   };
+
+  if (booting) {
+    return (
+      <div className="min-h-screen bg-black text-primary font-mono flex flex-col items-center justify-center p-6 relative overflow-hidden">
+        {/* CRT Scanline effect */}
+        <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px]"></div>
+        
+        <div className="w-full max-w-md border border-primary p-6 space-y-6 relative screen-glow bg-black">
+          <div className="flex justify-between items-center text-[10px] uppercase text-zinc-500 border-b border-primary/20 pb-2">
+            <span>[AUTH_BOOT_SEQUENCE]</span>
+            <span>REV_4.2.0_SECURE</span>
+          </div>
+
+          <div className="space-y-2 text-xs uppercase tracking-wider text-left min-h-[96px]">
+            <p className="text-zinc-600">// AUTH_GATEWAY_SYS_V4.2.0</p>
+            <p className="text-zinc-400">Connection: SECURE SOCKET SHIELD</p>
+            <p className="text-zinc-400">Status: SHIELD ENCRYPTED</p>
+            <div className="h-4"></div>
+            <p className="font-bold text-primary animate-pulse">{bootText}</p>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full border border-primary/40 bg-zinc-950/50 h-6 p-0.5 flex">
+            <div 
+              className="bg-primary h-full transition-all duration-200 shadow-[0_0_10px_#FFD300]" 
+              style={{ width: `${bootProgress}%` }}
+            />
+          </div>
+
+          <div className="flex justify-between items-center text-[9px] text-zinc-600">
+            <span>SECTOR_SYNC: {bootProgress}%</span>
+            <span className="animate-ping font-bold text-secondary">LOADING...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white font-body flex flex-col items-center justify-center p-4 relative overflow-hidden">
