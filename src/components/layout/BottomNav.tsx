@@ -9,7 +9,6 @@ const BottomNav = () => {
 
   const navItems = [
     { label: 'ARENA', icon: 'stadium', path: '/arena' },
-    { label: 'AGENT', icon: 'smart_toy', path: '/agent' },
     { label: 'MANIFEST', icon: 'inventory_2', path: '/portfolio' },
     { label: 'QUESTS', icon: 'military_tech', path: '/missions' },
     { label: 'STORE', icon: 'shopping_cart', path: '/store' },

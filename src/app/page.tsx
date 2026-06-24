@@ -3,14 +3,24 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useUserStore } from '@/store/userStore';
+import { useAuthStore } from '@/store/authStore';
+import Header from '@/components/layout/Header';
+import BottomNav from '@/components/layout/BottomNav';
 
 export default function LandingPage() {
   const { user } = useUserStore();
+  const { firebaseUser } = useAuthStore();
   const [booting, setBooting] = useState(true);
   const [bootProgress, setBootProgress] = useState(0);
   const [bootText, setBootText] = useState('INITIALIZING PORT CONSOLE...');
 
   useEffect(() => {
+    // If user is already logged in, skip boot sequence
+    if (firebaseUser) {
+      setBooting(false);
+      return;
+    }
+
     const steps = [
       { progress: 10, text: 'LAUNCHING SYSTEM CORE...' },
       { progress: 28, text: 'TESTING RAM MEMORY MATRIX... OK' },
@@ -31,9 +41,9 @@ export default function LandingPage() {
       }
     }, 280);
     return () => clearInterval(interval);
-  }, []);
+  }, [firebaseUser]);
 
-  if (booting) {
+  if (booting && !firebaseUser) {
     return (
       <div className="min-h-screen bg-black text-primary font-mono flex flex-col items-center justify-center p-6 relative overflow-hidden">
         {/* CRT Scanline effect */}
@@ -70,6 +80,108 @@ export default function LandingPage() {
     );
   }
 
+  // LOGGED IN DASHBOARD
+  if (firebaseUser) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] text-white font-body pb-24 md:pb-8 pt-16">
+        <Header />
+        
+        <main className="container mx-auto p-4 md:p-6 max-w-5xl mt-6 space-y-6">
+          {/* Profile Card */}
+          <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden">
+            {/* Subtle glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#00abec]/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            {/* Avatar Area */}
+            <div className="relative shrink-0 mt-2">
+               <div className="w-24 h-24 rounded-full border-[3px] border-zinc-800 overflow-hidden bg-zinc-900">
+                  <img src="/avatar_a.png" alt="Profile" className="w-full h-full object-cover" />
+               </div>
+               {/* LVL Badge */}
+               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-primary text-black font-headline font-black text-[10px] px-3 py-1 rounded-full shadow-lg flex items-center gap-1 border-2 border-[#121212] whitespace-nowrap">
+                  <span className="material-symbols-outlined text-[10px]">star</span>
+                  LVL {user.level}
+               </div>
+            </div>
+
+            {/* Profile Details */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left pt-2">
+               <h2 className="text-xl md:text-2xl font-bold font-headline tracking-wide">{user.name}</h2>
+               <p className="text-zinc-500 text-sm italic mt-1 font-body">"Professional Financial Arcade Player"</p>
+               
+               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
+                  <div className="flex items-center gap-1.5 border border-green-500/30 bg-green-500/10 text-green-500 px-3 py-1.5 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider">
+                     <span className="material-symbols-outlined text-[14px]">verified_user</span>
+                     KYC Verified
+                  </div>
+                  <div className="flex items-center gap-1.5 border border-zinc-700 bg-zinc-800/50 text-zinc-300 px-3 py-1.5 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider">
+                     <span className="material-symbols-outlined text-[14px]">schedule</span>
+                     Joined Recently
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+             {/* Vault Balance */}
+             <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-primary/50 transition-colors">
+                <div className="flex justify-between items-start mb-6">
+                   <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500 group-hover:text-primary transition-colors">Vault Balance</div>
+                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                      <span className="material-symbols-outlined">account_balance_wallet</span>
+                   </div>
+                </div>
+                <div>
+                   <div className="text-4xl font-headline font-black tracking-tight">₹{user.pacTokens}</div>
+                </div>
+             </div>
+
+             {/* Arcade XP */}
+             <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-[#00abec]/50 transition-colors">
+                <div className="flex justify-between items-start mb-6">
+                   <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500 group-hover:text-[#00abec] transition-colors">Arcade XP</div>
+                   <div className="w-10 h-10 rounded-xl bg-[#00abec]/10 flex items-center justify-center text-[#00abec]">
+                      <span className="material-symbols-outlined">stars</span>
+                   </div>
+                </div>
+                <div>
+                   <div className="text-4xl font-headline font-black mb-4 tracking-tight">{user.xp} <span className="text-xl text-zinc-600 font-bold">XP</span></div>
+                   <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden">
+                      <div className="h-full bg-[#00abec] shadow-[0_0_10px_#00abec]" style={{ width: '45%' }}></div>
+                   </div>
+                </div>
+             </div>
+
+             {/* Achievements */}
+             <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-secondary/50 transition-colors">
+                <div className="flex justify-between items-start mb-6">
+                   <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500 group-hover:text-secondary transition-colors">Achievements</div>
+                   <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+                      <span className="material-symbols-outlined">military_tech</span>
+                   </div>
+                </div>
+                <div className="flex gap-3">
+                   <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 opacity-50 hover:opacity-100 transition-opacity">
+                      <span className="material-symbols-outlined">egg</span>
+                   </div>
+                   <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 opacity-50 hover:opacity-100 transition-opacity">
+                      <span className="material-symbols-outlined">shield</span>
+                   </div>
+                   <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 opacity-50 hover:opacity-100 transition-opacity">
+                      <span className="material-symbols-outlined">diamond</span>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </main>
+
+        <BottomNav />
+      </div>
+    );
+  }
+
+  // NOT LOGGED IN MARKETING PAGE
   return (
     <div className="min-h-screen bg-black text-white font-body overflow-hidden flex flex-col items-center justify-center p-6 relative">
       {/* Arcade cabinet background effects */}
@@ -84,12 +196,9 @@ export default function LandingPage() {
       <main className="relative z-10 flex flex-col items-center text-center max-w-4xl">
         <div className="relative mb-8 group">
            <h1 className="font-headline text-7xl md:text-9xl font-black text-primary italic tracking-tight drop-shadow-[0_0_30px_rgba(255,211,0,0.4)] transition-all group-hover:drop-shadow-[0_0_50px_rgba(255,211,0,0.7)]">
-             SPLIT_SMART
+             PAC<span className="text-white">PAY</span>
            </h1>
-           <div className="absolute -top-4 -right-8 text-secondary font-mono text-sm animate-bounce">NEW!</div>
         </div>
-        
-
         
         <p className="font-body text-zinc-400 text-lg md:text-xl leading-relaxed mb-16 uppercase tracking-[0.2em] max-w-[600px] border-l-2 border-r-2 border-primary/20 px-8">
            The Retro-Futuristic <span className="text-primary font-bold">Token Exchange</span> Matrix for the Elite Gamer.
@@ -97,30 +206,15 @@ export default function LandingPage() {
 
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-lg">
            <Link 
-             href="/arena" 
+             href="/auth" 
              className="flex-1 bg-primary text-black font-headline font-black py-5 text-lg uppercase tracking-[0.3em] hover:bg-white hover:shadow-[0_0_40px_rgba(255,211,0,0.6)] transition-all flex justify-center items-center gap-3 group relative overflow-hidden"
            >
               {/* Internal glow animation */}
               <div className="absolute top-0 -left-1/2 w-1/4 h-full bg-white/20 skew-x-12 translate-x-[-100%] group-hover:animate-shine transition-all"></div>
-              INSERT COIN
+              START SYSTEM
               <span className="material-symbols-outlined font-bold group-hover:translate-x-2 transition-transform">play_arrow</span>
            </Link>
-           
-           <Link 
-             href="/agent" 
-             className="flex-1 bg-black border-2 border-primary/30 text-primary font-headline font-bold py-5 uppercase tracking-[0.3em] hover:border-primary hover:bg-primary/5 transition-all flex justify-center items-center gap-2"
-           >
-              AI Agent Manager
-           </Link>
         </div>
-
-        <Link 
-          href="/split" 
-          className="mt-4 w-full max-w-lg bg-black border-2 border-secondary/30 text-secondary font-headline font-bold py-5 uppercase tracking-[0.3em] hover:border-secondary hover:bg-secondary/5 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] transition-all flex justify-center items-center gap-3 group"
-        >
-           <span className="material-symbols-outlined text-xl group-hover:rotate-180 transition-transform duration-500">call_split</span>
-           Split Expenses
-        </Link>
 
         {/* Footer Technical Overlay */}
         <div className="mt-24 w-full flex flex-col md:flex-row justify-between font-mono text-[9px] text-zinc-700 tracking-[0.3em] border-t border-zinc-900 pt-6 gap-4">
@@ -134,16 +228,6 @@ export default function LandingPage() {
            </div>
         </div>
       </main>
-
-      {/* Retro HUD edge markers */}
-      <div className="fixed left-8 bottom-1/4 hidden lg:flex flex-col gap-12 font-mono text-[9px] text-zinc-800 rotate-180 [writing-mode:vertical-lr] tracking-[0.5em] uppercase">
-         <span>Hardware_Acceleration_Stream</span>
-         <span className="text-secondary opacity-50">Matrix_Buffer_Synced</span>
-      </div>
-      <div className="fixed right-8 top-1/4 hidden lg:flex flex-col gap-12 font-mono text-[9px] text-zinc-800 [writing-mode:vertical-lr] tracking-[0.5em] uppercase">
-         <span>User_Credential_Validation</span>
-         <span className="text-primary opacity-50">Token_Logic_Active</span>
-      </div>
 
       {/* CRT flicker effect */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px] animate-pulse"></div>
