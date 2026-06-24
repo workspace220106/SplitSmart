@@ -8,6 +8,7 @@ import FloatingChatbot from '@/components/agent/FloatingChatbot';
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
+  const isAuthPage = pathname === '/auth';
   const { firebaseUser, isLoading, isInitialized, initialize } = useAuthStore();
 
   useEffect(() => {
@@ -18,8 +19,6 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!isInitialized || isLoading) return;
-
-    const isAuthPage = pathname === '/auth';
 
     if (!firebaseUser) {
       // If not logged in and not on the auth page, redirect to /auth
