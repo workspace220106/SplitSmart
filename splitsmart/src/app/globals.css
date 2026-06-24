@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  /* Pacman Arcade Core Palette */
+  --color-primary: #FFD300;      /* Pacman Yellow */
+  --color-secondary: #00F0FF;    /* Ghost Cyan/Inky Blue */
+  --color-tertiary: #FFB8FF;     /* Pinky Pink */
+  --color-error: #FF0000;        /* Blinky Red */
+  --color-background: #000000;   /* Void Black */
+  
+  --color-surface: #121212;
+  --color-on-surface: #FFFFFF;
+  --color-on-surface-variant: #A0A0A0;
+  --color-outline: #2A2A2A;
+  --color-outline-variant: #1F1F1F;
+
+  --color-border: #2A2A2A;
+  --color-muted: #1F1F1F;
+
+  /* Typography */
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --animate-pulse-soft: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-shine: shine 0.5s ease-in-out forwards;
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  @keyframes shine {
+    0% { transform: translateX(-100%) skewX(12deg); }
+    100% { transform: translateX(400%) skewX(12deg); }
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+  }
+}
+
+:root {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #000000;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Retro CRT Scanline Effect */
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 100;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Custom Terminal Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #FFD300;
+  border-radius: 0;
+}
+
+/* Arcade Neon Text */
+.neon-primary {
+  text-shadow: 0 0 5px #FFD300, 0 0 12px rgba(255, 211, 0, 0.6);
+}
+
+.neon-secondary {
+  text-shadow: 0 0 5px #00F0FF, 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+.neon-tertiary {
+  text-shadow: 0 0 5px #FFB8FF, 0 0 12px rgba(255, 184, 255, 0.6);
+}
+
+/* Bento Grid HUD Item */
+.hud-card {
+  border: 1px solid rgba(255, 211, 0, 0.25);
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hud-card:hover {
+  border-color: rgba(255, 211, 0, 0.55);
+  box-shadow: 0 0 25px rgba(255, 211, 0, 0.15);
+}
+
+.hud-card-secondary {
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hud-card-secondary:hover {
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+}
+
+/* CRT Screen Glow overlay for modals */
+.screen-glow {
+  box-shadow: inset 0 0 80px rgba(0, 240, 255, 0.1), 0 0 40px rgba(255, 211, 0, 0.15);
+}

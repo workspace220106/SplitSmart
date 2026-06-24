@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PacPay - Token Exchange Arena</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#48474a",
+                        "error": "#ff716c",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-tertiary-fixed-variant": "#600084",
+                        "on-tertiary": "#390050",
+                        "tertiary-fixed": "#e092ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#0e0e10",
+                        "secondary-fixed": "#f2e805",
+                        "on-secondary-container": "#fffac6",
+                        "tertiary-fixed-dim": "#d97dff",
+                        "surface-container-highest": "#262528",
+                        "secondary-dim": "#e3d900",
+                        "on-tertiary-fixed": "#2c003f",
+                        "error-container": "#9f0519",
+                        "inverse-on-surface": "#565557",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#131315",
+                        "primary-fixed": "#00eefc",
+                        "inverse-primary": "#006a71",
+                        "surface": "#0e0e10",
+                        "on-error": "#490006",
+                        "on-surface-variant": "#adaaad",
+                        "surface-variant": "#262528",
+                        "on-primary-container": "#005359",
+                        "on-secondary-fixed": "#444100",
+                        "surface-tint": "#8ff5ff",
+                        "on-primary-fixed": "#003f43",
+                        "primary-fixed-dim": "#00deec",
+                        "on-background": "#f9f5f8",
+                        "tertiary-container": "#bb00fd",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#656100",
+                        "secondary": "#f2e805",
+                        "surface-container": "#19191c",
+                        "tertiary": "#d674ff",
+                        "primary": "#8ff5ff",
+                        "surface-container-high": "#1f1f22",
+                        "inverse-surface": "#fcf8fb",
+                        "on-secondary": "#585400",
+                        "surface-dim": "#0e0e10",
+                        "secondary-fixed-dim": "#e3d900",
+                        "on-secondary-fixed-variant": "#625e00",
+                        "on-surface": "#f9f5f8",
+                        "primary-dim": "#00deec",
+                        "on-primary": "#005d63",
+                        "surface-bright": "#2c2c2f",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#00eefc",
+                        "outline": "#767577",
+                        "tertiary-dim": "#bb00fd"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    fontFamily: {
+                        headline: ["Space Grotesk", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Space Grotesk", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-24 md:pb-0 pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full border-b border-[#00F0FF]/20 flex justify-between items-center px-6 h-16 z-50 bg-black/90 backdrop-blur-xl shadow-[0_0_15px_rgba(0,240,255,0.1)] tonal-shift via-surface-container-low">
+<div class="text-2xl font-black text-[#00F0FF] italic tracking-tighter">
+            PAC_PAY
+        </div>
+<div class="hidden md:flex gap-6 font-['Space_Grotesk'] uppercase tracking-widest text-sm">
+<a class="text-[#00F0FF] border-b-2 border-[#00F0FF] hover:text-[#8ff5ff] transition-colors Active: ring-1 ring-[#00F0FF] transition-all" href="#">ORACLE_AI</a>
+</div>
+<div class="flex items-center gap-4">
+<!-- User Level/XP HUD -->
+<div class="hidden md:flex items-center gap-3 bg-surface-container px-3 py-1 border border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-headline text-[10px] text-secondary tracking-widest uppercase">Elite Trader</span>
+<span class="font-mono text-xs text-on-surface">LVL 12</span>
+</div>
+<div class="w-24 h-2 bg-surface-variant flex gap-[1px]">
+<div class="w-1/5 h-full bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.4)]"></div>
+<div class="w-1/5 h-full bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.4)]"></div>
+<div class="w-1/5 h-full bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.4)]"></div>
+<div class="w-1/5 h-full bg-surface-container-low"></div>
+<div class="w-1/5 h-full bg-surface-container-low"></div>
+</div>
+</div>
+<button class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<img alt="User Rank Avatar" class="w-8 h-8 object-cover border border-primary" data-alt="High contrast, cyberpunk portrait of a male avatar with neon cyan lighting on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDppdpFbny3BV0cd2j7VWMCMnwc38ZLZK7MnJs1lO2mvzmy8WKkxJjCLXbicvg-N3Bdmr9rk_UfZ48kIkUXt5I43p_X1EBmpQkViPOfRHKVmNu9IvJ_HY8KZ9uLv7t8jOzssY-VfJwkCl7waWVTW5zI4u5jYEZF5wUQYk-SnkKRnouuRdiRsAKk58zXGHBd_OD2SmrDBTJiy19wtw3bgd51wPxNkHcqPiKiwDaNH0eW86IOwlIHvEdxyZBu9EiWTmEDp2l9SrxUT8k"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="container mx-auto p-4 md:p-6 lg:p-8 max-w-[1600px] mt-4">
+<div class="flex items-center justify-between mb-8">
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-widest text-on-surface uppercase">
+                Token Exchange <span class="text-primary">Arena</span>
+</h1>
+<div class="hidden lg:flex items-center gap-2 text-sm font-mono text-outline-variant">
+<span>SYSTEM.STATUS:</span>
+<span class="text-primary animate-pulse">ONLINE</span>
+<span class="ml-4">LATENCY:</span>
+<span class="text-secondary">12MS</span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Center Chart Area (Span 8) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Quick Stats / Toggles -->
+<div class="flex flex-col md:flex-row gap-4 justify-between items-start md:items-end">
+<div class="flex gap-2 font-headline text-sm uppercase">
+<button class="bg-primary/10 text-primary border border-primary px-4 py-2 hover:bg-primary/20 transition-colors shadow-[inset_0_0_10px_rgba(143,245,255,0.1)]">Crypto</button>
+<button class="bg-surface-container text-on-surface-variant border border-outline-variant/30 px-4 py-2 hover:bg-surface-container-high transition-colors">Tech</button>
+<button class="bg-surface-container text-on-surface-variant border border-outline-variant/30 px-4 py-2 hover:bg-surface-container-high transition-colors">Energy</button>
+</div>
+<div class="flex gap-6 bg-surface-container-low p-4 border-l-2 border-primary">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-headline uppercase tracking-widest">NEO-BTC Price</span>
+<span class="font-mono text-2xl text-on-surface">$64,289<span class="text-sm text-outline-variant">.42</span></span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant font-headline uppercase tracking-widest">24H Change</span>
+<span class="font-mono text-xl text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+                                +4.28%
+                            </span>
+</div>
+</div>
+</div>
+<!-- Main Chart Canvas -->
+<div class="bg-surface-container border border-outline-variant/20 relative h-[400px] w-full group overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-surface/0 to-surface/0 pointer-events-none"></div>
+<div class="absolute inset-0 border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<!-- Chart Background Image placeholder -->
+<div class="w-full h-full bg-surface-container-lowest flex items-center justify-center border-b border-primary/20 relative">
+<img alt="Trading Chart" class="w-full h-full object-cover opacity-40 mix-blend-screen" data-alt="Abstract dark financial chart with glowing neon cyan lines representing stock market or crypto trading data" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJXj7tsbEP3Eu70TWBE1p1r5z-p_BDIY2I38QolACKCZjjcsjaY8dix2YZL-QcebjZuduWjMaEIqaXXbaf8GsIiA4-6dsqKtJ4T7X7doM3SPTO8PTV5lfPmXuJyeyJo8FdCCp2KkMBB_i6n7Ez3Ddfq_tojYAEemdJc_w35Vj46SbU4nZ1vi-IodDKrNhX3lEZqtrNvTsOdpdw1B5WAoPIXKP6q8pdxmg_6Gj5XUOGdPL1m8i7zy-Q12Jgh_OSZ25XBC8RW-Pgfbw"/>
+<!-- Overlay grid for tech feel -->
+<div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+<!-- Mock current price line -->
+<div class="absolute right-0 top-1/3 flex items-center gap-2">
+<div class="w-full h-px bg-primary/50 absolute -left-[800px]"></div>
+<div class="bg-primary text-on-primary font-mono text-xs px-2 py-1 shadow-[0_0_10px_rgba(143,245,255,0.5)]">$64,289.42</div>
+</div>
+</div>
+<!-- Timeframe Toggles -->
+<div class="absolute bottom-4 left-4 flex gap-1 font-mono text-[10px]">
+<button class="bg-surface-container text-on-surface-variant px-2 py-1 hover:text-on-surface">1H</button>
+<button class="bg-surface-container text-on-surface-variant px-2 py-1 hover:text-on-surface">4H</button>
+<button class="bg-primary/20 text-primary border border-primary/50 px-2 py-1 shadow-[0_0_5px_rgba(143,245,255,0.2)]">1D</button>
+<button class="bg-surface-container text-on-surface-variant px-2 py-1 hover:text-on-surface">1W</button>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Area (Span 4) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Trade Execution Terminal -->
+<div class="bg-surface-container border border-outline-variant/30 p-5 flex flex-col gap-4 relative overflow-hidden">
+<!-- Accent corner -->
+<div class="absolute top-0 right-0 w-8 h-8 bg-surface-container border-l border-b border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-outline-variant">code</span>
+</div>
+<h2 class="font-headline text-lg uppercase tracking-widest text-on-surface border-b border-outline-variant/20 pb-2 mb-2">Execute Order</h2>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary font-headline uppercase font-bold py-2 shadow-[0_0_15px_rgba(143,245,255,0.3)] hover:shadow-[0_0_20px_rgba(143,245,255,0.5)] transition-shadow">Buy</button>
+<button class="flex-1 bg-surface-variant text-on-surface font-headline uppercase font-bold py-2 border border-outline-variant hover:bg-surface-container-high transition-colors">Sell</button>
+</div>
+<div class="flex flex-col gap-3 mt-2">
+<div class="flex flex-col gap-1">
+<label class="font-mono text-[10px] text-on-surface-variant uppercase">Amount (NEO-BTC)</label>
+<input class="bg-surface-container-lowest border-0 border-b border-primary text-primary font-mono text-lg focus:ring-0 focus:border-b-2 focus:shadow-[0_2px_10px_rgba(143,245,255,0.2)] transition-all w-full py-1" type="text" value="0.05"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-mono text-[10px] text-on-surface-variant uppercase">Total (USD)</label>
+<input class="bg-surface-container-lowest border-0 border-b border-outline-variant/50 text-on-surface font-mono text-lg focus:ring-0 focus:border-b-primary transition-all w-full py-1" readonly="" type="text" value="$3,214.47"/>
+</div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-mono text-outline-variant mt-2">
+<span>FEE: 0.1%</span>
+<span>MAX: 1.24 BTC</span>
+</div>
+<button class="w-full bg-primary/10 border border-primary text-primary font-headline uppercase py-3 mt-2 hover:bg-primary/20 hover:shadow-[inset_0_0_15px_rgba(143,245,255,0.2)] transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                        Confirm Trade
+                    </button>
+</div>
+<!-- AI Oracle Signal -->
+<div class="bg-surface-container-highest border border-tertiary/30 p-5 backdrop-blur-md relative">
+<!-- Accent side bar -->
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary shadow-[0_0_10px_rgba(214,116,255,0.5)]"></div>
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-headline text-sm uppercase tracking-widest text-tertiary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+                            Oracle Prediction
+                        </h3>
+<span class="bg-tertiary/20 text-tertiary font-mono text-[10px] px-2 py-0.5 border border-tertiary/50">CONF: 87%</span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-4 leading-relaxed">
+                        Neural network analysis indicates strong accumulation in the $63k-$64k zone. Expect upward volatility within 4H.
+                    </p>
+<div class="flex gap-4">
+<div class="flex flex-col">
+<span class="font-mono text-[10px] text-outline-variant">TARGET</span>
+<span class="font-mono text-primary">$66,500</span>
+</div>
+<div class="flex flex-col">
+<span class="font-mono text-[10px] text-outline-variant">RISK</span>
+<span class="font-mono text-secondary">MODERATE</span>
+</div>
+</div>
+</div>
+<!-- Recent Trades Feed -->
+<div class="bg-surface-container border border-outline-variant/20 p-4 flex-1">
+<h3 class="font-headline text-xs uppercase tracking-widest text-on-surface-variant mb-4 border-b border-outline-variant/20 pb-2">Network Feed</h3>
+<div class="flex flex-col gap-4">
+<!-- Trade Item -->
+<div class="flex justify-between items-center group">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xs bg-primary/10 p-1">arrow_downward</span>
+<span class="font-mono text-xs text-on-surface">0.15 BTC</span>
+</div>
+<span class="font-mono text-xs text-primary">$64,289</span>
+<span class="font-mono text-[10px] text-outline-variant">12:04:12</span>
+</div>
+<!-- Trade Item -->
+<div class="flex justify-between items-center group">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-xs bg-error/10 p-1">arrow_upward</span>
+<span class="font-mono text-xs text-on-surface">1.20 BTC</span>
+</div>
+<span class="font-mono text-xs text-error">$64,290</span>
+<span class="font-mono text-[10px] text-outline-variant">12:04:08</span>
+</div>
+<!-- Trade Item -->
+<div class="flex justify-between items-center group">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xs bg-primary/10 p-1">arrow_downward</span>
+<span class="font-mono text-xs text-on-surface">0.05 BTC</span>
+</div>
+<span class="font-mono text-xs text-primary">$64,288</span>
+<span class="font-mono text-[10px] text-outline-variant">12:04:01</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-black fixed bottom-0 w-full h-20 border-t border-zinc-800 surface-container-lowest background with zero radius flat no-shadows font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">
+<a class="flex flex-col items-center justify-center text-[#f2e805] bg-zinc-900 border-t-2 border-[#f2e805] px-2 py-1 Active: scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span>ARENA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>PORTFOLIO</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span>MISSIONS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span>RANKS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span>STORE</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PacPay Store / Power-Ups</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#48474a",
+                        "error": "#ff716c",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-tertiary-fixed-variant": "#600084",
+                        "on-tertiary": "#390050",
+                        "tertiary-fixed": "#e092ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#0e0e10",
+                        "secondary-fixed": "#f2e805",
+                        "on-secondary-container": "#fffac6",
+                        "tertiary-fixed-dim": "#d97dff",
+                        "surface-container-highest": "#262528",
+                        "secondary-dim": "#e3d900",
+                        "on-tertiary-fixed": "#2c003f",
+                        "error-container": "#9f0519",
+                        "inverse-on-surface": "#565557",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#131315",
+                        "primary-fixed": "#00eefc",
+                        "inverse-primary": "#006a71",
+                        "surface": "#0e0e10",
+                        "on-error": "#490006",
+                        "on-surface-variant": "#adaaad",
+                        "surface-variant": "#262528",
+                        "on-primary-container": "#005359",
+                        "on-secondary-fixed": "#444100",
+                        "surface-tint": "#8ff5ff",
+                        "on-primary-fixed": "#003f43",
+                        "primary-fixed-dim": "#00deec",
+                        "on-background": "#f9f5f8",
+                        "tertiary-container": "#bb00fd",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#656100",
+                        "secondary": "#f2e805",
+                        "surface-container": "#19191c",
+                        "tertiary": "#d674ff",
+                        "primary": "#8ff5ff",
+                        "surface-container-high": "#1f1f22",
+                        "inverse-surface": "#fcf8fb",
+                        "on-secondary": "#585400",
+                        "surface-dim": "#0e0e10",
+                        "secondary-fixed-dim": "#e3d900",
+                        "on-secondary-fixed-variant": "#625e00",
+                        "on-surface": "#f9f5f8",
+                        "primary-dim": "#00deec",
+                        "on-primary": "#005d63",
+                        "surface-bright": "#2c2c2f",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#00eefc",
+                        "outline": "#767577",
+                        "tertiary-dim": "#bb00fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glow-text-primary { text-shadow: 0 0 10px rgba(143, 245, 255, 0.5); }
+        .glow-box-primary { box-shadow: inset 0 0 20px rgba(143, 245, 255, 0.05), 0 0 15px rgba(143, 245, 255, 0.1); }
+        .glow-box-secondary { box-shadow: inset 0 0 20px rgba(242, 232, 5, 0.05), 0 0 15px rgba(242, 232, 5, 0.1); }
+        .glow-box-tertiary { box-shadow: inset 0 0 20px rgba(214, 116, 255, 0.05), 0 0 15px rgba(214, 116, 255, 0.1); }
+        
+        .corner-clip {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col pt-16 pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full border-b border-[#00F0FF]/20 bg-black/90 backdrop-blur-xl flex justify-between items-center px-6 h-16 z-50 tonal-shift via-surface-container-low shadow-[0_0_15px_rgba(0,240,255,0.1)]">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#00F0FF] italic tracking-tighter glow-text-primary">PAC_PAY</span>
+<nav class="hidden md:flex gap-6 ml-8">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm text-[#00F0FF] border-b-2 border-[#00F0FF] hover:text-[#8ff5ff] transition-colors h-16 flex items-center" href="#">ORACLE_AI</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm text-zinc-500 hover:text-[#8ff5ff] transition-colors h-16 flex items-center" href="#">ARENA</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm text-zinc-500 hover:text-[#8ff5ff] transition-colors h-16 flex items-center" href="#">PORTFOLIO</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm text-[#f2e805] hover:text-[#8ff5ff] transition-colors h-16 flex items-center glow-text-secondary" href="#">STORE</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors hover:ring-1 hover:ring-[#00F0FF] p-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors hover:ring-1 hover:ring-[#00F0FF] p-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_balance_wallet</span>
+</button>
+<img alt="User Rank Avatar" class="w-8 h-8 rounded-none border border-[#00F0FF]/30 object-cover" data-alt="Cyberpunk style neon lit avatar portrait of a user in a futuristic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC6RnjHCRl-oIp7DSi1Z6kgetJMXvkBXNaqca1ReeZlrGsKGKfQc2UZErcAGGLobC8wLtPuuRcDxbFQBgM-k17OzC0u9rwuNK5xaDjo5VenWz9RPB6RtY4bWdfP4BaEqaDXgwUi17GsynJDab8wMAgmh-IEpvcljOxNbrhrf5hWgQCJwmiILmWlu9y6LF5yXw5j0axugEblK3aWZj08purtNP6AX5BBeaY47pDmC5y149fg_iqjxp5CXRlivq0HEal9ABGGxgoQB4"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col px-4 md:px-8 py-8 max-w-7xl mx-auto w-full">
+<!-- Header & Balance -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+<div>
+<h1 class="font-headline text-3xl md:text-5xl font-bold tracking-tight text-on-surface mb-2">POWER_UPS &amp; PROTOCOLS</h1>
+<p class="text-on-surface-variant font-mono text-sm uppercase tracking-wider">Acquire tactical advantages for your portfolio missions.</p>
+</div>
+<div class="bg-surface-container-lowest border-b border-primary p-4 min-w-[240px] flex items-center justify-between">
+<div>
+<span class="block text-xs font-mono text-primary mb-1 uppercase">Available Credits</span>
+<span class="font-headline text-2xl font-bold text-on-surface">14,250 <span class="text-sm text-primary">PAC</span></span>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl glow-text-primary" style="font-variation-settings: 'FILL' 1;">generating_tokens</span>
+</div>
+</div>
+<!-- Store Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Item Card: AI Boost -->
+<div class="bg-surface-container-low corner-clip flex flex-col relative group border border-transparent hover:border-primary/30 transition-all glow-box-primary">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="p-6 flex-grow">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-4xl text-primary glow-text-primary" style="font-variation-settings: 'FILL' 0;">bolt</span>
+<span class="font-mono text-xs bg-primary/10 text-primary px-2 py-1 uppercase border border-primary/20">Active Buff</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 uppercase">Neural Accelerator</h3>
+<p class="text-sm text-on-surface-variant font-body mb-6">Increases Oracle AI prediction refresh rate by 200% for 24 hours. Gain real-time market foresight.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center text-xs font-mono text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary mr-2" style="font-variation-settings: 'FILL' 1;">check_small</span>
+                            +200% Refresh Rate
+                        </li>
+<li class="flex items-center text-xs font-mono text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary mr-2" style="font-variation-settings: 'FILL' 1;">check_small</span>
+                            Priority Queue Access
+                        </li>
+</ul>
+</div>
+<div class="p-6 pt-0 mt-auto border-t border-surface-container">
+<div class="flex justify-between items-center mb-4 pt-4">
+<span class="text-xs font-mono text-on-surface-variant">COST</span>
+<span class="font-mono text-lg font-bold text-primary">2,500 PAC</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-label font-bold uppercase tracking-wider py-3 hover:bg-primary-container hover:shadow-[0_0_15px_rgba(143,245,255,0.4)] transition-all">
+                        Execute Purchase
+                    </button>
+</div>
+</div>
+<!-- Item Card: Risk Shield -->
+<div class="bg-surface-container-low corner-clip flex flex-col relative group border border-transparent hover:border-secondary/30 transition-all glow-box-secondary">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="p-6 flex-grow">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-4xl text-secondary glow-text-secondary" style="font-variation-settings: 'FILL' 0;">shield</span>
+<span class="font-mono text-xs bg-secondary/10 text-secondary px-2 py-1 uppercase border border-secondary/20">Defensive Protocol</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 uppercase">Aegis Deflector</h3>
+<p class="text-sm text-on-surface-variant font-body mb-6">Automatically liquidates highest-risk asset if portfolio drops &gt;5% in a single session.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center text-xs font-mono text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary mr-2" style="font-variation-settings: 'FILL' 1;">check_small</span>
+                            Auto-Stop Loss (5%)
+                        </li>
+<li class="flex items-center text-xs font-mono text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary mr-2" style="font-variation-settings: 'FILL' 1;">check_small</span>
+                            Valid for 7 Days
+                        </li>
+</ul>
+</div>
+<div class="p-6 pt-0 mt-auto border-t border-surface-container">
+<div class="flex justify-between items-center mb-4 pt-4">
+<span class="text-xs font-mono text-on-surface-variant">COST</span>
+<span class="font-mono text-lg font-bold text-secondary">5,000 PAC</span>
+</div>
+<button class="w-full bg-secondary text-on-secondary font-label font-bold uppercase tracking-wider py-3 hover:bg-secondary-container hover:text-secondary hover:shadow-[0_0_15px_rgba(242,232,5,0.4)] transition-all">
+                        Execute Purchase
+                    </button>
+</div>
+</div>
+<!-- Item Card: XP Multiplier -->
+<div class="bg-surface-container-low corner-clip flex flex-col relative group border border-transparent hover:border-tertiary/30 transition-all glow-box-tertiary">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary"></div>
+<div class="p-6 flex-grow">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-4xl text-tertiary glow-text-tertiary" style="font-variation-settings: 'FILL' 0;">double_arrow</span>
+<span class="font-mono text-xs bg-tertiary/10 text-tertiary px-2 py-1 uppercase border border-tertiary/20">Progression</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2 uppercase">Quantum Catalyst</h3>
+<p class="text-sm text-on-surface-variant font-body mb-6">Double all XP gained from successful Arena missions and portfolio milestones for 48 hours.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center text-xs font-mono text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-tertiary mr-2" style="font-variation-settings: 'FILL' 1;">check_small</span>
+                            2x XP Multiplier
+                        </li>
+<li class="flex items-center text-xs font-mono text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-tertiary mr-2" style="font-variation-settings: 'FILL' 1;">check_small</span>
+                            Stacks with Base Rank
+                        </li>
+</ul>
+</div>
+<div class="p-6 pt-0 mt-auto border-t border-surface-container">
+<div class="flex justify-between items-center mb-4 pt-4">
+<span class="text-xs font-mono text-on-surface-variant">COST</span>
+<span class="font-mono text-lg font-bold text-tertiary">1,200 PAC</span>
+</div>
+<button class="w-full border border-tertiary text-tertiary font-label font-bold uppercase tracking-wider py-3 hover:bg-tertiary/10 hover:shadow-[0_0_15px_rgba(214,116,255,0.2)] transition-all">
+                        Execute Purchase
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full h-20 border-t border-zinc-800 bg-black z-50 flex justify-around items-center surface-container-lowest background with zero radius flat no-shadows">
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">query_stats</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">ARENA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">PORTFOLIO</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">military_tech</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">MISSIONS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">leaderboard</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">RANKS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#f2e805] bg-zinc-900 border-t-2 border-[#f2e805] px-2 py-1 scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">STORE</span>
+</a>
+</nav>
+</body></html>

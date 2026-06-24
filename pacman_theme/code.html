@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arcade Futurism - Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&amp;family=Epilogue:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#FFD300",
+          "background-light": "#000000",
+          "background-dark": "#000000",
+          "surface-container-highest": "#1A1A1A",
+          "surface-bright": "#262626",
+          "surface-container": "#121212",
+          "surface-dim": "#000000",
+          "surface-container-low": "#0D0D0D",
+          "surface-container-high": "#1F1F1F",
+          "surface-container-lowest": "#050505"
+        },
+        fontFamily: {
+          "display": ["Space Grotesk"],
+          headline: ["Space Grotesk", "sans-serif"],
+          body: ["Epilogue", "sans-serif"],
+          label: ["Space Grotesk", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+      },
+    },
+  }</script>
+<style>
+        body { background-color: #000000; color: #e2e2e2; }
+        .neon-glow-primary { box-shadow: 0 0 32px rgba(255, 211, 0, 0.15); }
+        .neon-text-primary { text-shadow: 0 0 8px rgba(255, 211, 0, 0.8); }
+        .ghost-border { border: 1px solid rgba(255, 211, 0, 0.1); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex font-body bg-black">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full z-40 w-64 bg-[#050505] border-r border-zinc-900">
+<div class="p-6 border-b border-zinc-900">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xl text-yellow-400">videogame_asset</span>
+<span class="font-['Space_Grotesk'] font-bold text-yellow-400 text-xl tracking-wider">ARCADE_FINANCE</span>
+</div>
+</div>
+<div class="p-6 flex flex-col items-center border-b border-zinc-900 bg-zinc-900/20">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center mb-3 overflow-hidden border-2 border-outline-variant">
+<img alt="Player Profile" class="w-full h-full object-cover" data-alt="8-bit style pixelated avatar portrait of a character with neon accents against dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyD2moheXbKSfY4oxHIMBb6luta8h0RBZ3AUDe4CfXkDwvZpY_xRldpfjp0yCPfledlNmdxrT7n2Diee5FX5QOos1v3ifXasi-g26frGrtj-jsAv21ubtwMNQVa9NK0voPJI_L5bfMHINt0u54DhhgBXDMlw4vqR0TNaZxnZOKH5MsjmwPul4tQEwCzKIVyAKTbnnr5CITmwGhUk2JxP8r00HMTQqwlaZS2OiirqGNw7YWTIUciWf7fCbh1aCwZYnwP5DZMwe9gmLG"/>
+</div>
+<h3 class="font-headline font-bold text-on-surface">PLAYER_01</h3>
+<p class="text-xs text-on-surface-variant font-label mt-1">LEVEL 42 ARCHMAGE</p>
+</div>
+<div class="flex-1 overflow-y-auto py-4">
+<a class="flex items-center gap-3 text-zinc-500 p-4 hover:bg-zinc-800/50 hover:text-yellow-200 transition-all duration-200 font-['Space_Grotesk'] font-bold" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span>DASHBOARD</span>
+</a>
+<a class="flex items-center gap-3 bg-zinc-800 text-yellow-400 border-l-4 border-yellow-400 p-4 transition-all duration-200 font-['Space_Grotesk'] font-bold" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span>LEVELS</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-500 p-4 hover:bg-zinc-800/50 hover:text-yellow-200 transition-all duration-200 font-['Space_Grotesk'] font-bold" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span>ARSENAL</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-500 p-4 hover:bg-zinc-800/50 hover:text-yellow-200 transition-all duration-200 font-['Space_Grotesk'] font-bold" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>HISTORY</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-500 p-4 hover:bg-zinc-800/50 hover:text-yellow-200 transition-all duration-200 font-['Space_Grotesk'] font-bold" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>SETTINGS</span>
+</a>
+</div>
+<div class="p-6">
+<button class="w-full bg-primary text-on-primary font-headline font-bold py-3 hover:shadow-[0_0_15px_rgba(255,211,0,0.5)] transition-all">
+                INSERT COIN
+            </button>
+</div>
+</nav>
+<!-- TopAppBar (from JSON) for Mobile -->
+<header class="md:hidden fixed top-0 w-full border-b-0 bg-black/80 backdrop-blur-md flex justify-between items-center px-6 h-16 z-50 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+<div class="flex items-center gap-2">
+<span class="text-2xl font-black text-yellow-400 drop-shadow-[0_0_8px_rgba(255,211,0,0.8)] font-['Space_Grotesk'] uppercase tracking-wider">ARCADE_FINANCE</span>
+</div>
+<div class="flex items-center gap-4 text-zinc-500">
+<button class="hover:text-yellow-200 transition-colors scale-95 active:duration-100">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</button>
+<button class="hover:text-yellow-200 transition-colors scale-95 active:duration-100">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full border border-yellow-400 overflow-hidden">
+<img alt="User pixel avatar" class="w-full h-full object-cover" data-alt="8-bit style pixel avatar for top nav bar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0L34bhV87Sald72_TqX3fHn6xYyun9svl2FTXmsa7TAKlFRZT8Mq1pdQ4myRaJ0rjqx9jADVLYjNIT5eN2fHLSQE_ZwO-FOa_DEptpmu19CWfqMaN9u0tGjSyE52SPn4CMuR_e-tjWMcFVxRpBJ-fG8R5Kaambe-A-8Wohb0RI6mVFY4dddtm-FoXW_6KKgkjqbFNyorbjNv-g0Q2NVgArxoDoOsLmrIy3To1LVKjgZ8ZPoqA71CMK4n_hd24W4Lf5asP9dd5g8N3"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pt-16 md:pt-0 p-6 lg:p-12 max-w-7xl mx-auto w-full bg-black">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-headline text-4xl lg:text-5xl font-bold text-on-surface uppercase tracking-widest neon-text-primary">HIGH SCORES</h1>
+<p class="font-body text-on-surface-variant mt-2 max-w-xl">GLOBAL YIELD RANKINGS. TOP 3 PLAYERS RECEIVE MONTHLY POWER-UP MULTIPLIERS.</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-2 border border-outline-variant/30">
+<span class="material-symbols-outlined text-secondary-container">filter_list</span>
+<span class="font-label text-sm text-on-surface">SEASON 4</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm cursor-pointer hover:text-primary transition-colors">expand_more</span>
+</div>
+</div>
+<!-- Top 3 Podium (Asymmetric Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 items-end">
+<!-- Rank 2 -->
+<div class="order-2 md:order-1 ghost-border p-6 flex flex-col items-center relative group hover:bg-surface-container transition-colors bg-[#0A0A0A]">
+<div class="absolute top-4 left-4 text-secondary-container font-headline font-bold text-xl">#2</div>
+<div class="w-20 h-20 bg-surface-container-high border-2 border-secondary-container p-1 mb-4">
+<img alt="Player 2" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all" data-alt="Cyberpunk stylized male portrait avatar with blue neon rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuNPnYzZuDH_Nb6wqgYjZrxmxrfywRn-X0pfv2J2chQ6_2bwSAd7CXlW3qNMuayhCE366CkZsa1aC9C8nrnO1KjKsES8oShb1ilAd0XYy7_jPm1pWaYhDtnnkfkyV_XzgMaeSsA3cslGWJeoUYMhUri32Y_hl-gMYEeCvOqWL-FPPIIl0rSJNg3xfsltkADPJNrc11pKFvnpZ2Z3zRUIVFl1ZfcnlXmS7VW_fSAMsydGkNxPzHfgKIGkw6y0ytyR9qda77oEHeeuMB"/>
+</div>
+<h3 class="font-headline font-bold text-on-surface mb-1">CYBER_BULL</h3>
+<div class="font-body text-secondary-container font-bold text-xl">842,109 PTS</div>
+<div class="mt-4 flex gap-1">
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<div class="w-2 h-2 rounded-full bg-secondary-container"></div>
+<div class="w-2 h-2 rounded-full border border-secondary-container"></div>
+</div>
+</div>
+<!-- Rank 1 -->
+<div class="order-1 md:order-2 ghost-border p-8 flex flex-col items-center relative neon-glow-primary transform md:-translate-y-4 bg-[#111111]">
+<div class="absolute top-4 left-4 text-primary font-headline font-bold text-2xl neon-text-primary">#1</div>
+<span class="material-symbols-outlined absolute top-4 right-4 text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<div class="w-28 h-28 bg-surface border-4 border-primary p-1 mb-6 relative">
+<div class="absolute -top-3 -right-3 text-primary text-3xl font-headline">*</div>
+<img alt="Player 1" class="w-full h-full object-cover" data-alt="Abstract glowing golden geometric avatar portrait against pure black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB30bMysFk1Z5cGoTsSATHW-ssZiMOnQqO_2PQMGuRf7QA2iGsn4kk4qlW8WBM_gIx-6XL7dz0lxhKIxzMMuymupN9YXwCA_hyemePT1jO0UCMNr8cLcgFsUtCy28RCFKhdFhEb8h_8nW_sVNm8_Z4C0siennyFNsDGufJD6-mHVuPS2bDamJrf3Ome9evshdrY9NWWwe-4duTuutNIQiGy0x-vzzRmUdnsMfO-h5jdzfkd_JhaAH91cAVyxA046b49vu5mZGV_K8s_"/>
+</div>
+<h3 class="font-headline font-bold text-primary text-xl mb-2 tracking-wider">NEON_WHALE</h3>
+<div class="font-body text-primary font-bold text-3xl">1,024,550 PTS</div>
+<p class="text-xs text-on-surface-variant font-label mt-2 uppercase text-center">+12.4% WEEKLY YIELD</p>
+<div class="mt-6 flex gap-1">
+<div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(255,211,0,0.8)]"></div>
+<div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(255,211,0,0.8)]"></div>
+<div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(255,211,0,0.8)]"></div>
+<div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(255,211,0,0.8)]"></div>
+<div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_8px_rgba(255,211,0,0.8)]"></div>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="order-3 md:order-3 ghost-border p-6 flex flex-col items-center relative group hover:bg-surface-container transition-colors bg-[#0A0A0A]">
+<div class="absolute top-4 left-4 text-tertiary-container font-headline font-bold text-xl">#3</div>
+<div class="w-20 h-20 bg-surface-container-high border-2 border-tertiary-container p-1 mb-4">
+<img alt="Player 3" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all" data-alt="Cyberpunk stylized female portrait avatar with pink neon rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB03OVzoFOwjE1PmzkyjfIF9O-LTtCRNy5tUGHv3dBIFKXPjXh69X9NBFQHIi9vahm85yrF9OlqQgzs1wD8t0D6gQnfchwOeu3ZnHhKuxOlVxAmh2Vl03t4ciw6TtG1A6GXwakiEZdysAd67Fw5eT40YDZp_2_AXLihP_jmaSYTvKfMbObnOldgXCUF5hP0yAIJTaeUGScT85JBmpouzLTojyJ_FtRXFCAjbzd-IVdVM__yRTHzbMMbYKfquslAiW6qJjnTFi-4GKla"/>
+</div>
+<h3 class="font-headline font-bold text-on-surface mb-1">GHOST_TRADER</h3>
+<div class="font-body text-tertiary-container font-bold text-xl">790,220 PTS</div>
+<div class="mt-4 flex gap-1">
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+<div class="w-2 h-2 rounded-full border border-tertiary-container"></div>
+<div class="w-2 h-2 rounded-full border border-tertiary-container"></div>
+</div>
+</div>
+</div>
+<!-- Leaderboard List -->
+<div class="space-y-4">
+<!-- Headers -->
+<div class="flex text-on-surface-variant font-label text-xs uppercase tracking-widest px-4 pb-2 border-b border-outline-variant/30">
+<div class="w-16">RANK</div>
+<div class="flex-1">PLAYER</div>
+<div class="w-32 text-right">SCORE</div>
+<div class="w-24 text-right hidden sm:block">TREND</div>
+</div>
+<!-- List Item 4 -->
+<div class="flex items-center bg-surface-container-low p-4 ghost-border hover:bg-surface-container transition-colors group">
+<div class="w-16 font-headline font-bold text-on-surface-variant group-hover:text-primary transition-colors">04</div>
+<div class="flex-1 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest border border-outline-variant overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover grayscale" data-alt="Pixelated low-res dark abstract portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBQnoGEoTVSoFUUz5Lk2mBZfmHKJ-QUiYwRVsbL_gMZHWflf32fMHCd5Jc1gPl4VzwpGrdUs0gEMcfY-XvYuryGzWA4CJGZXIhbnMjLFYjv6FTK8Xm_mI3VbseXO9dr5r1y1ZUTSusIqiuF8SojsNsNsJprqlAkJEED6jjH9K4y5G5p3SKKde4nvr681F6nGSCwDneaIdGfI8iG4ONYK-56ucOlbVG9Xxa6NATSGTfunxGPJa7pnBSZDhpiy4asttyjcpFGONS_6ET"/>
+</div>
+<span class="font-headline font-bold text-on-surface">BIT_KNIGHT</span>
+</div>
+<div class="w-32 text-right font-body text-on-surface font-semibold tracking-wider">650,400</div>
+<div class="w-24 text-right hidden sm:flex justify-end items-center text-primary">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+</div>
+</div>
+<!-- List Item 5 -->
+<div class="flex items-center bg-surface-container-low p-4 ghost-border hover:bg-surface-container transition-colors group">
+<div class="w-16 font-headline font-bold text-on-surface-variant group-hover:text-primary transition-colors">05</div>
+<div class="flex-1 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest border border-outline-variant overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover grayscale" data-alt="Pixelated low-res female portrait dark theme" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCF8C2oYH3yucOpiLPPXMObAy-rMR6OuakDgYzAtK73Bop3d0Eo6Oc1wntLGJHtzfyxvjfkEErSPuMSr2HfSSTaBCvSSu-SsVOLWx69PfFToUju5CUnYTv75LhEcssobiqcD3uSEsjNP2UPEDyf07LUAlxMjOvMKZoGsfcR2oFYtkcGVLLgb0NbvS2Tc2K5RBfXd8FINGA3eGb5LsJE-J8Aun8ZK6pJgvL8MgF1eYh3N9p2ELCusu3mvM2YEsJZW1iW7qm-CEvzdlW"/>
+</div>
+<span class="font-headline font-bold text-on-surface">VOID_WALKER</span>
+</div>
+<div class="w-32 text-right font-body text-on-surface font-semibold tracking-wider">612,900</div>
+<div class="w-24 text-right hidden sm:flex justify-end items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">trending_flat</span>
+</div>
+</div>
+<!-- List Item 6 (Current User) -->
+<div class="flex items-center bg-surface p-4 border border-outline relative group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-outline group-hover:bg-primary transition-colors"></div>
+<div class="w-16 font-headline font-bold text-primary">42</div>
+<div class="flex-1 flex items-center gap-4">
+<div class="w-10 h-10 bg-surface-container-highest border border-primary overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="8-bit style pixel avatar for current user row" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbnGmMkSGWoJTsl7riWaxXjGdNf2zKAjrHQm8cwGPj3mkFJgUqsxdfKA6TnQ8fa44ADKBVk2lZDmYG7TiNhgw3neUq3svsgwnrxC66zb87T541lR4md6glSd0_QPmGcDb1TtmNJZ5CsDjRVeelQmNg0yGFYUIjMZB4PoBR_2DV3gEvP863jDAzTDn3NYtG6rTAgxWGGbMP6t_HNk_y6Bt5xtpIyO2LK-W5c0OkjeFedNt6rCLmey5OwGx5MndNDUsAIDDgSVZuFhEQ"/>
+</div>
+<span class="font-headline font-bold text-primary">PLAYER_01 (YOU)</span>
+</div>
+<div class="w-32 text-right font-body text-primary font-semibold tracking-wider">128,050</div>
+<div class="w-24 text-right hidden sm:flex justify-end items-center text-primary">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+</div>
+</div>
+</div>
+<!-- Load More CTA -->
+<div class="mt-8 flex justify-center">
+<button class="flex items-center gap-2 text-on-surface-variant font-label text-sm uppercase tracking-wider hover:text-primary transition-colors border border-outline-variant/30 px-6 py-3 bg-surface-container-lowest">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+                LOAD NEXT SECTOR
+            </button>
+</div>
+</main>
+</body></html>

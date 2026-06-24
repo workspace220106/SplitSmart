@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PacPay Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+          font-family: 'Material Symbols Outlined';
+          font-weight: normal;
+          font-style: normal;
+          font-size: 24px;
+          line-height: 1;
+          letter-spacing: normal;
+          text-transform: none;
+          display: inline-block;
+          white-space: nowrap;
+          word-wrap: normal;
+          direction: ltr;
+          -webkit-font-feature-settings: 'liga';
+          -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#48474a",
+                        "error": "#ff716c",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-tertiary-fixed-variant": "#600084",
+                        "on-tertiary": "#390050",
+                        "tertiary-fixed": "#e092ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#0e0e10",
+                        "secondary-fixed": "#f2e805",
+                        "on-secondary-container": "#fffac6",
+                        "tertiary-fixed-dim": "#d97dff",
+                        "surface-container-highest": "#262528",
+                        "secondary-dim": "#e3d900",
+                        "on-tertiary-fixed": "#2c003f",
+                        "error-container": "#9f0519",
+                        "inverse-on-surface": "#565557",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#131315",
+                        "primary-fixed": "#00eefc",
+                        "inverse-primary": "#006a71",
+                        "surface": "#0e0e10",
+                        "on-error": "#490006",
+                        "on-surface-variant": "#adaaad",
+                        "surface-variant": "#262528",
+                        "on-primary-container": "#005359",
+                        "on-secondary-fixed": "#444100",
+                        "surface-tint": "#8ff5ff",
+                        "on-primary-fixed": "#003f43",
+                        "primary-fixed-dim": "#00deec",
+                        "on-background": "#f9f5f8",
+                        "tertiary-container": "#bb00fd",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#656100",
+                        "secondary": "#f2e805",
+                        "surface-container": "#19191c",
+                        "tertiary": "#d674ff",
+                        "primary": "#8ff5ff",
+                        "surface-container-high": "#1f1f22",
+                        "inverse-surface": "#fcf8fb",
+                        "on-secondary": "#585400",
+                        "surface-dim": "#0e0e10",
+                        "secondary-fixed-dim": "#e3d900",
+                        "on-secondary-fixed-variant": "#625e00",
+                        "on-surface": "#f9f5f8",
+                        "primary-dim": "#00deec",
+                        "on-primary": "#005d63",
+                        "surface-bright": "#2c2c2f",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#00eefc",
+                        "outline": "#767577",
+                        "tertiary-dim": "#bb00fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": [
+                            "Space Grotesk"
+                        ],
+                        "body": [
+                            "Inter"
+                        ],
+                        "label": [
+                            "Space Grotesk"
+                        ],
+                        "mono": [
+                            "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"
+                        ]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col pt-16 pb-20 md:pb-0">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full border-b border-[#00F0FF]/20 bg-black/90 backdrop-blur-xl shadow-[0_0_15px_rgba(0,240,255,0.1)] flex justify-between items-center px-6 h-16 z-50 tonal-shift via-surface-container-low">
+<div class="text-2xl font-black text-[#00F0FF] italic tracking-tighter">
+            PAC_PAY
+        </div>
+<nav class="hidden md:flex gap-8">
+<a class="font-['Space_Grotesk'] uppercase tracking-widest text-sm text-zinc-500 hover:text-[#8ff5ff] transition-colors" href="#">ORACLE_AI</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="notifications" class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button>
+<button aria-label="account_balance_wallet" class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</button>
+<div class="w-8 h-8 rounded-none overflow-hidden border border-outline-variant">
+<img alt="User Rank Avatar" class="w-full h-full object-cover" data-alt="cyberpunk stylized digital avatar portrait of a hacker with neon blue and purple ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYfbSyBj1JsHM6qvGtbUCz5I0a8j6XebH71uP16nESwiPNs0ikN80_27tB152bRJ0gmGErnVPIMsGVft8H1Vm2AyvlXkMRodgtmLlgddZ1tuGKyd42yPQcF3QzNSjyW3rxDryKDHS_bnqlmrG3z_66Fa1bC8jzZ_iFwZKYkWsf69x3WK-apgcWBeffmvjaQOpZbIuyNPlc-ZdYT8FNCpwA8v8GDCvN-MPTdbIfx4zIPwKo56smQUGWBM8QAhZwh68EVqhVLkxs53c"/>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
+<!-- Header Section -->
+<div class="mb-12 border-l-4 border-primary pl-6">
+<h1 class="font-headline text-display-lg text-primary uppercase tracking-widest mb-2 shadow-primary/20 drop-shadow-[0_0_10px_rgba(143,245,255,0.5)]">Global Leaderboard</h1>
+<p class="font-mono text-sm text-on-surface-variant">WEEKLY_RANKING // SYS.CYCLE_84 // SORTED_BY: PORTFOLIO_VAL</p>
+</div>
+<!-- Top 3 Podium Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 items-end">
+<!-- Rank 2 -->
+<div class="bg-surface-container-low border-b border-surface-container flex flex-col items-center p-6 relative order-2 md:order-1 h-[90%] before:absolute before:-top-px before:left-0 before:w-full before:h-px before:bg-gradient-to-r before:from-transparent before:via-outline-variant before:to-transparent">
+<div class="absolute top-4 left-4 text-on-surface-variant font-mono text-xs">#02</div>
+<div class="relative mb-4">
+<div class="w-20 h-20 bg-surface-container-lowest border border-outline-variant p-1">
+<img alt="Avatar" class="w-full h-full object-cover grayscale opacity-80" data-alt="cyberpunk stylized digital avatar portrait of a netrunner male with silver tactical gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABDoZ1cYRT5IFKGangaAdRor63iBLuCOzbCSFYRoSRhXtcJLN5I09dYGpZVuJD0J3v2dOhTAjzxq-biRFp0yzmba7uh_Hi-5iYJ09XGwKGRkzb7U6p9F8woQdW1E1znZA4lj00E34218UEXiaocGETyqsj4B86jAxgzicnh6w1t2iq9iBIwcIFGfO3pOzpZWzJ_Io0vQiEV3NQBBWAvLu0T4h5T9DlvKUiPtUfIlCFmxmjtppqYc2QhSBtCb-KmYct2uVEO95ezY0"/>
+</div>
+</div>
+<h3 class="font-headline font-bold text-lg text-on-surface mb-1">NeonDrift</h3>
+<div class="text-tertiary font-mono text-xs mb-3">LVL 42</div>
+<div class="bg-surface-container-lowest border-b border-outline-variant/30 px-4 py-2 w-full text-center">
+<span class="font-mono text-sm text-on-surface">542,890.00 PAC</span>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">local_fire_department</span>
+<span class="font-mono text-xs text-secondary">8 WINS</span>
+</div>
+</div>
+<!-- Rank 1 -->
+<div class="bg-surface-container border border-primary/20 shadow-[0_0_30px_rgba(143,245,255,0.05)] flex flex-col items-center p-8 relative order-1 md:order-2 h-full z-10">
+<div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-primary shadow-[0_0_10px_rgba(143,245,255,0.8)]"></div>
+<div class="absolute top-4 left-4 text-primary font-mono text-sm font-bold drop-shadow-[0_0_5px_rgba(143,245,255,0.5)]">#01</div>
+<div class="relative mb-6">
+<div class="absolute -inset-2 bg-primary/20 blur-xl"></div>
+<div class="w-24 h-24 bg-surface-container-lowest border-2 border-primary p-1 relative z-10">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="cyberpunk stylized female portrait with glowing primary cyan augmentations and high contrast dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVVx6xIqKQO6sdOaqEiKEwCO3hDtAsDx9SN6sAemDI8elYQgBQROW_fvHGrO5Tkp2-tLIqGfRwwxu77NyL98Qh6nRZh-CJRsthHfguXBkW6NcFPwU7mI4Z4Qh0rj_867O6NrRQb6NepSYHbfo2QaLTSSinZBAvnNzLy1pVN2hFjBsTItxQl5JQ2_JjTDNTslpLdyNTgMbyG45nX-Icf6DknBEv9FvQLrqA4-Jw8GDosNMafDC4QKQlyKkg6P4qbvX_MeVk8yRJUiA"/>
+</div>
+<div class="absolute -bottom-3 -right-3 bg-secondary text-on-secondary px-2 py-0.5 font-headline font-bold text-xs z-20 shadow-[0_0_10px_rgba(242,232,5,0.5)]">
+                        APEX
+                    </div>
+</div>
+<h3 class="font-headline font-bold text-2xl text-primary mb-1 drop-shadow-[0_0_5px_rgba(143,245,255,0.3)]">CyberMantis</h3>
+<div class="text-tertiary font-mono text-sm mb-4">LVL 50 (MAX)</div>
+<div class="bg-surface-container-lowest border border-primary/40 px-6 py-3 w-full text-center relative group">
+<div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+<span class="font-mono text-lg text-primary drop-shadow-[0_0_2px_rgba(143,245,255,0.5)]">1,204,500.00 PAC</span>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg drop-shadow-[0_0_5px_rgba(242,232,5,0.5)]">local_fire_department</span>
+<span class="font-mono text-sm text-secondary font-bold">15 WINS</span>
+</div>
+</div>
+<!-- Rank 3 -->
+<div class="bg-surface-container-low border-b border-surface-container flex flex-col items-center p-6 relative order-3 h-[85%] before:absolute before:-top-px before:left-0 before:w-full before:h-px before:bg-gradient-to-r before:from-transparent before:via-outline-variant before:to-transparent">
+<div class="absolute top-4 left-4 text-on-surface-variant font-mono text-xs">#03</div>
+<div class="relative mb-4">
+<div class="w-16 h-16 bg-surface-container-lowest border border-outline-variant p-1">
+<img alt="Avatar" class="w-full h-full object-cover grayscale opacity-60" data-alt="cyberpunk stylized digital avatar portrait of a man with worn tech gear in shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANIt-rq7a1pVwp-ht8sbYq_i_hjYl5uIgHbO0KNJOilm7NUjhDlgzqDxoJo0uymWLiINTzHGBeTRALQJOR3NvKIqVjqf7iDyW4yHIcxDFVtOLpCALKgcGjO0UyFF0j-NJTXKxOcFiKmxrRXLs4G1KUBhu5-nX_3wk4-E8FPz66bPu38MAEwlXctIm6dq2UUmepTeil8Y7-ne4kSwUxJiqtP8N5iy85bn9jmMZA-g9r-wKFcev2JzxAs4cWd7n2dj-Ey5AGegxKPHk"/>
+</div>
+</div>
+<h3 class="font-headline font-bold text-md text-on-surface mb-1">RogueNode</h3>
+<div class="text-tertiary font-mono text-[10px] mb-3">LVL 39</div>
+<div class="bg-surface-container-lowest border-b border-outline-variant/30 px-3 py-2 w-full text-center">
+<span class="font-mono text-xs text-on-surface">489,120.00 PAC</span>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xs">local_fire_department</span>
+<span class="font-mono text-[10px] text-secondary">5 WINS</span>
+</div>
+</div>
+</div>
+<!-- Leaderboard List -->
+<div class="bg-surface-container-low flex flex-col gap-px bg-outline-variant/20 p-px">
+<!-- List Header -->
+<div class="bg-surface-container-lowest grid grid-cols-12 gap-4 px-6 py-3 border-b border-outline-variant/50">
+<div class="col-span-1 font-mono text-xs text-on-surface-variant uppercase tracking-wider">Rank</div>
+<div class="col-span-4 md:col-span-5 font-mono text-xs text-on-surface-variant uppercase tracking-wider">Operative</div>
+<div class="col-span-3 md:col-span-2 font-mono text-xs text-on-surface-variant uppercase tracking-wider text-right">Level</div>
+<div class="col-span-4 font-mono text-xs text-on-surface-variant uppercase tracking-wider text-right">Portfolio (PAC)</div>
+</div>
+<!-- List Item 4 -->
+<div class="bg-surface-container flex items-center grid grid-cols-12 gap-4 px-6 py-4 hover:bg-surface-container-high transition-colors group relative">
+<div class="col-span-1 font-mono text-sm text-outline-variant group-hover:text-on-surface transition-colors">04</div>
+<div class="col-span-4 md:col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 bg-surface-container-lowest border border-outline-variant hidden md:block">
+<img alt="Avatar" class="w-full h-full object-cover grayscale opacity-50" data-alt="cyberpunk stylized digital avatar portrait female neutral expression dark lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHRIVFhZW9EqiS27LFFBREVbcrwL3sI6_qZIZn701fhOnDTKOvlCyD5iER6y8JN_ihg--nHZZLzSEOqoHqapN_HZJIwMWE1bxKjaZqGfkb8aXZMeGMyfrq0gy_vtSkxd9tqaBNJ-5KhI03lUmnQlHt-KeM8J6OwCUEfZnPm_9jjZ4zToDcRtCEo1nxtWB7rm3MWNYohccM3HkYsROG42_HSvjYPMbwnLY9NsGXQ98GEmUp67IlTciFTlyb8Ms274YBa1s1QYtjbEU"/>
+</div>
+<span class="font-headline font-bold text-on-surface">NullSector</span>
+</div>
+<div class="col-span-3 md:col-span-2 font-mono text-sm text-tertiary text-right flex items-center justify-end gap-1">
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+                    38
+                </div>
+<div class="col-span-4 font-mono text-sm text-on-surface text-right">412,000.00</div>
+</div>
+<!-- List Item 5 -->
+<div class="bg-surface-container flex items-center grid grid-cols-12 gap-4 px-6 py-4 hover:bg-surface-container-high transition-colors group relative">
+<div class="col-span-1 font-mono text-sm text-outline-variant group-hover:text-on-surface transition-colors">05</div>
+<div class="col-span-4 md:col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 bg-surface-container-lowest border border-outline-variant hidden md:block">
+<img alt="Avatar" class="w-full h-full object-cover grayscale opacity-50" data-alt="cyberpunk stylized digital avatar portrait male rugged appearance low light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbiDd59Hr3rZb4L9dPu2Xz-pxoytV_P2PVSCPw-7VWbq6Dy2eJFt877cp6pGoLJKWSvi_jGdQVcTtiJNyPWpG0q0ce7lH0-baTWvnRfI2qYHixPLZg0Xq3zj1Ye_HlzlgWjI4tHNTlk5QVvY3AZyu_0UYoR7jxUTg5sNwSZ1M1riPktoXdzDghfHno4W6WR0BJLgAygdIfzxllUFNVP-xvQhwOCVQqKlT8Gzi9sBTvhvWYj7qge7BbnBOcjO6yth3YtOb4hmdJmjg"/>
+</div>
+<span class="font-headline font-bold text-on-surface">DataGhost</span>
+</div>
+<div class="col-span-3 md:col-span-2 font-mono text-sm text-tertiary text-right flex items-center justify-end gap-1">
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+                    35
+                </div>
+<div class="col-span-4 font-mono text-sm text-on-surface text-right">398,550.00</div>
+</div>
+<!-- List Item 6 (Current User Highlight) -->
+<div class="bg-surface-container-high flex items-center grid grid-cols-12 gap-4 px-6 py-4 relative border-l-2 border-primary group">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="col-span-1 font-mono text-sm text-primary drop-shadow-[0_0_2px_rgba(143,245,255,0.5)]">06</div>
+<div class="col-span-4 md:col-span-5 flex items-center gap-3 relative z-10">
+<div class="w-8 h-8 bg-surface-container-lowest border border-primary p-0.5 hidden md:block">
+<img alt="Current User Avatar" class="w-full h-full object-cover" data-alt="cyberpunk stylized digital avatar portrait of a hacker with neon blue and purple ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmbbMaFraT0sH3K2mW1hz2xoAPKFxx5h14a5qf5SSSd-TtXIYZtsimOljmp441LRj2Du3q6czY-nLEc93ZALCkOSOEKIFd7A71Y7TdWWJOIfxUislu0fAJVlptaj8JWNPLbMdCVBLYgoYa687ZtmJHJr3fmAE5XEQZXuNyXuGN9dHG3l5hqBzauePZrKMz2QJyFpgdU_kvC7x8Omfz1w2Bl-5Eef5QnDbykdS_CCzViS5at5M6akTJzgaDttRGWEw5c1-Gr8DsZUg"/>
+</div>
+<div>
+<span class="font-headline font-bold text-primary drop-shadow-[0_0_2px_rgba(143,245,255,0.3)]">You (USER_902)</span>
+<div class="font-mono text-[10px] text-primary/70 mt-0.5 uppercase">Active Connection</div>
+</div>
+</div>
+<div class="col-span-3 md:col-span-2 font-mono text-sm text-tertiary text-right flex items-center justify-end gap-1 relative z-10">
+<span class="w-1 h-3 bg-tertiary block"></span>
+<span class="w-1 h-3 bg-tertiary block"></span>
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+                    32
+                </div>
+<div class="col-span-4 font-mono text-sm text-primary text-right font-bold drop-shadow-[0_0_2px_rgba(143,245,255,0.5)] relative z-10">350,100.00</div>
+</div>
+<!-- List Item 7 -->
+<div class="bg-surface-container flex items-center grid grid-cols-12 gap-4 px-6 py-4 hover:bg-surface-container-high transition-colors group relative">
+<div class="col-span-1 font-mono text-sm text-outline-variant group-hover:text-on-surface transition-colors">07</div>
+<div class="col-span-4 md:col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 bg-surface-container-lowest border border-outline-variant hidden md:block">
+<img alt="Avatar" class="w-full h-full object-cover grayscale opacity-50" data-alt="cyberpunk stylized digital avatar portrait female casual short hair shadowed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8R2hvQgAxZf-lN4T47HksVURHMdTbDzS1cMFVQfF-94zSr-X7QFam7eek2pDr02WGRt6bhiibvpADX2lkPKniIXdQi1862kvjwDGPYqyPfi3RkyXNH7VYZHGVtYgo2V97GVf1XQdfVOSNQADXKdO8HchreRLkrNk2JqM7YrWYzpi-xphQ_f8tg7Fh94ki-Uap7DHWKHeONfl4FrEao5GgRa0r3molFahxRex97byXKy5NX0BBaaFqlJ7oDLse-ygaNivGlgy77Qo"/>
+</div>
+<span class="font-headline font-bold text-on-surface">ByteRunner</span>
+</div>
+<div class="col-span-3 md:col-span-2 font-mono text-sm text-tertiary text-right flex items-center justify-end gap-1">
+<span class="w-1 h-3 bg-tertiary/20 block"></span>
+                    31
+                </div>
+<div class="col-span-4 font-mono text-sm text-on-surface text-right">342,900.00</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-8 flex justify-center">
+<button class="border border-primary/40 text-primary font-mono text-sm px-6 py-2 hover:bg-primary/10 transition-colors uppercase tracking-widest relative group">
+<span class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary group-hover:w-full group-hover:h-full transition-all duration-300 opacity-50"></span>
+<span class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary group-hover:w-full group-hover:h-full transition-all duration-300 opacity-50"></span>
+                Load Next Sequence
+            </button>
+</div>
+</main>
+<!-- BottomNavBar from JSON -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-black h-20 border-t border-zinc-800 md:hidden surface-container-lowest background with zero radius flat no-shadows">
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined mb-1" style="font-size: 20px;">query_stats</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">ARENA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined mb-1" style="font-size: 20px;">account_circle</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">PORTFOLIO</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined mb-1" style="font-size: 20px;">military_tech</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">MISSIONS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#f2e805] bg-zinc-900 border-t-2 border-[#f2e805] px-2 py-1 Active: scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1" style="font-size: 20px;">leaderboard</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">RANKS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined mb-1" style="font-size: 20px;">bolt</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter">STORE</span>
+</a>
+</nav>
+</body></html>

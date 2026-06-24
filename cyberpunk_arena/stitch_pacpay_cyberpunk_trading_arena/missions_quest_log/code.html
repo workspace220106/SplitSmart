@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PacPay - Missions &amp; Challenges</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#48474a",
+                      "error": "#ff716c",
+                      "on-primary-fixed-variant": "#005e64",
+                      "on-tertiary-fixed-variant": "#600084",
+                      "on-tertiary": "#390050",
+                      "tertiary-fixed": "#e092ff",
+                      "on-tertiary-container": "#ffffff",
+                      "background": "#0e0e10",
+                      "secondary-fixed": "#f2e805",
+                      "on-secondary-container": "#fffac6",
+                      "tertiary-fixed-dim": "#d97dff",
+                      "surface-container-highest": "#262528",
+                      "secondary-dim": "#e3d900",
+                      "on-tertiary-fixed": "#2c003f",
+                      "error-container": "#9f0519",
+                      "inverse-on-surface": "#565557",
+                      "surface-container-lowest": "#000000",
+                      "surface-container-low": "#131315",
+                      "primary-fixed": "#00eefc",
+                      "inverse-primary": "#006a71",
+                      "surface": "#0e0e10",
+                      "on-error": "#490006",
+                      "on-surface-variant": "#adaaad",
+                      "surface-variant": "#262528",
+                      "on-primary-container": "#005359",
+                      "on-secondary-fixed": "#444100",
+                      "surface-tint": "#8ff5ff",
+                      "on-primary-fixed": "#003f43",
+                      "primary-fixed-dim": "#00deec",
+                      "on-background": "#f9f5f8",
+                      "tertiary-container": "#bb00fd",
+                      "on-error-container": "#ffa8a3",
+                      "secondary-container": "#656100",
+                      "secondary": "#f2e805",
+                      "surface-container": "#19191c",
+                      "tertiary": "#d674ff",
+                      "primary": "#8ff5ff",
+                      "surface-container-high": "#1f1f22",
+                      "inverse-surface": "#fcf8fb",
+                      "on-secondary": "#585400",
+                      "surface-dim": "#0e0e10",
+                      "secondary-fixed-dim": "#e3d900",
+                      "on-secondary-fixed-variant": "#625e00",
+                      "on-surface": "#f9f5f8",
+                      "primary-dim": "#00deec",
+                      "on-primary": "#005d63",
+                      "surface-bright": "#2c2c2f",
+                      "error-dim": "#d7383b",
+                      "primary-container": "#00eefc",
+                      "outline": "#767577",
+                      "tertiary-dim": "#bb00fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "0px",
+                      "xl": "0px",
+                      "full": "0px"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Space Grotesk"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "label": [
+                              "Space Grotesk"
+                      ],
+                      "mono": [
+                              "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .clip-corner { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%); }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-primary selection:text-on-primary pb-24 md:pb-0 pt-16 bg-[#0e0e10]">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full border-b border-[#00F0FF]/20 bg-[#0e0e10] backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full z-50 shadow-[0_0_15px_rgba(0,240,255,0.1)]">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-[#00F0FF] italic tracking-tighter">PAC_PAY</span>
+<nav class="hidden md:flex gap-6 ml-8">
+<a class="font-headline uppercase tracking-widest text-sm text-[#00F0FF] border-b-2 border-[#00F0FF] py-5" href="#">MISSIONS</a>
+<a class="font-headline uppercase tracking-widest text-sm text-zinc-500 hover:text-[#8ff5ff] transition-colors py-5" href="#">ORACLE_AI</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 text-[#00F0FF]">
+<button class="hover:text-[#8ff5ff] transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-[#8ff5ff] transition-colors"><span class="material-symbols-outlined">account_balance_wallet</span></button>
+<img alt="User Rank Avatar" class="w-8 h-8 rounded-none border border-primary/40" data-alt="close up portrait of a digital avatar with neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsFMu21tKL-MvqoPbZbSiOBJw2ZXTIFbQTtxkSyaJhhMmGQrllhSbTXvhTEIjsCf4IPJ2Zv650aSUy2N3A0ovr2AsIaN_mJSpUhQ3aQbDaKiyih43AyQl7y8W3-NjyTNEq5Y3JSqSAcvzHzsNXhH_hXXuf6zavmNuDIlhADVXK8o4VXsvOjVwYta1JRVsMkTl5XDA8_D8yI2bcqg_ijCo-kc4ctWtBlQMRwmTSSn5bAEa1MbwFfk85O1Pu6LhnBz77GlqqOzACHeQ"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-l-4 border-secondary pl-6 py-2">
+<div>
+<h1 class="font-headline text-3xl md:text-5xl font-bold tracking-tight text-white uppercase">Active Directives</h1>
+<p class="font-body text-outline mt-2 max-w-2xl text-sm md:text-base">Complete protocol tasks to secure network assets and elevate operational rank. Daily cycles reset at 00:00 UTC.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 p-4 min-w-[200px] flex items-center gap-4">
+<div class="w-12 h-12 bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">military_tech</span>
+</div>
+<div>
+<div class="font-mono text-xs text-outline mb-1">CURRENT RANK</div>
+<div class="font-headline font-bold text-secondary text-xl">CYBER_OPERATIVE</div>
+</div>
+</div>
+</div>
+<!-- Mission Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Main Quest Log -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Completed Mission - Ready to Claim -->
+<div class="bg-surface-container-low border-l-2 border-secondary relative group transition-all hover:bg-surface-container">
+<div class="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-mono text-xs text-secondary mb-2 block tracking-widest">MISSION_STATUS: SECURED</span>
+<h3 class="font-headline text-xl font-bold text-on-surface">Execute 3 Arbitrage Trades</h3>
+<p class="text-sm text-on-surface-variant mt-1 max-w-md">Identify and exploit price discrepancies across multiple integrated DEX protocols within a single cycle.</p>
+</div>
+<div class="text-right">
+<div class="font-mono text-xs text-outline mb-1">REWARD POOL</div>
+<div class="flex gap-2 justify-end">
+<span class="bg-surface-container-lowest px-2 py-1 text-secondary font-mono text-sm border border-secondary/20">+500 XP</span>
+<span class="bg-surface-container-lowest px-2 py-1 text-primary font-mono text-sm border border-primary/20">25 PAC</span>
+</div>
+</div>
+</div>
+<!-- Progress Area -->
+<div class="mt-6 flex items-center gap-4">
+<div class="flex-grow flex gap-1 h-3">
+<div class="flex-1 bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.4)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.4)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.4)]"></div>
+</div>
+<span class="font-mono text-sm text-secondary w-12 text-right">3/3</span>
+</div>
+<div class="mt-6 border-t border-outline-variant/20 pt-4 flex justify-end">
+<button class="bg-secondary text-on-secondary px-6 py-2 font-headline font-bold text-sm uppercase tracking-wide hover:shadow-[0_0_15px_rgba(242,232,5,0.3)] transition-all">Claim Reward</button>
+</div>
+</div>
+</div>
+<!-- In Progress Mission -->
+<div class="bg-surface-container-low border-l-2 border-primary relative group transition-all hover:bg-surface-container clip-corner">
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-mono text-xs text-primary mb-2 block tracking-widest">MISSION_STATUS: IN_PROGRESS</span>
+<h3 class="font-headline text-xl font-bold text-on-surface">Diversify Asset Allocation</h3>
+<p class="text-sm text-on-surface-variant mt-1 max-w-md">Allocate capital across at least 5 distinct asset classes to mitigate operational risk.</p>
+</div>
+<div class="text-right">
+<div class="font-mono text-xs text-outline mb-1">REWARD POOL</div>
+<div class="flex gap-2 justify-end">
+<span class="bg-surface-container-lowest px-2 py-1 text-secondary font-mono text-sm border border-secondary/20">+300 XP</span>
+<span class="bg-surface-container-lowest px-2 py-1 text-tertiary font-mono text-sm border border-tertiary/20">RARE_NODE</span>
+</div>
+</div>
+</div>
+<!-- Progress Area -->
+<div class="mt-6 flex items-center gap-4">
+<div class="flex-grow flex gap-1 h-3">
+<div class="flex-1 bg-primary shadow-[0_0_8px_rgba(143,245,255,0.4)]"></div>
+<div class="flex-1 bg-primary shadow-[0_0_8px_rgba(143,245,255,0.4)]"></div>
+<div class="flex-1 bg-surface-variant"></div>
+<div class="flex-1 bg-surface-variant"></div>
+<div class="flex-1 bg-surface-variant"></div>
+</div>
+<span class="font-mono text-sm text-primary w-12 text-right">2/5</span>
+</div>
+</div>
+</div>
+<!-- Locked/Pending Mission -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 relative group opacity-60">
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-outline">lock</span>
+<div>
+<span class="font-mono text-xs text-outline mb-2 block tracking-widest">MISSION_STATUS: LOCKED</span>
+<h3 class="font-headline text-xl font-bold text-outline">Stake 1000 PAC Tokens</h3>
+<p class="text-sm text-outline-variant mt-1 max-w-md">Requires Rank: DATA_BROKER to initiate protocol.</p>
+</div>
+</div>
+<div class="text-right opacity-50">
+<div class="font-mono text-xs text-outline mb-1">REWARD POOL</div>
+<div class="flex gap-2 justify-end">
+<span class="bg-surface border border-outline-variant/30 px-2 py-1 text-outline font-mono text-sm">??? XP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar / Status Panel -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Daily Cycle Timer -->
+<div class="bg-surface-container-high border border-outline-variant/30 p-6 relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-tertiary animate-pulse">schedule</span>
+<h4 class="font-headline font-bold text-on-surface">CYCLE_RESET</h4>
+</div>
+<div class="font-mono text-4xl text-primary tracking-tighter">08:42:15</div>
+<div class="w-full bg-surface-variant h-1 mt-4">
+<div class="bg-primary h-full w-[65%] shadow-[0_0_5px_rgba(143,245,255,0.5)]"></div>
+</div>
+</div>
+<!-- AI Insights Panel -->
+<div class="bg-surface-container-low border-l-2 border-tertiary p-6">
+<h4 class="font-headline font-bold text-tertiary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">psychology</span>
+                        ORACLE_INSIGHT
+                    </h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Network volatility is elevated. Completing the 'Arbitrage Trades' directive within the next 2 hours has a 78% probability of yielding bonus operational yield.</p>
+<button class="mt-4 w-full border border-tertiary/40 text-tertiary py-2 text-xs font-mono hover:bg-tertiary/10 transition-colors">ANALYZE_MARKETS</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-black h-20 border-t border-zinc-800">
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">ARENA</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">PORTFOLIO</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#f2e805] bg-zinc-900 border-t-2 border-[#f2e805] px-2 py-1 scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">MISSIONS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">RANKS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 hover:bg-zinc-800 hover:text-white" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">STORE</span>
+</a>
+</nav>
+</body></html>

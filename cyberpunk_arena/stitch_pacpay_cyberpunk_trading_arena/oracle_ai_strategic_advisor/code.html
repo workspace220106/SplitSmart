@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PacPay - Oracle Terminal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@400;700&amp;family=Space+Grotesk:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration (Design System Anchor) -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#48474a",
+                        "error": "#ff716c",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-tertiary-fixed-variant": "#600084",
+                        "on-tertiary": "#390050",
+                        "tertiary-fixed": "#e092ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#0e0e10",
+                        "secondary-fixed": "#f2e805",
+                        "on-secondary-container": "#fffac6",
+                        "tertiary-fixed-dim": "#d97dff",
+                        "surface-container-highest": "#262528",
+                        "secondary-dim": "#e3d900",
+                        "on-tertiary-fixed": "#2c003f",
+                        "error-container": "#9f0519",
+                        "inverse-on-surface": "#565557",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#131315",
+                        "primary-fixed": "#00eefc",
+                        "inverse-primary": "#006a71",
+                        "surface": "#0e0e10",
+                        "on-error": "#490006",
+                        "on-surface-variant": "#adaaad",
+                        "surface-variant": "#262528",
+                        "on-primary-container": "#005359",
+                        "on-secondary-fixed": "#444100",
+                        "surface-tint": "#8ff5ff",
+                        "on-primary-fixed": "#003f43",
+                        "primary-fixed-dim": "#00deec",
+                        "on-background": "#f9f5f8",
+                        "tertiary-container": "#bb00fd",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#656100",
+                        "secondary": "#f2e805",
+                        "surface-container": "#19191c",
+                        "tertiary": "#d674ff",
+                        "primary": "#8ff5ff",
+                        "surface-container-high": "#1f1f22",
+                        "inverse-surface": "#fcf8fb",
+                        "on-secondary": "#585400",
+                        "surface-dim": "#0e0e10",
+                        "secondary-fixed-dim": "#e3d900",
+                        "on-secondary-fixed-variant": "#625e00",
+                        "on-surface": "#f9f5f8",
+                        "primary-dim": "#00deec",
+                        "on-primary": "#005d63",
+                        "surface-bright": "#2c2c2f",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#00eefc",
+                        "outline": "#767577",
+                        "tertiary-dim": "#bb00fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "0rem"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .terminal-scroll::-webkit-scrollbar { width: 6px; }
+            .terminal-scroll::-webkit-scrollbar-track { background: transparent; }
+            .terminal-scroll::-webkit-scrollbar-thumb { background: #262528; border-radius: 0px; }
+            .terminal-scroll::-webkit-scrollbar-thumb:hover { background: #48474a; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen selection:bg-primary selection:text-on-primary antialiased relative overflow-x-hidden">
+<!-- Ambient Background Glow -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-tertiary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-primary/5 blur-[150px] rounded-full"></div>
+<!-- Grid overlay for terminal feel -->
+<div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+</div>
+<!-- TopAppBar (Web & Shared Shell) -->
+<header class="flex justify-between items-center px-6 h-16 w-full z-50 bg-black/90 backdrop-blur-xl fixed top-0 border-b border-[#00F0FF]/20 shadow-[0_0_15px_rgba(0,240,255,0.1)]">
+<!-- Brand identity -->
+<div class="text-2xl font-black text-[#00F0FF] italic tracking-tighter uppercase">
+            PAC_PAY
+        </div>
+<!-- Desktop Nav Shell -->
+<nav class="hidden md:flex space-x-8 h-full items-center">
+<!-- Active State: ORACLE_AI fits intent best -->
+<a class="h-full flex items-center text-[#00F0FF] border-b-2 border-[#00F0FF] font-['Space_Grotesk'] uppercase tracking-widest text-sm transition-all hover:text-[#8ff5ff]" href="#">
+                ORACLE_AI
+            </a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-4">
+<button class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors hover:ring-1 hover:ring-[#00F0FF] p-1 flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-[#00F0FF] hover:text-[#8ff5ff] transition-colors hover:ring-1 hover:ring-[#00F0FF] p-1 flex items-center justify-center">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<!-- User Rank Avatar Placeholder -->
+<div class="w-8 h-8 bg-surface-container-high border border-[#00F0FF]/30 flex items-center justify-center relative group cursor-pointer">
+<span class="font-mono text-[10px] text-[#00F0FF]">SYS</span>
+<div class="absolute inset-0 border border-[#00F0FF] scale-110 opacity-0 group-hover:opacity-100 transition-all"></div>
+</div>
+</div>
+</header>
+<!-- Canvas (Main Terminal Area) -->
+<main class="relative z-10 pt-28 pb-28 px-4 md:px-8 max-w-[1400px] mx-auto min-h-screen flex flex-col gap-6">
+<!-- Header Console Status -->
+<header class="flex flex-col gap-2 border-l-2 border-tertiary pl-4 mb-4">
+<div class="flex items-center space-x-3">
+<div class="w-2 h-2 bg-secondary shadow-[0_0_8px_rgba(242,232,5,0.8)] animate-pulse"></div>
+<span class="font-mono text-xs text-secondary uppercase tracking-widest">Connection Stable // Vector Analysis Online</span>
+</div>
+<h1 class="font-headline text-4xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-on-primary-container uppercase tracking-tighter">
+                Oracle Diagnostics
+            </h1>
+</header>
+<!-- Asymmetric Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 flex-grow">
+<!-- Left Column: Tactical Overviews (md:col-span-4) -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<!-- Card: Risk Warning Overlay (HUD Style) -->
+<div class="bg-surface-container-highest p-6 relative overflow-hidden group">
+<!-- Smoked glass effect & Light-bleed boundary -->
+<div class="absolute inset-0 bg-surface-container-highest/60 backdrop-blur-md"></div>
+<div class="absolute top-0 left-0 w-full h-[2px] bg-secondary shadow-[0_0_15px_rgba(242,232,5,0.6)]"></div>
+<div class="absolute top-0 left-0 h-full w-[2px] bg-gradient-to-b from-secondary to-transparent"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h2 class="font-mono text-sm text-secondary tracking-widest uppercase">Alert Vector [Alpha]</h2>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<div class="font-headline text-3xl text-on-surface uppercase tracking-tight">Tech exposure high</div>
+<div class="font-mono text-sm text-outline-variant mt-1">Variance detected: +14.2% over threshold</div>
+</div>
+<p class="font-body text-sm text-on-surface-variant border-l border-secondary/30 pl-3">
+                            Sector concentration in technology assets exceeds recommended safe limits. AI suggests immediate recalibration to mitigate systemic risk factors.
+                        </p>
+<button class="mt-2 self-start bg-secondary text-on-secondary font-headline uppercase tracking-wider text-xs px-4 py-2 hover:bg-secondary-dim hover:shadow-[0_0_15px_rgba(242,232,5,0.4)] transition-all">
+                            Initialize Rebalance
+                        </button>
+</div>
+</div>
+<!-- Card: Portfolio Balances (Ledger Style) -->
+<div class="bg-surface-container-low p-6 flex flex-col gap-4 relative">
+<div class="absolute right-0 bottom-0 w-16 h-16 border-b border-r border-tertiary/20"></div>
+<h2 class="font-mono text-xs text-tertiary tracking-widest uppercase">Net Protocol Value</h2>
+<div>
+<div class="font-headline text-4xl text-primary tracking-tighter">
+                            124,092.45 <span class="text-xl text-primary/50">USDC</span>
+</div>
+<div class="font-mono text-xs text-outline-variant mt-1">LATEST SYNC: T-0.04s</div>
+</div>
+<!-- Segmented Progress Bar (RPG Style) -->
+<div class="mt-4 flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-mono text-[10px] text-surface-tint uppercase">Goal Progression</span>
+<span class="font-mono text-[10px] text-on-surface">Level 4 // 82%</span>
+</div>
+<div class="w-full h-3 flex gap-1">
+<div class="flex-1 bg-surface-tint shadow-[0_0_8px_rgba(143,245,255,0.4)]"></div>
+<div class="flex-1 bg-surface-tint shadow-[0_0_8px_rgba(143,245,255,0.4)]"></div>
+<div class="flex-1 bg-surface-tint shadow-[0_0_8px_rgba(143,245,255,0.4)]"></div>
+<div class="flex-1 bg-surface-tint shadow-[0_0_8px_rgba(143,245,255,0.4)]"></div>
+<div class="flex-1 bg-surface-variant"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Predictive Engine Terminal (md:col-span-8) -->
+<div class="md:col-span-8 flex flex-col">
+<div class="bg-surface-container-lowest h-full flex flex-col border border-outline-variant/20 relative shadow-[inset_0_0_40px_rgba(0,0,0,0.8)]">
+<!-- Terminal Header Bar -->
+<div class="bg-surface-container border-b border-outline-variant/20 px-4 py-2 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm">terminal</span>
+<span class="font-mono text-[10px] text-tertiary uppercase tracking-widest">Predictive_Engine_v4.2.sh</span>
+</div>
+<div class="flex gap-2">
+<div class="w-2 h-2 bg-outline-variant"></div>
+<div class="w-2 h-2 bg-outline-variant"></div>
+<div class="w-2 h-2 bg-primary/50"></div>
+</div>
+</div>
+<!-- Terminal Output Area -->
+<div class="p-6 font-mono text-sm flex flex-col gap-3 terminal-scroll overflow-y-auto max-h-[500px]">
+<div class="flex gap-3 text-on-surface-variant">
+<span class="text-primary opacity-50">[14:02:41]</span>
+<span class="text-primary">&gt;</span>
+<span>Initializing multi-factor analysis protocol...</span>
+</div>
+<div class="flex gap-3 text-on-surface-variant">
+<span class="text-primary opacity-50">[14:02:42]</span>
+<span class="text-primary">&gt;</span>
+<span>Fetching historical variance for node clusters: [SOL, ETH, BTC]</span>
+</div>
+<div class="flex gap-3 text-on-surface-variant">
+<span class="text-primary opacity-50">[14:02:44]</span>
+<span class="text-primary">&gt;</span>
+<span>Cross-referencing global sentiment matrices... <span class="text-tertiary">DONE</span></span>
+</div>
+<div class="my-4 p-4 border border-tertiary/20 bg-surface-container-low flex flex-col gap-2 relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<span class="text-[10px] text-tertiary uppercase tracking-widest">Oracle Projection Matrix</span>
+<div class="grid grid-cols-3 gap-4 text-xs mt-2">
+<div>
+<div class="text-outline-variant mb-1">SCENARIO A (Hold)</div>
+<div class="text-error font-bold">-4.2% Yield</div>
+<div class="text-[10px] text-on-surface-variant">High volatility risk</div>
+</div>
+<div>
+<div class="text-outline-variant mb-1">SCENARIO B (Divest)</div>
+<div class="text-on-surface font-bold">+1.1% Yield</div>
+<div class="text-[10px] text-on-surface-variant">Capital preservation</div>
+</div>
+<div class="bg-primary/10 p-2 border border-primary/20">
+<div class="text-primary mb-1">SCENARIO C (Rebalance)</div>
+<div class="text-primary font-bold">+18.5% Yield</div>
+<div class="text-[10px] text-primary/70">Optimal path determined</div>
+</div>
+</div>
+</div>
+<div class="flex gap-3 text-primary">
+<span class="opacity-50">[14:02:45]</span>
+<span>&gt;</span>
+<span>Awaiting user confirmation to execute Protocol Scenario C.</span>
+</div>
+<div class="flex gap-3 text-primary mt-2">
+<span>&gt;</span>
+<span class="w-2 h-4 bg-primary animate-pulse"></span>
+</div>
+</div>
+<!-- Tactical Triggers (Footer) -->
+<div class="mt-auto p-4 border-t border-outline-variant/20 bg-surface flex gap-4">
+<button class="bg-primary text-on-primary font-headline uppercase tracking-widest text-sm px-6 py-3 hover:bg-surface-tint hover:shadow-[0_0_20px_rgba(143,245,255,0.3)] transition-all flex-1 text-center border border-transparent">
+                            Execute Scenario C
+                        </button>
+<button class="border border-primary/40 text-primary font-headline uppercase tracking-widest text-sm px-6 py-3 hover:bg-primary/5 transition-colors text-center">
+                            Abort Sequence
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Shell - Exact execution of JSON) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-black h-20 border-t border-zinc-800">
+<!-- Item 1: ARENA -->
+<div class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 w-full h-full hover:bg-zinc-800 hover:text-white transition-all">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">ARENA</span>
+</div>
+<!-- Item 2: PORTFOLIO (Active Mapping based on logical context for Mobile) -->
+<div class="flex flex-col items-center justify-center text-[#f2e805] bg-zinc-900 border-t-2 border-[#f2e805] px-2 py-1 scale-95 duration-75 transition-all w-full h-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<!-- Applying primary color to text as per style_active_navigation intent for contrast, though JSON active mixes yellow/cyan concepts, executing exactly what is provided in 'style_active_navigation' -->
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1 text-[#00F0FF]">PORTFOLIO</span>
+</div>
+<!-- Item 3: MISSIONS -->
+<div class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 w-full h-full hover:bg-zinc-800 hover:text-white transition-all">
+<span class="material-symbols-outlined">military_tech</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">MISSIONS</span>
+</div>
+<!-- Item 4: RANKS -->
+<div class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 w-full h-full hover:bg-zinc-800 hover:text-white transition-all">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">RANKS</span>
+</div>
+<!-- Item 5: STORE -->
+<div class="flex flex-col items-center justify-center text-zinc-600 grayscale px-2 py-1 w-full h-full hover:bg-zinc-800 hover:text-white transition-all">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold tracking-tighter mt-1">STORE</span>
+</div>
+</nav>
+</body></html>

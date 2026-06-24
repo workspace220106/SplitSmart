@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PacPay Trade Result</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#48474a",
+                        "error": "#ff716c",
+                        "on-primary-fixed-variant": "#005e64",
+                        "on-tertiary-fixed-variant": "#600084",
+                        "on-tertiary": "#390050",
+                        "tertiary-fixed": "#e092ff",
+                        "on-tertiary-container": "#ffffff",
+                        "background": "#0e0e10",
+                        "secondary-fixed": "#f2e805",
+                        "on-secondary-container": "#fffac6",
+                        "tertiary-fixed-dim": "#d97dff",
+                        "surface-container-highest": "#262528",
+                        "secondary-dim": "#e3d900",
+                        "on-tertiary-fixed": "#2c003f",
+                        "error-container": "#9f0519",
+                        "inverse-on-surface": "#565557",
+                        "surface-container-lowest": "#000000",
+                        "surface-container-low": "#131315",
+                        "primary-fixed": "#00eefc",
+                        "inverse-primary": "#006a71",
+                        "surface": "#0e0e10",
+                        "on-error": "#490006",
+                        "on-surface-variant": "#adaaad",
+                        "surface-variant": "#262528",
+                        "on-primary-container": "#005359",
+                        "on-secondary-fixed": "#444100",
+                        "surface-tint": "#8ff5ff",
+                        "on-primary-fixed": "#003f43",
+                        "primary-fixed-dim": "#00deec",
+                        "on-background": "#f9f5f8",
+                        "tertiary-container": "#bb00fd",
+                        "on-error-container": "#ffa8a3",
+                        "secondary-container": "#656100",
+                        "secondary": "#f2e805",
+                        "surface-container": "#19191c",
+                        "tertiary": "#d674ff",
+                        "primary": "#8ff5ff",
+                        "surface-container-high": "#1f1f22",
+                        "inverse-surface": "#fcf8fb",
+                        "on-secondary": "#585400",
+                        "surface-dim": "#0e0e10",
+                        "secondary-fixed-dim": "#e3d900",
+                        "on-secondary-fixed-variant": "#625e00",
+                        "on-surface": "#f9f5f8",
+                        "primary-dim": "#00deec",
+                        "on-primary": "#005d63",
+                        "surface-bright": "#2c2c2f",
+                        "error-dim": "#d7383b",
+                        "primary-container": "#00eefc",
+                        "outline": "#767577",
+                        "tertiary-dim": "#bb00fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        
+        /* CRT Scanline Effect Overlay */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.1) 50%,
+                rgba(0,0,0,0.1)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        /* Glitch Text Effect Placeholder (No actual animation per rules, just styling) */
+        .glitch-text {
+            text-shadow: 2px 0 #f2e805, -2px 0 #d674ff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- Ambient Glare -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[500px] bg-primary/5 blur-[120px]"></div>
+</div>
+<!-- Scanlines Overlay -->
+<div class="fixed inset-0 scanlines z-50 mix-blend-overlay"></div>
+<!-- MAIN CONTENT CANVAS -->
+<main class="flex-grow flex flex-col items-center justify-center p-6 relative z-10 w-full max-w-4xl mx-auto mt-16 mb-24">
+<!-- Status Indicator / Mission Banner -->
+<div class="w-full flex justify-between items-end mb-12 border-b border-primary/30 pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<div>
+<h2 class="font-headline text-xs tracking-[0.3em] text-primary/70 uppercase">Mission Status</h2>
+<p class="font-mono text-lg text-primary">TRADE_EXECUTED</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-mono text-xs text-outline-variant">SYS.TICK: 18394.002</p>
+</div>
+</div>
+<!-- HERO RESULT: The "Critical Profit" -->
+<div class="w-full relative flex flex-col items-center justify-center py-16 mb-12">
+<!-- Background Glow -->
+<div class="absolute inset-0 bg-primary/10 blur-3xl rounded-none"></div>
+<h1 class="font-headline text-6xl md:text-8xl font-black text-primary text-center tracking-tighter leading-none glitch-text relative z-10 mb-4 drop-shadow-[0_0_20px_rgba(143,245,255,0.4)]">
+                CRITICAL PROFIT
+            </h1>
+<div class="flex items-center justify-center gap-4 bg-surface-container-low px-8 py-4 border border-primary/50 relative z-10 shadow-[0_0_30px_rgba(143,245,255,0.15)]">
+<span class="material-symbols-outlined text-primary text-4xl">arrow_upward</span>
+<span class="font-mono text-4xl md:text-5xl text-primary font-bold">+ $4,204.89</span>
+</div>
+</div>
+<!-- BENTO GRID: Stats & Rewards -->
+<div class="w-full grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
+<!-- XP & Level Up Card -->
+<div class="md:col-span-8 bg-surface-container-low border border-outline-variant/30 p-6 flex flex-col justify-between relative overflow-hidden group">
+<!-- Inner Glow on Hover -->
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<!-- Decorative Left Accent -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="font-headline text-sm tracking-widest text-secondary uppercase mb-1">Combat Experience</h3>
+<p class="font-mono text-3xl text-on-surface font-bold">+ 1,250 XP</p>
+</div>
+<div class="bg-secondary/10 px-3 py-1 border border-secondary/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">stars</span>
+<span class="font-headline text-xs font-bold text-secondary tracking-wider">LEVEL UP IMMINENT</span>
+</div>
+</div>
+<!-- Segmented Progress Bar -->
+<div class="w-full relative z-10">
+<div class="flex justify-between text-xs font-mono text-outline-variant mb-2">
+<span>LVL 34</span>
+<span class="text-secondary">98% to LVL 35</span>
+</div>
+<div class="h-4 flex gap-1 w-full">
+<!-- Filled segments -->
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<div class="flex-1 bg-secondary shadow-[0_0_10px_rgba(242,232,5,0.3)]"></div>
+<!-- Empty segments -->
+<div class="flex-1 bg-surface-variant"></div>
+</div>
+</div>
+</div>
+<!-- Trade Receipt Mini-Card -->
+<div class="md:col-span-4 bg-surface-container-lowest border border-outline-variant/30 p-6 flex flex-col relative">
+<!-- Decorative Corner Cut Placeholder (via linear gradient) -->
+<div class="absolute top-0 right-0 w-8 h-8 bg-background" style="clip-path: polygon(100% 0, 0 0, 100% 100%);"></div>
+<div class="absolute top-0 right-0 w-[30px] h-[30px] bg-surface-container-lowest" style="clip-path: polygon(100% 0, 0 0, 100% 100%);"></div>
+<h3 class="font-headline text-sm tracking-widest text-outline-variant uppercase mb-4">Transaction Log</h3>
+<div class="space-y-4 flex-grow">
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="text-sm text-on-surface-variant">Asset</span>
+<span class="font-mono text-on-surface">NVDA_CALL_0915</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="text-sm text-on-surface-variant">Entry</span>
+<span class="font-mono text-on-surface">$12,450.00</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2">
+<span class="text-sm text-on-surface-variant">Exit</span>
+<span class="font-mono text-primary">$16,654.89</span>
+</div>
+</div>
+<div class="mt-6 font-mono text-[10px] text-outline-variant leading-tight break-all">
+                    HASH: 0x8f3c...9a2b<br/>
+                    CONFIRMATION_SIG_VALID
+                </div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="w-full flex justify-center mt-12 relative z-10 gap-6">
+<button class="bg-surface border border-primary/40 text-primary font-headline tracking-widest px-8 py-4 text-sm hover:bg-primary/10 transition-colors uppercase flex items-center gap-2">
+<span class="material-symbols-outlined">receipt_long</span>
+                View Ledger
+            </button>
+<button class="bg-primary text-on-primary font-headline tracking-widest font-bold px-12 py-4 text-sm hover:shadow-[0_0_20px_rgba(143,245,255,0.4)] transition-all uppercase flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                Next Mission
+            </button>
+</div>
+</main>
+</body></html>
