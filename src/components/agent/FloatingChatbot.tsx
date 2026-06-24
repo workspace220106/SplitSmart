@@ -139,10 +139,10 @@ export default function FloatingChatbot() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-[#00abec] text-white rounded-[22px] flex items-center justify-center shadow-[0_0_20px_rgba(0,171,236,0.3)] hover:scale-105 hover:bg-[#00c0ff] transition-all relative group z-20"
+        className="w-14 h-14 bg-[#00abec] text-white rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,171,236,0.3)] hover:scale-105 hover:bg-[#00c0ff] transition-all relative group z-20"
       >
-        <span className="material-symbols-outlined text-[28px] group-hover:rotate-12 transition-transform">
-          {isOpen ? 'expand_more' : 'chat_bubble'}
+        <span className="material-symbols-outlined text-[28px] group-hover:scale-105 transition-transform text-white">
+          {isOpen ? 'close' : 'smart_toy'}
         </span>
         {!isOpen && (
           <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-error rounded-full border-2 border-background"></div>

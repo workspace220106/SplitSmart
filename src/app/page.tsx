@@ -2,22 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useUserStore } from '@/store/userStore';
+import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
-import Header from '@/components/layout/Header';
-import BottomNav from '@/components/layout/BottomNav';
 
 export default function LandingPage() {
-  const { user } = useUserStore();
+  const router = useRouter();
   const { firebaseUser } = useAuthStore();
   const [booting, setBooting] = useState(true);
   const [bootProgress, setBootProgress] = useState(0);
   const [bootText, setBootText] = useState('INITIALIZING PORT CONSOLE...');
 
   useEffect(() => {
-    // If user is already logged in, skip boot sequence
+    // If user is already logged in, redirect immediately to /arena (Insights)
     if (firebaseUser) {
-      setBooting(false);
+      router.push('/arena');
       return;
     }
 
@@ -41,8 +39,9 @@ export default function LandingPage() {
       }
     }, 280);
     return () => clearInterval(interval);
-  }, [firebaseUser]);
+  }, [firebaseUser, router]);
 
+  // Boot sequence screen
   if (booting && !firebaseUser) {
     return (
       <div className="min-h-screen bg-black text-primary font-mono flex flex-col items-center justify-center p-6 relative overflow-hidden">
@@ -80,103 +79,11 @@ export default function LandingPage() {
     );
   }
 
-  // LOGGED IN DASHBOARD
+  // If authenticated and somehow still rendering, render loading
   if (firebaseUser) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white font-body pb-24 md:pb-8 pt-16">
-        <Header />
-        
-        <main className="container mx-auto p-4 md:p-6 max-w-5xl mt-6 space-y-6">
-          {/* Profile Card */}
-          <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden">
-            {/* Subtle glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#00abec]/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            {/* Avatar Area */}
-            <div className="relative shrink-0 mt-2">
-               <div className="w-24 h-24 rounded-full border-[3px] border-zinc-800 overflow-hidden bg-zinc-900">
-                  <img src="/avatar_a.png" alt="Profile" className="w-full h-full object-cover" />
-               </div>
-               {/* LVL Badge */}
-               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-primary text-black font-headline font-black text-[10px] px-3 py-1 rounded-full shadow-lg flex items-center gap-1 border-2 border-[#121212] whitespace-nowrap">
-                  <span className="material-symbols-outlined text-[10px]">star</span>
-                  LVL {user.level}
-               </div>
-            </div>
-
-            {/* Profile Details */}
-            <div className="flex flex-col items-center md:items-start text-center md:text-left pt-2">
-               <h2 className="text-xl md:text-2xl font-bold font-headline tracking-wide">{user.name}</h2>
-               <p className="text-zinc-500 text-sm italic mt-1 font-body">"Professional Financial Arcade Player"</p>
-               
-               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
-                  <div className="flex items-center gap-1.5 border border-green-500/30 bg-green-500/10 text-green-500 px-3 py-1.5 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider">
-                     <span className="material-symbols-outlined text-[14px]">verified_user</span>
-                     KYC Verified
-                  </div>
-                  <div className="flex items-center gap-1.5 border border-zinc-700 bg-zinc-800/50 text-zinc-300 px-3 py-1.5 rounded-lg text-[10px] font-mono font-bold uppercase tracking-wider">
-                     <span className="material-symbols-outlined text-[14px]">schedule</span>
-                     Joined Recently
-                  </div>
-               </div>
-            </div>
-          </div>
-
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-             {/* Vault Balance */}
-             <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-primary/50 transition-colors">
-                <div className="flex justify-between items-start mb-6">
-                   <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500 group-hover:text-primary transition-colors">Vault Balance</div>
-                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                      <span className="material-symbols-outlined">account_balance_wallet</span>
-                   </div>
-                </div>
-                <div>
-                   <div className="text-4xl font-headline font-black tracking-tight">₹{user.pacTokens}</div>
-                </div>
-             </div>
-
-             {/* Arcade XP */}
-             <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-[#00abec]/50 transition-colors">
-                <div className="flex justify-between items-start mb-6">
-                   <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500 group-hover:text-[#00abec] transition-colors">Arcade XP</div>
-                   <div className="w-10 h-10 rounded-xl bg-[#00abec]/10 flex items-center justify-center text-[#00abec]">
-                      <span className="material-symbols-outlined">stars</span>
-                   </div>
-                </div>
-                <div>
-                   <div className="text-4xl font-headline font-black mb-4 tracking-tight">{user.xp} <span className="text-xl text-zinc-600 font-bold">XP</span></div>
-                   <div className="w-full h-2 bg-zinc-900 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#00abec] shadow-[0_0_10px_#00abec]" style={{ width: '45%' }}></div>
-                   </div>
-                </div>
-             </div>
-
-             {/* Achievements */}
-             <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-secondary/50 transition-colors">
-                <div className="flex justify-between items-start mb-6">
-                   <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500 group-hover:text-secondary transition-colors">Achievements</div>
-                   <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
-                      <span className="material-symbols-outlined">military_tech</span>
-                   </div>
-                </div>
-                <div className="flex gap-3">
-                   <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 opacity-50 hover:opacity-100 transition-opacity">
-                      <span className="material-symbols-outlined">egg</span>
-                   </div>
-                   <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 opacity-50 hover:opacity-100 transition-opacity">
-                      <span className="material-symbols-outlined">shield</span>
-                   </div>
-                   <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 opacity-50 hover:opacity-100 transition-opacity">
-                      <span className="material-symbols-outlined">diamond</span>
-                   </div>
-                </div>
-             </div>
-          </div>
-        </main>
-
-        <BottomNav />
+      <div className="min-h-screen bg-black text-primary font-mono flex flex-col items-center justify-center p-6">
+        <span className="animate-pulse">REDIRECTING TO ARENA...</span>
       </div>
     );
   }
@@ -195,8 +102,8 @@ export default function LandingPage() {
       {/* Hero Content */}
       <main className="relative z-10 flex flex-col items-center text-center max-w-4xl">
         <div className="relative mb-8 group">
-           <h1 className="font-headline text-7xl md:text-9xl font-black text-primary italic tracking-tight drop-shadow-[0_0_30px_rgba(255,211,0,0.4)] transition-all group-hover:drop-shadow-[0_0_50px_rgba(255,211,0,0.7)]">
-             PAC<span className="text-white">PAY</span>
+           <h1 className="font-headline text-6xl md:text-8xl font-black text-primary italic tracking-tight drop-shadow-[0_0_30px_rgba(255,211,0,0.3)] transition-all group-hover:drop-shadow-[0_0_50px_rgba(255,211,0,0.5)]">
+             SPLIT<span className="text-white"> SMART</span>
            </h1>
         </div>
         
