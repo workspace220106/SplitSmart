@@ -63,8 +63,8 @@ export default function AuthPage() {
       } else {
         await loginWithEmail(email, password);
       }
-      // Successful auth redirects to Split Dashboard
-      router.push('/split');
+      // Successful auth redirects to Landing Page
+      router.push('/');
     } catch (err: any) {
       console.error(err);
       // Friendly check if firebase config is missing
@@ -83,7 +83,7 @@ export default function AuthPage() {
     setLoading(true);
     try {
       await loginWithGoogle();
-      router.push('/split');
+      router.push('/');
     } catch (err: any) {
       console.error(err);
       if (err.message && (err.message.includes('API key') || err.message.includes('initialize'))) {
@@ -103,8 +103,8 @@ export default function AuthPage() {
     // Simulate connection delay
     setTimeout(() => {
       setDemoLoading(false);
-      // Redirect straight to Dashboard
-      router.push('/split');
+      // Redirect straight to Landing Page
+      router.push('/');
     }, 1200);
   };
 
