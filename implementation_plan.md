@@ -1,24 +1,18 @@
-# Implementation Plan - Unique Username Validation, Cloud Sync & Session Isolation
+# Implementation Plan - Landing Page Logged-In View & AI Agent Manager Button Removal
 
-We will implement username uniqueness verification in Firestore during email sign-up, ensure Google Sign-In automatically resolves username collisions, isolate local sessions on logout, and keep the local Zustand game state in sync with the Firestore user documents.
+We will update the landing page (`/`) to be accessible to logged-in users (removing the automatic redirect to `/arena`), render the navigation Header and BottomNav for logged-in users, and remove the deprecated "AI Agent Manager" button from the main action layout.
 
 ## Proposed Changes
 
-### Unique Username Checks & Firestore Integration
+### Landing Page Updates
 
-#### [MODIFY] [firebaseService.ts](file:///c:/Users/araji/AI/SplitSmart/src/services/firebaseService.ts)
-- Add a helper function `isUsernameUnique(username: string)` to query Firestore and check if a username is already taken.
-- Update `registerWithEmail` to check for username uniqueness first; if it's already taken, throw a clear error: `"Username is already taken. Please choose another."`
-- Update `loginWithGoogle` to check for username uniqueness. If the Google display name is already taken, append a random 4-digit number (e.g. `Name_1234`) to make it unique before creating the document.
-
-#### [MODIFY] [authStore.ts](file:///c:/Users/araji/AI/SplitSmart/src/store/authStore.ts)
-- Import `useUserStore`.
-- Inside `initialize()`, when the Firestore user document is loaded/updated, sync the data directly to the local game store using `useUserStore.getState().setUser(userData)`.
-- Update the `logout` action to clear the specific `localStorage` keys (`splitsmart-user-storage`, `splitsmart-stocks-v2`, `splitsmart-split-storage`) so a new user signing in starts fresh and doesn't see cached data from the previous account.
-
-#### [MODIFY] [userStore.ts](file:///c:/Users/araji/AI/SplitSmart/src/store/userStore.ts)
-- Import `auth` and `updateUserData` from Firebase modules.
-- Update state-mutating actions (`addXP`, `addTokens`, `spendTokens`, `updateBehaviorScore`, `incrementStreak`, `resetStreak`, `setPremium`) to also write the updated values to Firestore if a user is authenticated (`auth.currentUser` is present).
+#### [MODIFY] [page.tsx](file:///c:/Users/araji/AI/SplitSmart/src/app/page.tsx)
+- **Remove Redirect**: Remove the `router.push('/arena')` call in `useEffect` when `firebaseUser` is present.
+- **Render Navigation for Logged-In Users**: Render the `<Header />` component at the top and the `<BottomNav />` component at the bottom of the page when `firebaseUser` is true, ensuring users can navigate the application.
+- **Adjust Layout Padding**: Add top padding (`pt-16`) and bottom padding (`pb-24`) to the main container when logged in, to avoid overlaps with the Header and BottomNav.
+- **Button Cleanup**:
+  - Remove the "AI Agent Manager" button from the landing page.
+  - Display the yellow action button (`INSERT COIN` if logged in, `START SYSTEM` if logged out) and the cyan action button (`Split Expenses`) side-by-side in a responsive flex layout.
 
 ## Verification Plan
 
@@ -26,6 +20,7 @@ We will implement username uniqueness verification in Firestore during email sig
 - Run `npm run build` to verify compiling works.
 
 ### Manual Verification
-- Attempt to register a new user with an existing username and check if it shows the "Username is already taken" validation error.
-- Sign in with a new Google account and verify it creates a unique username (appending random digits if there is a collision).
-- Log out and log in with a different email; verify that all stats, balance, and split groups are cleared/updated to match the new profile instead of displaying cached data.
+- Sign in and verify you land on `/` without being redirected to `/arena`.
+- Verify the header and bottom navigation are visible on `/` when logged in.
+- Verify the "AI Agent Manager" button is removed from `/`.
+- Verify the remaining two buttons ("INSERT COIN" / "START SYSTEM" and "Split Expenses") render correctly side-by-side.

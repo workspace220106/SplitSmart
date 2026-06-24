@@ -2,20 +2,20 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
+import Header from '@/components/layout/Header';
+import BottomNav from '@/components/layout/BottomNav';
 
 export default function LandingPage() {
-  const router = useRouter();
   const { firebaseUser } = useAuthStore();
   const [booting, setBooting] = useState(true);
   const [bootProgress, setBootProgress] = useState(0);
   const [bootText, setBootText] = useState('INITIALIZING PORT CONSOLE...');
 
   useEffect(() => {
-    // If user is already logged in, redirect immediately to /arena (Insights)
+    // If user is already logged in, skip boot sequence immediately
     if (firebaseUser) {
-      router.push('/arena');
+      setBooting(false);
       return;
     }
 
@@ -39,7 +39,7 @@ export default function LandingPage() {
       }
     }, 280);
     return () => clearInterval(interval);
-  }, [firebaseUser, router]);
+  }, [firebaseUser]);
 
   // Boot sequence screen
   if (booting && !firebaseUser) {
@@ -79,18 +79,11 @@ export default function LandingPage() {
     );
   }
 
-  // If authenticated and somehow still rendering, render loading
-  if (firebaseUser) {
-    return (
-      <div className="min-h-screen bg-black text-primary font-mono flex flex-col items-center justify-center p-6">
-        <span className="animate-pulse">REDIRECTING TO ARENA...</span>
-      </div>
-    );
-  }
-
-  // NOT LOGGED IN MARKETING PAGE
+  // NOT LOGGED IN MARKETING PAGE (AND LOGGED IN HOME)
   return (
-    <div className="min-h-screen bg-black text-white font-body overflow-hidden flex flex-col items-center justify-center p-6 relative">
+    <div className={`min-h-screen bg-black text-white font-body overflow-hidden flex flex-col items-center justify-center p-6 relative ${firebaseUser ? 'pt-20 pb-24 md:pb-8' : ''}`}>
+      {firebaseUser && <Header />}
+      
       {/* Arcade cabinet background effects */}
       <div className="absolute inset-0 z-0">
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] bg-[radial-gradient(circle,rgba(255,211,0,0.08)_0%,transparent_70%)] opacity-50"></div>
@@ -111,15 +104,23 @@ export default function LandingPage() {
            The Retro-Futuristic <span className="text-primary font-bold">Token Exchange</span> Matrix for the Elite Gamer.
         </p>
 
-        <div className="flex flex-col md:flex-row gap-8 w-full max-w-lg">
+        <div className="flex flex-col md:flex-row gap-6 w-full max-w-lg mt-8">
            <Link 
-             href="/auth" 
+             href={firebaseUser ? "/arena" : "/auth"} 
              className="flex-1 bg-primary text-black font-headline font-black py-5 text-lg uppercase tracking-[0.3em] hover:bg-white hover:shadow-[0_0_40px_rgba(255,211,0,0.6)] transition-all flex justify-center items-center gap-3 group relative overflow-hidden"
            >
               {/* Internal glow animation */}
               <div className="absolute top-0 -left-1/2 w-1/4 h-full bg-white/20 skew-x-12 translate-x-[-100%] group-hover:animate-shine transition-all"></div>
-              START SYSTEM
+              {firebaseUser ? "INSERT COIN" : "START SYSTEM"}
               <span className="material-symbols-outlined font-bold group-hover:translate-x-2 transition-transform">play_arrow</span>
+           </Link>
+
+           <Link 
+             href="/split" 
+             className="flex-grow md:flex-1 bg-black border-2 border-secondary/30 text-secondary font-headline font-bold py-5 uppercase tracking-[0.3em] hover:border-secondary hover:bg-secondary/5 hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] transition-all flex justify-center items-center gap-3 group"
+           >
+              <span className="material-symbols-outlined text-xl group-hover:rotate-180 transition-transform duration-500">call_split</span>
+              Split Expenses
            </Link>
         </div>
 
@@ -135,6 +136,8 @@ export default function LandingPage() {
            </div>
         </div>
       </main>
+
+      {firebaseUser && <BottomNav />}
 
       {/* CRT flicker effect */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px] animate-pulse"></div>
