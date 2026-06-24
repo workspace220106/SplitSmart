@@ -181,9 +181,6 @@ export default function AuthPage() {
             </div>
           </div>
 
-          <h2 className="font-headline text-3xl font-black text-center uppercase tracking-tight text-white italic">
-            SPLIT_SMART
-          </h2>
 
           {error && (
             <div className="mb-6 p-4 border border-error/50 bg-error/10 font-mono text-[11px] text-error rounded-lg uppercase tracking-wide leading-relaxed">
