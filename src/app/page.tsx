@@ -82,10 +82,6 @@ export default function LandingPage() {
 
       {/* Hero Content */}
       <main className="relative z-10 flex flex-col items-center text-center max-w-4xl">
-        <div className="mb-6 font-mono text-primary text-xs uppercase tracking-[0.8em] animate-pulse font-bold">
-           Initializing_Neural_Port // 0xSPLIT_ENTRY
-        </div>
-        
         <div className="relative mb-8 group">
            <h1 className="font-headline text-7xl md:text-9xl font-black text-primary italic tracking-tight drop-shadow-[0_0_30px_rgba(255,211,0,0.4)] transition-all group-hover:drop-shadow-[0_0_50px_rgba(255,211,0,0.7)]">
              SPLIT_SMART
@@ -93,7 +89,7 @@ export default function LandingPage() {
            <div className="absolute -top-4 -right-8 text-secondary font-mono text-sm animate-bounce">NEW!</div>
         </div>
         
-        <div className="h-1 w-32 bg-primary mb-10 shadow-[0_0_15px_rgba(255,211,0,0.5)]"></div>
+
         
         <p className="font-body text-zinc-400 text-lg md:text-xl leading-relaxed mb-16 uppercase tracking-[0.2em] max-w-[600px] border-l-2 border-r-2 border-primary/20 px-8">
            The Retro-Futuristic <span className="text-primary font-bold">Token Exchange</span> Matrix for the Elite Gamer.
