@@ -9,7 +9,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const isAuthPage = pathname === '/auth';
-  const { firebaseUser, isLoading, isInitialized, initialize } = useAuthStore();
+  const isSetupProfilePage = pathname === '/setup-profile';
+  const { firebaseUser, user, isLoading, isInitialized, initialize } = useAuthStore();
 
   useEffect(() => {
     // Initialize the auth listener on mount
@@ -26,12 +27,19 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
         router.push('/auth');
       }
     } else {
-      // If logged in and on the auth page, redirect to landing page
-      if (isAuthPage) {
-        router.push('/');
+      // If logged in but the Firestore profile does not exist, redirect to /setup-profile
+      if (!user) {
+        if (!isSetupProfilePage) {
+          router.push('/setup-profile');
+        }
+      } else {
+        // If logged in, profile exists, and on auth or setup-profile page, redirect to /
+        if (isAuthPage || isSetupProfilePage) {
+          router.push('/');
+        }
       }
     }
-  }, [firebaseUser, isInitialized, isLoading, pathname, router]);
+  }, [firebaseUser, user, isInitialized, isLoading, pathname, router, isAuthPage, isSetupProfilePage]);
 
   // Show a dark screen loader while checking authentication state
   if (!isInitialized || isLoading) {

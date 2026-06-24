@@ -61,7 +61,7 @@ export const registerWithEmail = async (
     email,
     xp: 0,
     level: 1,
-    pacTokens: 100,
+    pacTokens: 500,
     behaviorScore: 50,
     streakDays: 0,
     longestStreak: 0,
@@ -82,32 +82,37 @@ export const loginWithEmail = async (
 
 export const loginWithGoogle = async (): Promise<FirebaseUser> => {
   const provider = new GoogleAuthProvider();
+  // Force Google to prompt to choose account so users can switch accounts easily
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
   const userCredential = await signInWithPopup(auth, provider);
+  return userCredential.user;
+};
 
-  const userDoc = await getDoc(doc(db, USERS_COLLECTION, userCredential.user.uid));
-  if (!userDoc.exists()) {
-    let username = userCredential.user.displayName || 'User';
-    const unique = await isUsernameUnique(username);
-    if (!unique) {
-      username = `${username}_${Math.floor(1000 + Math.random() * 9000)}`;
-    }
-
-    await createUserDocument(userCredential.user.uid, {
-      id: userCredential.user.uid,
-      name: username,
-      email: userCredential.user.email || '',
-      xp: 0,
-      level: 1,
-      pacTokens: 100,
-      behaviorScore: 50,
-      streakDays: 0,
-      longestStreak: 0,
-      joinedAt: new Date(),
-      isPremium: false,
-    });
+export const setupNewUserProfile = async (
+  uid: string,
+  username: string,
+  email: string
+): Promise<void> => {
+  const unique = await isUsernameUnique(username);
+  if (!unique) {
+    throw new Error('Username is already taken. Please choose another.');
   }
 
-  return userCredential.user;
+  await createUserDocument(uid, {
+    id: uid,
+    name: username,
+    email: email,
+    xp: 0,
+    level: 1,
+    pacTokens: 500,
+    behaviorScore: 50,
+    streakDays: 0,
+    longestStreak: 0,
+    joinedAt: new Date(),
+    isPremium: false,
+  });
 };
 
 export const logout = async (): Promise<void> => {

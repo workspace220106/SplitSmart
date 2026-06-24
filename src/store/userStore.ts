@@ -48,7 +48,7 @@ const DEFAULT_USER: User = {
   email: 'student@splitsmart.app',
   xp: 0,
   level: 1,
-  pacTokens: 100,
+  pacTokens: 500,
   behaviorScore: 50,
   streakDays: 0,
   longestStreak: 0,

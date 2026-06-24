@@ -72,6 +72,14 @@ const Header = () => {
           <span className="material-symbols-outlined text-[22px]">notifications</span>
         </button>
 
+        {/* Token Balance Pill */}
+        <div className="hidden sm:flex items-center gap-1.5 bg-zinc-950 border border-primary/25 hover:border-primary/50 px-3.5 py-1.5 rounded-xl shadow-[0_0_10px_rgba(255,211,0,0.05)] transition-all select-none">
+          <span className="material-symbols-outlined text-primary text-[17px] animate-pulse">database</span>
+          <span className="font-mono text-xs font-bold text-primary tracking-wide">
+            {localUser.pacTokens} <span className="text-[9px] text-zinc-550 font-normal">PAC</span>
+          </span>
+        </div>
+
         {/* Profile Badge Pill */}
         <Link 
           href="/profile" 

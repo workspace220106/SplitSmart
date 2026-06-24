@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { Stock, PricePoint, Holding, Portfolio, StockTransaction, MarketEvent } from '../types';
 import { getMultipleQuotes, getMultipleCandles } from '../lib/finnhub';
+import { useUserStore } from './userStore';
 
 // ─── Stock definitions with real tickers ─────────────────────────
 const STOCK_DEFS = [
@@ -62,7 +63,7 @@ export const useStockStore = create<StockState>()(
       stocks: STOCK_DEFS.map(makeInitialStock),
       holdings: [],
       transactions: [],
-      balance: 10000, // Starting balance: 10,000 Pac-Tokens
+      balance: 500, // Starting balance: 500 Pac-Tokens
       watchlist: [],
       lastUpdate: 0,
       isLoading: false,
@@ -227,7 +228,13 @@ export const useStockStore = create<StockState>()(
         if (!stock || shares <= 0) return false;
 
         const cost = shares * stock.currentPrice;
-        if (state.balance < cost) return false;
+        
+        // Unify with userStore
+        const userStore = useUserStore.getState();
+        if (userStore.user.pacTokens < cost) return false;
+
+        const success = userStore.spendTokens(cost);
+        if (!success) return false;
 
         const existingHolding = state.holdings.find(h => h.symbol === symbol);
         let newHoldings: Holding[];
@@ -266,7 +273,7 @@ export const useStockStore = create<StockState>()(
         };
 
         set({
-          balance: state.balance - cost,
+          balance: userStore.user.pacTokens - cost,
           holdings: newHoldings,
           transactions: [tx, ...state.transactions].slice(0, 50), // Keep last 50
         });
@@ -282,6 +289,11 @@ export const useStockStore = create<StockState>()(
         if (!stock || !holding || shares <= 0 || holding.shares < shares) return false;
 
         const revenue = shares * stock.currentPrice;
+        
+        // Unify with userStore
+        const userStore = useUserStore.getState();
+        userStore.addTokens(revenue);
+
         const remainingShares = holding.shares - shares;
 
         let newHoldings: Holding[];
@@ -307,7 +319,7 @@ export const useStockStore = create<StockState>()(
         };
 
         set({
-          balance: state.balance + revenue,
+          balance: userStore.user.pacTokens + revenue,
           holdings: newHoldings,
           transactions: [tx, ...state.transactions].slice(0, 50),
         });
@@ -342,3 +354,13 @@ export const useStockStore = create<StockState>()(
     }
   )
 );
+
+// Real-time synchronization: when userStore updates pacTokens, sync stockStore balance
+if (typeof window !== 'undefined') {
+  useUserStore.subscribe((state) => {
+    const pacTokens = state.user?.pacTokens ?? 500;
+    if (useStockStore.getState().balance !== pacTokens) {
+      useStockStore.setState({ balance: pacTokens });
+    }
+  });
+}
