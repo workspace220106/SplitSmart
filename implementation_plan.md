@@ -1,47 +1,31 @@
-# Implementation Plan - Dedicated Profile Route & Premium Financial Dashboard
+# Implementation Plan - Unique Username Validation, Cloud Sync & Session Isolation
 
-We will remove the "Dashboard" link from the header, redirect logged-in users landing on `/` to `/arena` (Insights), and build a dedicated, professional `/profile` page. The header design will be updated to match the second screenshot (gamepad icon and "SPLIT SMART" text without the underscore), and the settings gear icon will redirect to the profile/settings page. Additionally, we will update the floating chatbot's trigger button to match the user's screenshot.
+We will implement username uniqueness verification in Firestore during email sign-up, ensure Google Sign-In automatically resolves username collisions, isolate local sessions on logout, and keep the local Zustand game state in sync with the Firestore user documents.
 
 ## Proposed Changes
 
-### Navigation & Header Updates
+### Unique Username Checks & Firestore Integration
 
-#### [MODIFY] [Header.tsx](file:///c:/Users/araji/AI/SplitSmart/src/components/layout/Header.tsx)
-- **Logo Revamp**: Replace the Pacman "PACPAY" logo with the gamepad/controller icon (material icon `videogame_asset`) and the text "SPLIT SMART" (yellow, uppercase, no underscore) to match the second screenshot.
-- **Font & Style Tuning**: Make the navigation font size smaller and more professional (`text-[12px] font-medium tracking-wide text-zinc-400 hover:text-white`) to look clean, compact, and premium.
-- **Remove Dashboard**: Remove the "Dashboard" entry from `navLinks`.
-- **Redirects**: 
-  - Update the settings gear button so that clicking it navigates to `/profile`.
-  - Ensure the user name/avatar pill also links to `/profile`.
+#### [MODIFY] [firebaseService.ts](file:///c:/Users/araji/AI/SplitSmart/src/services/firebaseService.ts)
+- Add a helper function `isUsernameUnique(username: string)` to query Firestore and check if a username is already taken.
+- Update `registerWithEmail` to check for username uniqueness first; if it's already taken, throw a clear error: `"Username is already taken. Please choose another."`
+- Update `loginWithGoogle` to check for username uniqueness. If the Google display name is already taken, append a random 4-digit number (e.g. `Name_1234`) to make it unique before creating the document.
 
-#### [MODIFY] [page.tsx](file:///c:/Users/araji/AI/SplitSmart/src/app/page.tsx)
-- Redirect authenticated users visiting `/` straight to `/arena` (Insights) so they start on the main finance/trading arena.
+#### [MODIFY] [authStore.ts](file:///c:/Users/araji/AI/SplitSmart/src/store/authStore.ts)
+- Import `useUserStore`.
+- Inside `initialize()`, when the Firestore user document is loaded/updated, sync the data directly to the local game store using `useUserStore.getState().setUser(userData)`.
+- Update the `logout` action to clear the specific `localStorage` keys (`splitsmart-user-storage`, `splitsmart-stocks-v2`, `splitsmart-split-storage`) so a new user signing in starts fresh and doesn't see cached data from the previous account.
 
-### Chatbot Trigger Style Update
-
-#### [MODIFY] [FloatingChatbot.tsx](file:///c:/Users/araji/AI/SplitSmart/src/components/agent/FloatingChatbot.tsx)
-- **Button Styling**: Update the trigger button to be a light blue (`bg-[#00abec]`) rounded square (`rounded-[18px]` or `rounded-2xl`) matching the screenshot.
-- **Icon Styling**: Update the icon inside the trigger button to always display the white robot head (`smart_toy` material icon) when closed, and a close/expand icon when open.
-
-### New Premium Profile Page
-
-#### [NEW] [page.tsx](file:///c:/Users/araji/AI/SplitSmart/src/app/profile/page.tsx)
-- A highly polished dashboard that renders when visiting `/profile`:
-  - **Profile Hero Card**: Level badge (LVL x), KYC verification status, and name/email details with modern border animations.
-  - **Dynamic Tab View**:
-    - **Overview**: Rendering a PacPay Credit Card mockup showing Vault Balance, an interactive radial behavior score gauge, and key statistics.
-    - **SplitSmart**: Overview of expenses, group debts (what you owe / are owed), and pending split bills.
-    - **Portfolio**: Active stock investments, profit/loss percentage, and trading history.
-    - **Quests & Levels**: Detailed XP circle, current level milestones, and a grid of unlocked/locked achievements.
-    - **Preferences**: Manage account toggles, notifications, and reset statistics.
+#### [MODIFY] [userStore.ts](file:///c:/Users/araji/AI/SplitSmart/src/store/userStore.ts)
+- Import `auth` and `updateUserData` from Firebase modules.
+- Update state-mutating actions (`addXP`, `addTokens`, `spendTokens`, `updateBehaviorScore`, `incrementStreak`, `resetStreak`, `setPremium`) to also write the updated values to Firestore if a user is authenticated (`auth.currentUser` is present).
 
 ## Verification Plan
 
 ### Automated Tests
-- Run `npm run build` to verify compiling works and that all imports and props are correct.
+- Run `npm run build` to verify compiling works.
 
 ### Manual Verification
-- Access the app, sign in, and verify redirect to `/arena`.
-- Verify the header logo shows the yellow game controller icon next to `SPLIT SMART`.
-- Click the settings gear icon in the header and verify it opens `/profile`.
-- Verify the chatbot icon matches the rounded square light blue button with the white robot head inside.
+- Attempt to register a new user with an existing username and check if it shows the "Username is already taken" validation error.
+- Sign in with a new Google account and verify it creates a unique username (appending random digits if there is a collision).
+- Log out and log in with a different email; verify that all stats, balance, and split groups are cleared/updated to match the new profile instead of displaying cached data.

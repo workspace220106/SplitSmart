@@ -1,5 +1,3 @@
-'use client';
-
 import { create } from 'zustand';
 import { User as FirebaseUser, signOut } from 'firebase/auth';
 import { User } from '../types';
@@ -9,6 +7,7 @@ import {
   subscribeToUserData,
 } from '../services/firebaseService';
 import { auth } from '../lib/firebase';
+import { useUserStore } from './userStore';
 
 interface AuthState {
   firebaseUser: FirebaseUser | null;
@@ -50,6 +49,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         const unsubscribeUser = subscribeToUserData(firebaseUser.uid, (userData) => {
           if (userData) {
             set({ user: userData, isLoading: false, isInitialized: true });
+            // Sync user data to Zustand userStore
+            useUserStore.getState().setUser(userData);
           } else {
             // User document doesn't exist yet
             set({ user: null, isLoading: false, isInitialized: true });
@@ -96,5 +97,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       user: null,
       isLoading: false,
     });
+    
+    // Clear localStorage to ensure clean state for next user login session
+    localStorage.removeItem('splitsmart-user-storage');
+    localStorage.removeItem('splitsmart-stocks-v2');
+    localStorage.removeItem('splitsmart-split-storage');
+    
+    // Force a reload to sign-in page to clean state
+    window.location.href = '/auth';
   },
 }));

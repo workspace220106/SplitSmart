@@ -35,12 +35,23 @@ const BADGES_COLLECTION = 'badges';
 const STOCK_TRANSACTIONS_COLLECTION = 'stock_transactions';
 const MARKET_EVENTS_COLLECTION = 'market_events';
 
+export const isUsernameUnique = async (username: string): Promise<boolean> => {
+  const q = query(collection(db, USERS_COLLECTION), where('name', '==', username));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.empty;
+};
+
 // Auth functions
 export const registerWithEmail = async (
   email: string,
   password: string,
   name: string
 ): Promise<FirebaseUser> => {
+  const unique = await isUsernameUnique(name);
+  if (!unique) {
+    throw new Error('Username is already taken. Please choose another.');
+  }
+
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   await updateProfile(userCredential.user, { displayName: name });
 
@@ -75,9 +86,15 @@ export const loginWithGoogle = async (): Promise<FirebaseUser> => {
 
   const userDoc = await getDoc(doc(db, USERS_COLLECTION, userCredential.user.uid));
   if (!userDoc.exists()) {
+    let username = userCredential.user.displayName || 'User';
+    const unique = await isUsernameUnique(username);
+    if (!unique) {
+      username = `${username}_${Math.floor(1000 + Math.random() * 9000)}`;
+    }
+
     await createUserDocument(userCredential.user.uid, {
       id: userCredential.user.uid,
-      name: userCredential.user.displayName || 'User',
+      name: username,
       email: userCredential.user.email || '',
       xp: 0,
       level: 1,

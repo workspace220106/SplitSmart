@@ -56,6 +56,16 @@ const DEFAULT_USER: User = {
   isPremium: false,
 };
 
+import { auth } from '../lib/firebase';
+import { updateUserData } from '../services/firebaseService';
+
+const syncUserToFirestore = (updatedUser: Partial<User>) => {
+  const currentUser = auth.currentUser;
+  if (currentUser) {
+    updateUserData(currentUser.uid, updatedUser).catch(err => console.error("Firestore sync error:", err));
+  }
+};
+
 export const useUserStore = create<UserState>()(
   persist(
     (set, get) => ({
@@ -69,67 +79,100 @@ export const useUserStore = create<UserState>()(
           const newLevel = LEVEL_THRESHOLDS.findIndex(threshold => newXP < threshold);
           const actualLevel = newLevel === -1 ? LEVEL_THRESHOLDS.length : newLevel;
 
+          const updated = {
+            xp: newXP,
+            level: Math.max(actualLevel, 1),
+          };
+          syncUserToFirestore(updated);
+
           return {
             user: {
               ...state.user,
-              xp: newXP,
-              level: Math.max(actualLevel, 1),
+              ...updated,
             },
           };
         });
       },
 
       addTokens: (amount: number) => {
-        set((state) => ({
-          user: {
-            ...state.user,
+        set((state) => {
+          const updated = {
             pacTokens: state.user.pacTokens + amount,
-          },
-        }));
+          };
+          syncUserToFirestore(updated);
+          return {
+            user: {
+              ...state.user,
+              ...updated,
+            },
+          };
+        });
       },
 
       spendTokens: (amount: number) => {
         const state = get();
         if (state.user.pacTokens < amount) return false;
 
-        set((state) => ({
-          user: {
-            ...state.user,
+        set((state) => {
+          const updated = {
             pacTokens: state.user.pacTokens - amount,
-          },
-        }));
+          };
+          syncUserToFirestore(updated);
+          return {
+            user: {
+              ...state.user,
+              ...updated,
+            },
+          };
+        });
         return true;
       },
 
       updateBehaviorScore: (score: number) => {
-        set((state) => ({
-          user: {
-            ...state.user,
+        set((state) => {
+          const updated = {
             behaviorScore: Math.min(100, Math.max(0, score)),
-          },
-        }));
+          };
+          syncUserToFirestore(updated);
+          return {
+            user: {
+              ...state.user,
+              ...updated,
+            },
+          };
+        });
       },
 
       incrementStreak: () => {
         set((state) => {
           const newStreak = state.user.streakDays + 1;
+          const updated = {
+            streakDays: newStreak,
+            longestStreak: Math.max(newStreak, state.user.longestStreak),
+          };
+          syncUserToFirestore(updated);
           return {
             user: {
               ...state.user,
-              streakDays: newStreak,
-              longestStreak: Math.max(newStreak, state.user.longestStreak),
+              ...updated,
             },
           };
         });
       },
 
       resetStreak: () => {
-        set((state) => ({
-          user: {
-            ...state.user,
+        set((state) => {
+          const updated = {
             streakDays: 0,
-          },
-        }));
+          };
+          syncUserToFirestore(updated);
+          return {
+            user: {
+              ...state.user,
+              ...updated,
+            },
+          };
+        });
       },
 
       completeMission: (missionId: string) => {
@@ -160,12 +203,18 @@ export const useUserStore = create<UserState>()(
       },
 
       setPremium: (isPremium: boolean) => {
-        set((state) => ({
-          user: {
-            ...state.user,
+        set((state) => {
+          const updated = {
             isPremium,
-          },
-        }));
+          };
+          syncUserToFirestore(updated);
+          return {
+            user: {
+              ...state.user,
+              ...updated,
+            },
+          };
+        });
       },
 
       getLevel: () => {
