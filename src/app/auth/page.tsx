@@ -146,7 +146,7 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white font-body flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white font-body flex flex-col items-center justify-center p-4 py-8 relative overflow-y-auto">
       {/* CRT Scanline and flicker overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px]"></div>
       
@@ -156,12 +156,12 @@ export default function AuthPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
       </div>
 
-      <main className="relative z-10 w-full max-w-[440px] px-4">
+      <main className="relative z-10 w-full max-w-[440px] px-4 my-auto">
         {/* Glowing Terminal Card */}
-        <div className="bg-[#0b0b0b] border-2 border-primary/20 backdrop-blur-xl p-8 rounded-2xl shadow-[0_0_50px_rgba(255,211,0,0.1)] relative overflow-hidden">
+        <div className="bg-[#0b0b0b] border-2 border-primary/20 backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-[0_0_50px_rgba(255,211,0,0.1)] relative overflow-hidden">
           
           {/* Custom retro-glowing SplitSmart logo */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-4">
             <div className="relative w-16 h-16 flex items-center justify-center bg-zinc-950 border-2 border-primary rounded-2xl shadow-[0_0_20px_rgba(255,211,0,0.35)]">
               <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Center division bar */}
@@ -217,13 +217,13 @@ export default function AuthPage() {
             Continue with Google
           </button>
 
-          <div className="flex items-center justify-between my-6">
+          <div className="flex items-center justify-between my-4">
             <span className="w-1/5 border-b border-zinc-800"></span>
             <span className="font-mono text-[9px] uppercase text-zinc-600 tracking-[0.3em]">System_Split</span>
             <span className="w-1/5 border-b border-zinc-800"></span>
           </div>
 
-          <form onSubmit={handleAuth} className="space-y-4">
+          <form onSubmit={handleAuth} className="space-y-3">
             {isSignUp && (
               <div className="relative group">
                 <input
@@ -290,7 +290,7 @@ export default function AuthPage() {
             </button>
           </div>
 
-          <div className="mt-8 text-center">
+          <div className="mt-5 text-center">
             <button
               type="button"
               onClick={() => setIsSignUp(!isSignUp)}
