@@ -64,9 +64,9 @@ const Header = () => {
           <span className="font-mono text-xs text-white">LVL_{user.level}</span>
         </div>
 
-        <div className="w-8 h-8 border-2 border-primary bg-surface-container-high flex items-center justify-center cursor-pointer">
+        <Link href="/auth" className="w-8 h-8 border-2 border-primary bg-surface-container-high flex items-center justify-center cursor-pointer hover:bg-primary/10 transition-colors" title="Authentication Terminal">
           <span className="font-mono text-[10px] text-primary">P1</span>
-        </div>
+        </Link>
       </div>
     </header>
   );
