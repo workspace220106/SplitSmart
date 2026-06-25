@@ -8,6 +8,7 @@ import StockList from '@/components/arena/StockList';
 import StockChart from '@/components/arena/StockChart';
 import AgentTerminal from '@/components/arena/AgentTerminal';
 import TradePanel from '@/components/arena/TradePanel';
+import AnimatedBackground from '@/components/layout/AnimatedBackground';
 
 export default function ArenaPage() {
   const { fetchPrices, initialize, isLoading, apiError } = useStockStore();
@@ -25,14 +26,8 @@ export default function ArenaPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-body pb-24 md:pb-8 pt-16 relative overflow-hidden">
+      <AnimatedBackground />
       <Header />
-
-      {/* Background effects */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-primary/5 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-secondary/5 blur-[150px] rounded-full"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      </div>
 
       <main className="relative z-10 container mx-auto p-4 md:p-6 lg:p-8 max-w-[1600px] mt-4">
         {/* Mobile title */}
@@ -95,14 +90,14 @@ export default function ArenaPage() {
 
             {/* Mobile stock selector */}
             <div className="lg:hidden">
-              <div className="bg-black border-2 border-primary/20 p-5">
+              <div className="bg-black p-5 arcade-card-3d arcade-card-3d-primary">
                 <h3 className="font-headline text-xs text-primary mb-4 uppercase tracking-[0.3em] font-bold">Select Stock</h3>
                 <div className="flex gap-3 overflow-x-auto pb-2">
                   {['MSFT', 'TSLA', 'AMZN', 'JPM', 'KO', 'CVX', 'PFE', 'SONY'].map(s => (
                     <button
                       key={s}
                       onClick={() => setSelectedSymbol(s)}
-                      className={`px-5 py-2.5 font-mono text-xs border-2 transition-all whitespace-nowrap ${
+                      className={`px-5 py-2.5 font-mono text-xs border-2 transition-all whitespace-nowrap rounded-xl ${
                         s === selectedSymbol
                           ? 'border-primary text-primary bg-primary/10 shadow-[0_0_10px_rgba(255,211,0,0.2)]'
                           : 'border-zinc-800 text-zinc-500'

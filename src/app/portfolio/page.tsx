@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header';
 import BottomNav from '@/components/layout/BottomNav';
 import { useStockStore } from '@/store/stockStore';
 import { useUserStore } from '@/store/userStore';
+import AnimatedBackground from '@/components/layout/AnimatedBackground';
 
 export default function PortfolioPage() {
   const { getPortfolio, initialize } = useStockStore();
@@ -17,6 +18,7 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-body pb-24 md:pb-8 pt-16 relative overflow-hidden">
+      <AnimatedBackground />
       <Header />
 
       <main className="relative z-10 container mx-auto p-4 md:p-6 lg:p-8 max-w-[1200px] mt-4">
@@ -31,7 +33,7 @@ export default function PortfolioPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-          <div className="bg-zinc-900/30 border-2 border-primary/20 p-6 group hover:border-primary/50 transition-all">
+          <div className="bg-zinc-900/30 p-6 group transition-all arcade-card-3d arcade-card-3d-primary">
             <span className="font-headline text-[9px] text-zinc-500 uppercase tracking-widest block mb-2">Available Tokens</span>
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-primary text-xl">token</span>
@@ -40,7 +42,7 @@ export default function PortfolioPage() {
               </span>
             </div>
           </div>
-          <div className="bg-zinc-900/30 border-2 border-secondary/20 p-6 group hover:border-secondary/50 transition-all">
+          <div className="bg-zinc-900/30 p-6 group transition-all arcade-card-3d arcade-card-3d-secondary">
             <span className="font-headline text-[9px] text-zinc-500 uppercase tracking-widest block mb-2">Total Net Worth</span>
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-secondary text-xl">account_balance_wallet</span>
@@ -49,7 +51,7 @@ export default function PortfolioPage() {
               </span>
             </div>
           </div>
-          <div className="bg-zinc-900/30 border-2 border-white/10 p-6 md:col-span-2 relative overflow-hidden group">
+          <div className="bg-zinc-900/30 p-6 md:col-span-2 relative overflow-hidden group transition-all arcade-card-3d arcade-card-3d-white">
             <span className="font-headline text-[9px] text-zinc-500 uppercase tracking-widest block mb-2">Total P&L</span>
             <div className="flex items-center gap-10">
               <span className={`font-mono text-3xl font-black ${portfolio.totalProfitLoss >= 0 ? 'text-primary' : 'text-error'}`}>
@@ -65,7 +67,7 @@ export default function PortfolioPage() {
         </div>
 
         {/* Holdings Table */}
-        <div className="bg-black border-2 border-primary/10 overflow-hidden mb-10">
+        <div className="bg-black mb-10 overflow-hidden arcade-card-3d arcade-card-3d-primary">
           <div className="p-4 border-b border-primary/10 bg-zinc-900/50 flex justify-between items-center">
             <h3 className="font-headline text-[10px] tracking-[0.3em] text-primary uppercase font-bold">
               Holdings

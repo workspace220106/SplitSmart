@@ -73,7 +73,7 @@ const Header = () => {
         </button>
 
         {/* Token Balance Pill */}
-        <div className="hidden sm:flex items-center gap-1.5 bg-zinc-950 border border-primary/25 hover:border-primary/50 px-3.5 py-1.5 rounded-xl shadow-[0_0_10px_rgba(255,211,0,0.05)] transition-all select-none">
+        <div className="hidden sm:flex items-center gap-1.5 bg-zinc-950 border border-primary/25 hover:border-primary/50 px-3.5 py-1.5 rounded-none shadow-[0_0_10px_rgba(255,211,0,0.05)] transition-all select-none">
           <span className="material-symbols-outlined text-primary text-[17px] animate-pulse">database</span>
           <span className="font-mono text-xs font-bold text-primary tracking-wide">
             {localUser.pacTokens} <span className="text-[9px] text-zinc-550 font-normal">PAC</span>
@@ -83,7 +83,7 @@ const Header = () => {
         {/* Profile Badge Pill */}
         <Link 
           href="/profile" 
-          className="flex items-center gap-3 bg-zinc-900 border border-zinc-800/80 px-4 py-1.5 rounded-full hover:border-[#00abec]/40 hover:bg-zinc-850 transition-all cursor-pointer select-none group"
+          className="flex items-center gap-3 bg-zinc-900 border border-zinc-800/80 px-4 py-1.5 rounded-none hover:border-[#00abec]/40 hover:bg-zinc-850 transition-all cursor-pointer select-none group"
         >
           <span className="font-headline text-xs font-bold text-white uppercase tracking-wider group-hover:text-primary transition-colors">
             {authUser?.name || localUser.name || 'Player'}

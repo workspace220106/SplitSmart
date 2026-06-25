@@ -7,8 +7,8 @@ export default function StockList({ onSelect, selectedSymbol }: { onSelect: (s: 
   const { stocks, isLoading } = useStockStore();
 
   return (
-    <div className="bg-surface-container border border-primary/20 flex flex-col h-full bg-black">
-      <div className="p-4 border-b border-primary/20 flex justify-between items-center bg-surface-container-low">
+    <div className="bg-surface-container flex flex-col h-full bg-black arcade-card-3d arcade-card-3d-primary overflow-hidden">
+      <div className="p-4 border-b border-primary/20 flex justify-between items-center bg-surface-container-low rounded-t-[14px]">
         <h3 className="font-headline text-[10px] uppercase tracking-[0.3em] text-primary font-bold">
           Market
         </h3>

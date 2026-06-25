@@ -40,7 +40,7 @@ export default function AgentTerminal() {
   }, [user.level, user.xp, user.behaviorScore, user.pacTokens, missions]);
 
   return (
-    <div className="agent-theme bg-surface/40 border border-outline/30 p-5 flex flex-col gap-4 relative overflow-hidden rounded-xl backdrop-blur-xl transition-all hover:border-primary/40 group shadow-xl">
+    <div className="agent-theme bg-surface/40 p-5 flex flex-col gap-4 relative overflow-hidden backdrop-blur-xl transition-all group arcade-card-3d arcade-card-3d-primary shadow-xl">
       {/* HUD Accent */}
       <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
          <span className="material-symbols-outlined text-4xl text-primary">analytics</span>
@@ -60,15 +60,15 @@ export default function AgentTerminal() {
       <div className="h-[200px] overflow-y-auto scrollbar-hide">
         {loading ? (
           <div className="space-y-4 pt-4 px-2">
-             <div className="h-4 bg-primary/5 border border-primary/10 animate-pulse w-full rounded"></div>
-             <div className="h-4 bg-primary/5 border border-primary/10 animate-pulse w-4/5 rounded"></div>
-             <div className="h-2 bg-primary/5 border border-primary/10 animate-pulse w-1/2 mt-4 rounded"></div>
+             <div className="h-4 bg-primary/5 border border-primary/10 animate-pulse w-full rounded-md"></div>
+             <div className="h-4 bg-primary/5 border border-primary/10 animate-pulse w-4/5 rounded-md"></div>
+             <div className="h-2 bg-primary/5 border border-primary/10 animate-pulse w-1/2 mt-4 rounded-md"></div>
              <span className="text-[10px] text-primary/40 animate-pulse uppercase mt-2 tracking-widest block font-mono">Aggregating Analytics...</span>
           </div>
         ) : (
           <div className="space-y-4 pt-2">
             {insights.map((insight, idx) => (
-              <div key={idx} className="bg-background/40 border border-outline/20 p-4 rounded-lg hover:border-primary/20 transition-all shadow-sm">
+              <div key={idx} className="bg-background/40 border border-outline/20 p-4 rounded-xl hover:border-primary/20 transition-all shadow-sm">
                 <div className="flex items-center justify-between mb-2">
                    <span className={`text-[9px] font-mono font-bold uppercase tracking-widest ${
                      insight.priority === 'high' ? 'text-primary' : 'text-secondary'
@@ -89,7 +89,7 @@ export default function AgentTerminal() {
         )}
       </div>
 
-      <button className="w-full mt-2 font-headline text-[9px] font-black py-4 border border-primary/30 text-primary uppercase tracking-[0.3em] hover:bg-primary/10 hover:border-primary transition-all flex items-center justify-center gap-2 rounded-lg">
+      <button className="w-full mt-2 font-headline text-[9px] font-black py-4 border border-primary/30 text-primary uppercase tracking-[0.3em] hover:bg-primary/10 hover:border-primary transition-all flex items-center justify-center gap-2 rounded-xl">
          <span className="material-symbols-outlined text-sm">open_in_new</span>
          Expanded Portfolio Analysis
       </button>

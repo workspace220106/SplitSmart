@@ -42,7 +42,7 @@ export default function TradePanel({ symbol }: { symbol: string }) {
   };
 
   return (
-    <div className="bg-black border-2 border-primary/30 p-5 flex flex-col gap-4 relative overflow-hidden shadow-[0_0_20px_rgba(255,211,0,0.05)]">
+    <div className="bg-black p-5 flex flex-col gap-4 relative overflow-hidden arcade-card-3d arcade-card-3d-primary">
       <h2 className="font-headline text-lg uppercase tracking-[0.2em] text-primary border-b border-primary/20 pb-2 mb-1 font-bold">
         Trade <span className="text-white/50 text-[10px] ml-2 font-normal">[{symbol}]</span>
       </h2>
@@ -51,7 +51,7 @@ export default function TradePanel({ symbol }: { symbol: string }) {
       <div className="flex gap-2">
         <button
           onClick={() => setTradeType('buy')}
-          className={`flex-1 font-headline uppercase font-bold py-3 transition-all duration-200 border-2 ${
+          className={`flex-1 font-headline uppercase font-bold py-3 transition-all duration-200 border-2 rounded-xl ${
             tradeType === 'buy'
               ? 'bg-primary text-black border-primary shadow-[0_0_15px_rgba(255,211,0,0.4)]'
               : 'bg-black text-primary/50 border-primary/20 hover:border-primary/50'
@@ -61,7 +61,7 @@ export default function TradePanel({ symbol }: { symbol: string }) {
         </button>
         <button
           onClick={() => setTradeType('sell')}
-          className={`flex-1 font-headline uppercase font-bold py-3 transition-all duration-200 border-2 ${
+          className={`flex-1 font-headline uppercase font-bold py-3 transition-all duration-200 border-2 rounded-xl ${
             tradeType === 'sell'
               ? 'bg-error text-white border-error shadow-[0_0_15px_rgba(255,0,0,0.4)]'
               : 'bg-black text-error/50 border-error/20 hover:border-error/50'
@@ -80,14 +80,14 @@ export default function TradePanel({ symbol }: { symbol: string }) {
           step="1"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="bg-zinc-900 border-0 border-b-2 border-primary text-primary font-mono text-xl focus:ring-0 focus:border-b-4 focus:bg-zinc-800 transition-all w-full py-2 px-3 outline-none"
+          className="bg-zinc-900 border-0 border-b-2 border-primary text-primary font-mono text-xl focus:ring-0 focus:border-b-4 focus:bg-zinc-800 transition-all w-full py-2 px-3 outline-none rounded-t-lg"
         />
       </div>
 
       {/* Total */}
       <div className="flex flex-col gap-1.5">
         <label className="font-mono text-[9px] text-zinc-500 uppercase tracking-widest">Total Cost (Tokens)</label>
-        <div className="bg-zinc-900/50 border border-zinc-800 text-white font-mono text-xl w-full py-2 px-3 flex justify-between items-center">
+        <div className="bg-zinc-900/50 border border-zinc-800 text-white font-mono text-xl w-full py-2 px-3 flex justify-between items-center rounded-lg">
           <span>{total.toFixed(2)}</span>
           <span className="text-[10px] text-primary">TK</span>
         </div>
@@ -111,7 +111,7 @@ export default function TradePanel({ symbol }: { symbol: string }) {
       <button
         onClick={handleTrade}
         disabled={!isValid}
-        className={`w-full font-headline uppercase py-4 mt-2 transition-all flex justify-center items-center gap-3 font-bold text-sm tracking-widest ${
+        className={`w-full font-headline uppercase py-4 mt-2 transition-all flex justify-center items-center gap-3 font-bold text-sm tracking-widest rounded-xl ${
           isValid
             ? 'bg-primary text-black hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]'
             : 'bg-zinc-900 text-zinc-600 border-2 border-zinc-800 opacity-50 cursor-not-allowed'
@@ -123,7 +123,7 @@ export default function TradePanel({ symbol }: { symbol: string }) {
 
       {/* Feedback toast */}
       {feedback && (
-        <div className={`text-[10px] font-mono uppercase text-center py-2 font-bold tracking-[0.15em] transition-all ${
+        <div className={`text-[10px] font-mono uppercase text-center py-2 font-bold tracking-[0.15em] transition-all rounded-lg ${
           feedback.type === 'success' ? 'text-primary bg-primary/5' : 'text-error bg-error/5 animate-pulse'
         }`}>
           {feedback.msg}

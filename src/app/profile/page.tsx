@@ -7,6 +7,7 @@ import { useUserStore, LEVEL_NAMES, LEVEL_THRESHOLDS } from '@/store/userStore';
 import { useStockStore } from '@/store/stockStore';
 import { useSplitStore } from '@/store/splitStore';
 import { useAuthStore } from '@/store/authStore';
+import AnimatedBackground from '@/components/layout/AnimatedBackground';
 
 export default function ProfilePage() {
   const { user, missions, badges, earnBadge, setPremium } = useUserStore();
@@ -61,16 +62,16 @@ export default function ProfilePage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#070707] text-white font-body pb-24 md:pb-8 pt-16 relative">
-      {/* Background glow matrix */}
+    <div className="min-h-screen bg-[#070707] text-white font-body pb-24 md:pb-8 pt-16 relative overflow-hidden">
+      <AnimatedBackground />
+      {/* Static background glow matrix */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top,rgba(0,240,255,0.03)_0%,transparent_50%)] pointer-events-none"></div>
       
       <Header />
       
       <main className="container mx-auto p-4 md:p-6 max-w-5xl mt-6 relative z-10 space-y-6">
         
-        {/* Profile Identity Card */}
-        <div className="bg-zinc-950 border border-zinc-800/80 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden shadow-[0_15px_30px_rgba(0,0,0,0.5)]">
+        <div className="bg-surface-container-lowest p-6 md:p-8 flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden arcade-card-3d arcade-card-3d-secondary">
           <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-secondary/5 via-transparent to-transparent rounded-full blur-3xl pointer-events-none"></div>
           
           {/* Avatar Ring */}
@@ -106,7 +107,7 @@ export default function ProfilePage() {
                 <span className="material-symbols-outlined text-[14px]">military_tech</span>
                 {user.isPremium ? 'PRO MEMBER' : 'STANDARD'}
               </div>
-              <div className="flex items-center gap-1.5 border border-zinc-800 bg-zinc-900/60 text-zinc-400 px-3 py-1.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 border border-zinc-900 bg-zinc-950 text-zinc-400 px-3 py-1.5 rounded-xl text-[10px] font-mono font-bold uppercase tracking-wider">
                 <span className="material-symbols-outlined text-[14px]">schedule</span>
                 STREAK: {user.streakDays} DAYS
               </div>
@@ -141,7 +142,7 @@ export default function ProfilePage() {
               <div className="md:col-span-7 space-y-6">
                 
                 {/* PacPay Titanium Card Card */}
-                <div className="relative h-56 w-full rounded-2xl bg-gradient-to-br from-[#151515] to-[#080808] border border-zinc-800 p-6 flex flex-col justify-between overflow-hidden group shadow-[0_10px_35px_rgba(0,0,0,0.6)] hover:border-secondary/35 transition-all duration-500">
+                <div className="relative h-56 w-full rounded-2xl bg-gradient-to-br from-[#0d0d0d] to-[#050505] p-6 flex flex-col justify-between overflow-hidden group transition-all duration-300 arcade-card-3d arcade-card-3d-primary shadow-[0_0_20px_rgba(255,211,0,0.05)]">
                   {/* Glowing micro-elements */}
                   <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-secondary/15 to-transparent rounded-full blur-2xl opacity-60"></div>
                   
@@ -152,9 +153,9 @@ export default function ProfilePage() {
                       <div className="text-[15px] font-headline font-black text-white mt-1 italic tracking-tight">SPLIT SMART</div>
                     </div>
                     {/* Metal chip */}
-                    <div className="w-10 h-8 rounded-md bg-gradient-to-r from-zinc-700 via-zinc-650 to-zinc-700 border border-zinc-800 relative overflow-hidden shadow-inner flex items-center justify-center">
+                    <div className="w-10 h-8 rounded-md bg-gradient-to-r from-zinc-700 via-zinc-650 to-zinc-700 border border-zinc-900 relative overflow-hidden shadow-inner flex items-center justify-center">
                       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_center,var(--color-primary)_0%,transparent_100%)]"></div>
-                      <div className="w-6 h-4 border border-zinc-800/40 rounded-sm"></div>
+                      <div className="w-6 h-4 border border-zinc-850/40 rounded"></div>
                     </div>
                   </div>
 
@@ -179,15 +180,15 @@ export default function ProfilePage() {
 
                 {/* Quick actions bar */}
                 <div className="grid grid-cols-3 gap-4">
-                  <button className="bg-zinc-950 border border-zinc-800 rounded-2xl py-3 px-4 flex flex-col items-center gap-1.5 hover:bg-zinc-900 hover:border-zinc-700 transition-all cursor-pointer">
+                  <button className="bg-surface-container-lowest border border-zinc-900 rounded-xl py-3 px-4 flex flex-col items-center gap-1.5 hover:bg-surface-container-low hover:border-primary/45 hover:shadow-[0_0_15px_rgba(255,211,0,0.12)] transition-all duration-200 cursor-pointer">
                     <span className="material-symbols-outlined text-secondary text-[22px]">add_circle</span>
                     <span className="text-[11px] font-mono font-bold tracking-wide uppercase text-zinc-400">Load</span>
                   </button>
-                  <button className="bg-zinc-950 border border-zinc-800 rounded-2xl py-3 px-4 flex flex-col items-center gap-1.5 hover:bg-zinc-900 hover:border-zinc-700 transition-all cursor-pointer">
+                  <button className="bg-surface-container-lowest border border-zinc-900 rounded-xl py-3 px-4 flex flex-col items-center gap-1.5 hover:bg-surface-container-low hover:border-primary/45 hover:shadow-[0_0_15px_rgba(255,211,0,0.12)] transition-all duration-200 cursor-pointer">
                     <span className="material-symbols-outlined text-primary text-[22px]">send</span>
                     <span className="text-[11px] font-mono font-bold tracking-wide uppercase text-zinc-400">Send</span>
                   </button>
-                  <button className="bg-zinc-950 border border-zinc-800 rounded-2xl py-3 px-4 flex flex-col items-center gap-1.5 hover:bg-zinc-900 hover:border-zinc-700 transition-all cursor-pointer">
+                  <button className="bg-surface-container-lowest border border-zinc-900 rounded-xl py-3 px-4 flex flex-col items-center gap-1.5 hover:bg-surface-container-low hover:border-primary/45 hover:shadow-[0_0_15px_rgba(255,211,0,0.12)] transition-all duration-200 cursor-pointer">
                     <span className="material-symbols-outlined text-tertiary text-[22px]">history</span>
                     <span className="text-[11px] font-mono font-bold tracking-wide uppercase text-zinc-400">History</span>
                   </button>
@@ -199,7 +200,7 @@ export default function ProfilePage() {
               <div className="md:col-span-5 space-y-6">
                 
                 {/* Financial Integrity Card */}
-                <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between h-full shadow-lg">
+                <div className="bg-surface-container-lowest p-6 flex flex-col justify-between h-full transition-all duration-300 arcade-card-3d arcade-card-3d-primary shadow-[0_0_20px_rgba(255,211,0,0.02)]">
                   <div className="flex justify-between items-center mb-4">
                     <div className="text-[11px] font-mono font-bold uppercase tracking-widest text-zinc-500">Integrity Score</div>
                     <span className="material-symbols-outlined text-green-400">gavel</span>
@@ -253,39 +254,39 @@ export default function ProfilePage() {
               
               {/* Financial Balance Summary Widgets */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl flex items-center justify-between group hover:border-green-500/35 transition-colors">
+                <div className="bg-surface-container-lowest p-6 flex items-center justify-between group transition-all duration-200 arcade-card-3d arcade-card-3d-primary">
                   <div>
                     <div className="text-[10px] font-mono uppercase text-zinc-500 tracking-wider">Owed to Me</div>
                     <div className="text-3xl font-headline font-black text-green-400 mt-2">₹{totalOwedToMe.toFixed(2)}</div>
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400">
+                  <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 border border-green-500/20">
                     <span className="material-symbols-outlined">call_made</span>
                   </div>
                 </div>
 
-                <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl flex items-center justify-between group hover:border-error/35 transition-colors">
+                <div className="bg-surface-container-lowest p-6 flex items-center justify-between group transition-all duration-200 arcade-card-3d arcade-card-3d-error">
                   <div>
                     <div className="text-[10px] font-mono uppercase text-zinc-500 tracking-wider">You Owe</div>
                     <div className="text-3xl font-headline font-black text-red-500 mt-2">₹{totalIOwe.toFixed(2)}</div>
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-500">
+                  <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-500 border border-red-500/20">
                     <span className="material-symbols-outlined">call_received</span>
                   </div>
                 </div>
 
-                <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl flex items-center justify-between group hover:border-secondary/35 transition-colors">
+                <div className="bg-surface-container-lowest p-6 flex items-center justify-between group transition-all duration-200 arcade-card-3d arcade-card-3d-secondary">
                   <div>
                     <div className="text-[10px] font-mono uppercase text-zinc-500 tracking-wider">Active Split Groups</div>
                     <div className="text-3xl font-headline font-black text-secondary mt-2">{userGroups.length}</div>
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+                  <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary border border-secondary/20">
                     <span className="material-symbols-outlined">group</span>
                   </div>
                 </div>
               </div>
 
               {/* Group summaries */}
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6">
+              <div className="bg-surface-container-lowest p-6 arcade-card-3d arcade-card-3d-primary">
                 <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-4 flex items-center gap-2">
                   <span className="material-symbols-outlined text-sm text-secondary">folder_shared</span>
                   Group Bill Split Ledger
@@ -325,7 +326,7 @@ export default function ProfilePage() {
               {/* Portfolio Performance stats */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                 {/* Total Value */}
-                <div className="md:col-span-8 bg-zinc-950 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between">
+                <div className="md:col-span-8 bg-surface-container-lowest p-6 flex flex-col justify-between transition-all duration-200 arcade-card-3d arcade-card-3d-secondary">
                   <div className="flex justify-between items-center mb-6">
                     <div className="text-[10px] font-mono uppercase text-zinc-500 tracking-wider">Trading Portfolio Net Value</div>
                     <span className="material-symbols-outlined text-secondary">show_chart</span>
@@ -333,18 +334,18 @@ export default function ProfilePage() {
                   <div>
                     <div className="text-4xl font-headline font-black text-white">₹{portfolioTotalValue.toFixed(2)}</div>
                     <div className="flex items-center gap-2 mt-2">
-                      <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-md ${
-                        stockProfitLoss >= 0 ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-500'
+                      <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-none border ${
+                        stockProfitLoss >= 0 ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-500 border-red-500/20'
                       }`}>
                         {stockProfitLoss >= 0 ? '▲' : '▼'} ₹{Math.abs(stockProfitLoss).toFixed(2)} ({stockProfitLossPercent.toFixed(2)}%)
                       </span>
-                      <span className="text-[10px] text-zinc-500">ALL TIME RETURN</span>
+                      <span className="text-[10px] text-zinc-500 font-mono">ALL TIME RETURN</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Assets split mini-chart */}
-                <div className="md:col-span-4 bg-zinc-950 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between">
+                <div className="md:col-span-4 bg-surface-container-lowest p-6 flex flex-col justify-between arcade-card-3d arcade-card-3d-white">
                   <div className="text-[10px] font-mono uppercase text-zinc-500 tracking-wider mb-4">Asset Split</div>
                   <div className="space-y-3">
                     <div className="flex justify-between text-xs text-zinc-400">
@@ -368,7 +369,7 @@ export default function ProfilePage() {
               </div>
 
               {/* Holdings list */}
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden">
+              <div className="bg-surface-container-lowest overflow-hidden arcade-card-3d arcade-card-3d-primary">
                 <div className="p-6 border-b border-zinc-900 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
                   <span className="material-symbols-outlined text-sm text-primary">inventory_2</span>
                   Active Stock Holdings
@@ -419,7 +420,7 @@ export default function ProfilePage() {
             <div className="space-y-6">
               
               {/* Level XP Progress card */}
-              <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+              <div className="bg-surface-container-lowest p-6 flex flex-col justify-between relative overflow-hidden transition-all duration-200 arcade-card-3d arcade-card-3d-secondary">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#00abec]/5 rounded-full blur-3xl pointer-events-none"></div>
                 
                 <div className="flex justify-between items-center mb-4">
@@ -443,7 +444,7 @@ export default function ProfilePage() {
               </div>
 
               {/* Achievements list */}
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6">
+              <div className="bg-surface-container-lowest p-6 arcade-card-3d arcade-card-3d-primary">
                 <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 mb-6 flex items-center gap-2">
                   <span className="material-symbols-outlined text-sm text-tertiary">emoji_events</span>
                   Earned Achievements Badges
@@ -452,32 +453,32 @@ export default function ProfilePage() {
                 {badges.length === 0 ? (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {/* Mock Locked Badges */}
-                    <div className="border border-zinc-900 bg-zinc-950/20 p-4 rounded-xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
-                      <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
+                    <div className="border border-zinc-900 bg-[#050505] p-4 rounded-2xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
                         <span className="material-symbols-outlined text-2xl">egg</span>
                       </div>
                       <div className="text-xs font-semibold text-white">First Split</div>
                       <div className="text-[9px] text-zinc-500 mt-1 font-mono">Settle your first shared expense group bill.</div>
                     </div>
 
-                    <div className="border border-zinc-900 bg-zinc-950/20 p-4 rounded-xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
-                      <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
+                    <div className="border border-zinc-900 bg-[#050505] p-4 rounded-2xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
                         <span className="material-symbols-outlined text-2xl">shield</span>
                       </div>
                       <div className="text-xs font-semibold text-white">Integrity Guard</div>
                       <div className="text-[9px] text-zinc-500 mt-1 font-mono">Maintain a behavior score above 85 for 7 days.</div>
                     </div>
 
-                    <div className="border border-zinc-900 bg-zinc-950/20 p-4 rounded-xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
-                      <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
+                    <div className="border border-zinc-900 bg-[#050505] p-4 rounded-2xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
                         <span className="material-symbols-outlined text-2xl">diamond</span>
                       </div>
                       <div className="text-xs font-semibold text-white">Asset Titan</div>
                       <div className="text-[9px] text-zinc-500 mt-1 font-mono">Reach a stock portfolio valuation of ₹20,000.</div>
                     </div>
 
-                    <div className="border border-zinc-900 bg-zinc-950/20 p-4 rounded-xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
-                      <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
+                    <div className="border border-zinc-900 bg-[#050505] p-4 rounded-2xl flex flex-col items-center text-center opacity-40 hover:opacity-75 transition-opacity select-none">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-950 border border-zinc-800 flex items-center justify-center text-zinc-400 mb-3">
                         <span className="material-symbols-outlined text-2xl">flash_on</span>
                       </div>
                       <div className="text-xs font-semibold text-white">Pac Streak</div>
@@ -487,7 +488,7 @@ export default function ProfilePage() {
                 ) : (
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {badges.map(badge => (
-                      <div key={badge.id} className="border border-zinc-800 bg-zinc-900/20 p-4 rounded-xl flex flex-col items-center text-center shadow-md">
+                      <div key={badge.id} className="border border-zinc-850 bg-zinc-950/20 p-4 rounded-2xl flex flex-col items-center text-center shadow-md">
                         <div className="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary mb-3">
                           <span className="material-symbols-outlined text-2xl">{badge.icon}</span>
                         </div>
@@ -504,7 +505,7 @@ export default function ProfilePage() {
 
           {/* PREFERENCES TAB */}
           {activeTab === 'preferences' && (
-            <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-6 space-y-6">
+            <div className="bg-surface-container-lowest p-6 space-y-6 arcade-card-3d arcade-card-3d-white">
               
               {/* Account Setting Fields */}
               <div>

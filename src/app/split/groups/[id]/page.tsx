@@ -141,7 +141,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
         <div className="lg:col-span-2 space-y-8">
           
           {/* Section: Balances / Debt Simplification Panel */}
-          <section className="hud-card rounded-none p-5 space-y-4">
+          <section className="hud-card p-5 space-y-4">
             <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-primary/10 pb-2 font-headline">
               <span className="material-symbols-outlined text-lg text-primary">monetization_on</span> MINIMIZD_SETTLEMENTS_MATRIX
             </h2>
@@ -163,7 +163,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
                   return (
                     <div 
                       key={idx} 
-                      className={`hud-card rounded-none p-4 flex flex-col justify-between gap-3 ${
+                      className={`hud-card p-4 flex flex-col justify-between gap-3 ${
                         isCurrentDebtor 
                           ? 'border-error/40 bg-error/5' 
                           : 'border-primary/20 bg-black'
@@ -189,12 +189,12 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
                               description: `Settle for ${group.name}`
                             });
                           }}
-                          className="w-full flex items-center justify-center gap-1.5 bg-primary text-black py-1.5 text-[10px] font-black hover:bg-white transition-all cursor-pointer uppercase tracking-wider font-mono"
+                          className="w-full flex items-center justify-center gap-1.5 bg-primary text-black py-1.5 text-[10px] font-black hover:bg-white transition-all cursor-pointer uppercase tracking-wider font-mono rounded-xl"
                         >
                           <span className="material-symbols-outlined text-sm">qr_code</span> Settle Up via UPI
                         </button>
                       ) : isCurrentDebtor ? (
-                        <div className="text-[9px] text-error bg-error/5 border border-error/20 p-2 rounded-none flex items-center gap-1 font-mono">
+                        <div className="text-[9px] text-error bg-error/5 border border-error/20 p-2 rounded-xl flex items-center gap-1 font-mono">
                           <span className="material-symbols-outlined text-xs shrink-0">error</span>
                           <span>NO RECEIVING ADDRESS REGISTERED.</span>
                         </div>
@@ -214,13 +214,13 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
               <div className="flex flex-wrap items-center gap-2.5 text-[10px] uppercase font-bold font-mono">
                 <button
                   onClick={handlePrintPDF}
-                  className="flex items-center gap-1.5 border border-primary/30 bg-black text-primary hover:border-primary px-3 py-1.5 cursor-pointer"
+                  className="flex items-center gap-1.5 border border-primary/30 bg-black text-primary hover:border-primary px-3 py-1.5 cursor-pointer rounded-xl"
                 >
                   <span className="material-symbols-outlined text-sm">description</span> PRINT_PDF
                 </button>
                 <button
                   onClick={triggerCSVExport}
-                  className="flex items-center gap-1.5 border border-primary/30 bg-black text-primary hover:border-primary px-3 py-1.5 cursor-pointer"
+                  className="flex items-center gap-1.5 border border-primary/30 bg-black text-primary hover:border-primary px-3 py-1.5 cursor-pointer rounded-xl"
                 >
                   <span className="material-symbols-outlined text-sm">download</span> DOWNLOAD_CSV
                 </button>
@@ -236,14 +236,14 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
                   placeholder="SEARCH_LEDGER..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full bg-black border border-primary/30 rounded-none pl-10 pr-4 py-2.5 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
+                  className="w-full bg-black border border-primary/30 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
                 />
               </div>
               <div className="relative flex items-center">
                 <select
                   value={categoryFilter}
                   onChange={e => setCategoryFilter(e.target.value)}
-                  className="bg-black border border-primary/30 rounded-none px-4 py-2.5 text-xs text-white focus:outline-none focus:border-primary pr-8 appearance-none font-mono uppercase min-w-[160px]"
+                  className="bg-black border border-primary/30 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-primary pr-8 appearance-none font-mono uppercase min-w-[160px]"
                 >
                   <option value="all">ALL_CATEGORIES</option>
                   <option value="food">FOOD_SPLIT</option>
@@ -259,7 +259,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
 
             {/* List of expenses */}
             {filteredExpenses.length === 0 ? (
-              <div className="hud-card rounded-none p-12 text-center text-xs text-gray-500 uppercase font-mono">
+              <div className="hud-card p-12 text-center text-xs text-gray-500 uppercase font-mono">
                 NO EXPENDITURE ENTRIES FOUND IN NODE HISTORY.
               </div>
             ) : (
@@ -274,7 +274,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
                   return (
                     <div 
                       key={expense.id} 
-                      className="hud-card rounded-none p-4 flex items-center justify-between hover:border-primary"
+                      className="hud-card p-4 flex items-center justify-between hover:border-primary"
                     >
                       <div className="flex items-center gap-4">
                         <div className="hidden sm:flex h-9 w-9 items-center justify-center border border-primary/30 bg-primary/5 text-primary font-black text-xs uppercase font-headline">
@@ -337,7 +337,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
         <div className="space-y-6 no-print relative z-10">
           
           {/* Section: Member list */}
-          <section className="hud-card rounded-none p-5 space-y-4">
+          <section className="hud-card p-5 space-y-4">
             <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 border-b border-primary/10 pb-2 font-headline">
               <span className="material-symbols-outlined text-lg text-secondary">groups</span> CONNECTED_NODES
             </h2>
@@ -353,7 +353,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
                         <img
                           src={member.avatar}
                           alt={member.name}
-                          className="h-7 w-7 rounded-none object-cover border border-gray-700"
+                          className="h-7 w-7 rounded-xl object-cover border border-gray-700"
                         />
                       ) : (
                         <div className="h-7 w-7 bg-primary/20 text-primary flex items-center justify-center font-bold text-[10px]">
@@ -390,10 +390,10 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
       {/* UPI QR PAYMENT MODAL */}
       {activePaySettlement && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xs">
-          <div className="hud-card max-w-sm w-full rounded-none p-6 text-center space-y-6 relative border-2 border-primary screen-glow font-mono">
+          <div className="hud-card max-w-sm w-full p-6 text-center space-y-6 relative border-2 border-primary screen-glow font-mono">
             <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2 font-headline">UPI_INTENT_DISPATCH</h3>
             
-            <div className="bg-white p-3 rounded-none inline-block mx-auto border-2 border-primary">
+            <div className="bg-white p-3 rounded-2xl inline-block mx-auto border-2 border-primary">
               <img
                 src={generateUPIQRCodeUrl(
                   activePaySettlement.upiId,
@@ -425,7 +425,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
                   activePaySettlement.amount,
                   activePaySettlement.description
                 )}
-                className="w-full flex items-center justify-center border border-primary bg-primary text-black py-2.5 text-xs font-bold hover:bg-white hover:shadow-[0_0_15px_rgba(255,211,0,0.5)] transition-all uppercase tracking-wider font-headline"
+                className="w-full flex items-center justify-center border border-primary bg-primary text-black py-2.5 text-xs font-bold hover:bg-white hover:shadow-[0_0_15px_rgba(255,211,0,0.5)] transition-all uppercase tracking-wider font-headline rounded-xl"
               >
                 Launch Mobile App Natively
               </a>

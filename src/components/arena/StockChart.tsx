@@ -44,7 +44,7 @@ export default function StockChart({ symbol }: { symbol: string }) {
   const maxPrice = data.length > 0 ? Math.max(...data.map(d => d.price)) * 1.002 : 100;
 
   return (
-    <div className="w-full h-full bg-black relative group overflow-hidden border border-primary/20">
+    <div className="w-full h-full bg-black relative group overflow-hidden arcade-card-3d arcade-card-3d-primary">
       {/* HUD: Price & Change */}
       <div className="absolute top-4 left-6 z-20 flex gap-12">
         <div className="flex flex-col">

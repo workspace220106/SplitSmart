@@ -4,6 +4,7 @@ import React from 'react';
 import Header from '@/components/layout/Header';
 import BottomNav from '@/components/layout/BottomNav';
 import { useUserStore } from '@/store/userStore';
+import AnimatedBackground from '@/components/layout/AnimatedBackground';
 
 export default function MissionsPage() {
   const { missions, completeMission } = useUserStore();
@@ -16,6 +17,7 @@ export default function MissionsPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-body pb-24 md:pb-8 pt-16 relative overflow-hidden">
+      <AnimatedBackground />
       <Header />
       
       {/* Arcade decoration */}
@@ -32,7 +34,7 @@ export default function MissionsPage() {
              {categories.map(cat => (
                 <button key={cat.label} className="flex items-center gap-3 group whitespace-nowrap">
                    <span className="font-headline text-[10px] text-zinc-500 group-hover:text-primary transition-colors tracking-[0.2em] uppercase font-bold">{cat.label}</span>
-                   <span className="font-mono text-xs bg-zinc-900 px-3 py-0.5 border border-primary/30 text-primary font-bold">{cat.count}</span>
+                   <span className="font-mono text-xs bg-zinc-900 px-3 py-0.5 border border-primary/30 text-primary font-bold rounded-md">{cat.count}</span>
                 </button>
              ))}
           </div>
@@ -40,10 +42,10 @@ export default function MissionsPage() {
 
         <div className="grid grid-cols-1 gap-6">
            {missions.length === 0 ? (
-              <div className="bg-zinc-900/20 border-2 border-dashed border-primary/10 p-20 flex flex-col items-center text-center">
+              <div className="bg-zinc-900/20 border-2 border-dashed border-primary/10 p-20 flex flex-col items-center text-center rounded-2xl">
                  <span className="material-symbols-outlined text-5xl text-zinc-800 mb-6 scale-150">joystick</span>
                  <p className="font-headline text-sm text-zinc-600 uppercase tracking-[0.5em] font-bold">Waiting for Neural Assignments...</p>
-                 <button className="mt-8 bg-zinc-900 text-primary border border-primary/50 px-8 py-3 font-headline font-black text-xs uppercase tracking-[0.3em] hover:bg-primary hover:text-black transition-all">
+                 <button className="mt-8 bg-zinc-900 text-primary border border-primary/50 px-8 py-3 font-headline font-black text-xs uppercase tracking-[0.3em] hover:bg-primary hover:text-black transition-all rounded-xl">
                     Sync Database
                  </button>
               </div>
@@ -51,10 +53,10 @@ export default function MissionsPage() {
               missions.map((mission) => (
                 <div 
                   key={mission.id} 
-                  className={`bg-black border-2 relative group transition-all overflow-hidden ${
+                  className={`bg-black relative group transition-all overflow-hidden arcade-card-3d ${
                     mission.completed 
-                    ? 'border-zinc-800/50 opacity-50' 
-                    : 'border-primary/20 hover:border-primary/60 hover:shadow-[0_0_30px_rgba(255,211,0,0.1)]'
+                    ? 'opacity-50 arcade-card-3d-white' 
+                    : 'arcade-card-3d-primary'
                   }`}
                 >
                    {/* Top Accent Strip */}
@@ -65,7 +67,7 @@ export default function MissionsPage() {
                    <div className="p-8 flex flex-col md:flex-row md:items-center justify-between gap-8">
                       <div className="flex-grow">
                          <div className="flex items-center gap-4 mb-3">
-                            <div className={`w-3 h-3 border border-primary ${mission.completed ? 'bg-zinc-700' : 'bg-primary animate-pulse'}`}></div>
+                            <div className={`w-3 h-3 border border-primary ${mission.completed ? 'bg-zinc-700' : 'bg-primary animate-pulse rounded-full'}`}></div>
                             <h3 className="font-headline text-xl font-black tracking-widest uppercase text-white group-hover:text-primary transition-colors">
                                {mission.title}
                             </h3>
@@ -92,20 +94,20 @@ export default function MissionsPage() {
                                <div className="flex justify-between font-mono text-[10px] text-zinc-500 mb-2 uppercase tracking-widest font-bold">
                                   <span>Neural Link</span>
                                   <span className="text-white">{Math.round((mission.progress / mission.target) * 100)}%</span>
-                               </div>
-                               <div className="w-full h-2 bg-zinc-900 relative">
+                                </div>
+                               <div className="w-full h-2 bg-zinc-900 relative rounded-full overflow-hidden">
                                   <div 
-                                    className="h-full bg-primary transition-all duration-700 shadow-[0_0_15px_rgba(255,211,0,0.4)]"
+                                    className="h-full bg-primary transition-all duration-700 shadow-[0_0_15px_rgba(255,211,0,0.4)] rounded-full"
                                     style={{ width: `${(mission.progress / mission.target) * 100}%` }}
                                   ></div>
-                               </div>
+                                </div>
                             </div>
                          )}
 
                          {mission.progress >= mission.target && !mission.completed && (
                             <button 
                                onClick={() => completeMission(mission.id)}
-                               className="w-full bg-primary text-black font-headline font-black text-xs py-3 uppercase tracking-[0.3em] hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all flex items-center justify-center gap-2"
+                               className="w-full bg-primary text-black font-headline font-black text-xs py-3 uppercase tracking-[0.3em] hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all flex items-center justify-center gap-2 rounded-xl"
                             >
                                <span className="material-symbols-outlined text-sm">stars</span>
                                Claim Rewards

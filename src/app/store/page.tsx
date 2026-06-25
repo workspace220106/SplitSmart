@@ -4,6 +4,7 @@ import React from 'react';
 import Header from '@/components/layout/Header';
 import BottomNav from '@/components/layout/BottomNav';
 import { useUserStore } from '@/store/userStore';
+import AnimatedBackground from '@/components/layout/AnimatedBackground';
 
 export default function StorePage() {
   const { user, spendTokens } = useUserStore();
@@ -53,6 +54,7 @@ export default function StorePage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-body pb-24 md:pb-8 pt-16 relative overflow-hidden">
+      <AnimatedBackground />
       <Header />
       
       {/* Background ambient detail */}
@@ -75,15 +77,15 @@ export default function StorePage() {
               return (
                 <div 
                   key={item.id} 
-                  className="bg-zinc-900/10 border-2 border-primary/10 group hover:border-primary/60 hover:shadow-[0_0_30px_rgba(255,211,0,0.1)] transition-all flex flex-col h-full relative"
+                  className="bg-zinc-900/10 group transition-all arcade-card-3d arcade-card-3d-primary flex flex-col h-full relative"
                 >
                    {/* Item type badge */}
-                   <div className="absolute top-0 right-0 px-3 py-1 bg-zinc-900 font-mono text-[8px] text-zinc-500 border-l border-b border-primary/20 uppercase tracking-widest font-bold">
+                   <div className="absolute top-0 right-0 px-3 py-1 bg-zinc-900 font-mono text-[8px] text-zinc-500 border-l border-b border-primary/20 uppercase tracking-widest font-bold rounded-bl-xl rounded-tr-[14px]">
                       {item.type}
                    </div>
 
                    <div className="p-8 flex-grow flex flex-col items-center text-center">
-                      <div className="w-20 h-20 mb-6 flex items-center justify-center border-2 border-primary/20 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(255,211,0,0.4)] transition-all transform group-hover:scale-110">
+                      <div className="w-20 h-20 mb-6 flex items-center justify-center border-2 border-primary/20 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(255,211,0,0.4)] transition-all transform group-hover:scale-110 rounded-xl">
                          <span className="material-symbols-outlined text-4xl text-primary">{item.icon}</span>
                       </div>
                       
@@ -103,7 +105,7 @@ export default function StorePage() {
                       <button 
                          onClick={() => handlePurchase(item.id, item.price)}
                          disabled={!canAfford}
-                         className={`w-full font-headline font-black text-xs py-4 uppercase tracking-[0.3em] border-2 transition-all flex items-center justify-center gap-2 ${
+                         className={`w-full font-headline font-black text-xs py-4 uppercase tracking-[0.3em] border-2 transition-all flex items-center justify-center gap-2 rounded-xl ${
                             canAfford 
                             ? 'bg-primary/5 border-primary text-primary hover:bg-primary hover:text-black hover:shadow-[0_0_25px_rgba(255,211,0,0.5)]' 
                             : 'bg-zinc-900/50 border-zinc-800 text-zinc-700 cursor-not-allowed opacity-40'
@@ -119,7 +121,7 @@ export default function StorePage() {
         </div>
 
         {/* Neural Market HUD */}
-        <div className="mt-16 p-8 bg-black border-2 border-primary/20 relative overflow-hidden group">
+        <div className="mt-16 p-8 bg-black relative overflow-hidden group arcade-card-3d arcade-card-3d-primary">
            {/* Animated background bar */}
            <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
               <span className="material-symbols-outlined text-8xl -rotate-12">videogame_asset</span>

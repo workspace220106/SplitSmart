@@ -156,7 +156,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
           <span className="material-symbols-outlined text-xs">arrow_back</span> [ABORT_TO_CHANNEL]
         </Link>
 
-        <div className="hud-card rounded-none p-6 md:p-8 space-y-6">
+        <div className="hud-card p-6 md:p-8 space-y-6">
           <div className="border-b border-primary/20 pb-4">
             <h1 className="text-xl font-bold uppercase tracking-widest text-primary font-headline">LOG_TRANSACTION_SPLIT</h1>
             <p className="text-[10px] text-gray-500 mt-1 uppercase font-mono">Define expense weights, payer metrics, and split parameters.</p>
@@ -173,7 +173,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                   placeholder="e.g. ROOM_RENT"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
-                  className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
+                  className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
                   required
                 />
               </div>
@@ -186,7 +186,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                   placeholder="0.00"
                   value={amount}
                   onChange={e => setAmount(e.target.value)}
-                  className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-bold font-mono"
+                  className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-bold font-mono"
                   required
                 />
               </div>
@@ -199,7 +199,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                 <select
                   value={category}
                   onChange={e => setCategory(e.target.value as SplitCategory)}
-                  className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
+                  className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
                 >
                   <option value="food">Food</option>
                   <option value="travel">Travel</option>
@@ -215,7 +215,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                 <select
                   value={payerId}
                   onChange={e => setPayerId(e.target.value)}
-                  className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
+                  className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
                 >
                   {group.members.map(member => (
                     <option key={member.id} value={member.id}>
@@ -235,7 +235,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                     key={type}
                     type="button"
                     onClick={() => setSplitType(type)}
-                    className={`rounded-none py-2 text-[10px] font-bold capitalize transition-all cursor-pointer ${
+                    className={`rounded-xl py-2 text-[10px] font-bold capitalize transition-all cursor-pointer ${
                       splitType === type
                         ? 'bg-primary text-black font-black'
                         : 'border border-primary/30 hover:border-primary bg-black text-gray-300'
@@ -248,7 +248,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
             </div>
 
             {/* Custom Split Details Allocator */}
-            <div className="space-y-3 bg-black border border-primary/20 p-4 rounded-none">
+            <div className="space-y-3 bg-black border border-primary/20 p-4 rounded-2xl">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider font-mono">
                 {splitType === 'equal' && 'EQUAL SPLIT MATRIX'}
                 {splitType === 'percentage' && 'PERCENTAGE INDEX ALLOCATION'}
@@ -265,7 +265,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                           type="checkbox"
                           checked={participants[member.id] !== false}
                           onChange={() => handleParticipantToggle(member.id)}
-                          className="accent-primary h-4 w-4 rounded-none border-primary"
+                          className="accent-primary h-4 w-4 rounded border-primary"
                         />
                       )}
                       <span className="text-xs font-bold text-white uppercase truncate">{member.name}</span>
@@ -279,7 +279,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                           value={splitDetails[member.id] === 0 ? '' : splitDetails[member.id]}
                           placeholder="0"
                           onChange={e => handleDetailChange(member.id, e.target.value)}
-                          className="bg-black border border-primary/30 rounded-none px-3 py-1.5 text-xs text-right w-24 text-white focus:outline-none focus:border-primary font-mono"
+                          className="bg-black border border-primary/30 rounded-xl px-3 py-1.5 text-xs text-right w-24 text-white focus:outline-none focus:border-primary font-mono"
                         />
                         <span className="absolute right-2 top-2 text-[9px] text-gray-500 font-bold pointer-events-none">
                           {splitType === 'percentage' && '%'}
@@ -301,7 +301,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                   id="recurring-toggle"
                   checked={isRecurring}
                   onChange={e => setIsRecurring(e.target.checked)}
-                  className="accent-primary h-4 w-4 rounded-none border-primary"
+                  className="accent-primary h-4 w-4 rounded border-primary"
                 />
                 <label htmlFor="recurring-toggle" className="text-[10px] font-bold text-gray-300 uppercase cursor-pointer select-none tracking-wider">
                   Enable Cron Scheduler (Auto-Recurring)
@@ -315,7 +315,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
                       key={interval}
                       type="button"
                       onClick={() => setRecurringInterval(interval)}
-                      className={`flex-1 rounded-none py-1.5 text-[9px] font-bold capitalize transition-all cursor-pointer ${
+                      className={`flex-1 rounded-xl py-1.5 text-[9px] font-bold capitalize transition-all cursor-pointer ${
                         recurringInterval === interval
                           ? 'bg-secondary text-black font-bold'
                           : 'border border-primary/30 hover:border-primary text-gray-400 bg-black'
@@ -330,7 +330,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
 
             {/* Validation alerts */}
             {!isValid && validationMessage && (
-              <div className="border border-error/20 bg-error/5 p-3 text-[10px] text-error flex items-start gap-2">
+              <div className="border border-error/20 bg-error/5 p-3 text-[10px] text-error flex items-start gap-2 rounded-xl">
                 <span className="material-symbols-outlined text-sm text-error shrink-0">warning</span>
                 <span className="uppercase">{validationMessage}</span>
               </div>
@@ -340,7 +340,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
             <button
               type="submit"
               disabled={!isValid}
-              className={`w-full flex items-center justify-center gap-2 rounded-none py-2.5 text-xs font-black transition-all ${
+              className={`w-full flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-black transition-all ${
                 isValid
                   ? 'bg-primary text-black hover:bg-white shadow-[0_0_15px_rgba(255,211,0,0.3)] cursor-pointer'
                   : 'border border-primary/30 text-gray-600 bg-black cursor-not-allowed'

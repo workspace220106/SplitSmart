@@ -63,7 +63,7 @@ export const useStockStore = create<StockState>()(
       stocks: STOCK_DEFS.map(makeInitialStock),
       holdings: [],
       transactions: [],
-      balance: 500, // Starting balance: 500 Pac-Tokens
+      balance: 5000, // Starting balance: 5000 Pac-Tokens
       watchlist: [],
       lastUpdate: 0,
       isLoading: false,

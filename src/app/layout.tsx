@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AuthGuard from "@/components/layout/AuthGuard";
+import PageBackground from "@/components/layout/PageBackground";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-headline",
@@ -40,6 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-surface">
+        <PageBackground />
         <AuthGuard>
           {children}
         </AuthGuard>
@@ -47,3 +49,4 @@ export default function RootLayout({
     </html>
   );
 }
+

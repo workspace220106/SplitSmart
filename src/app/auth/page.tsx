@@ -149,16 +149,11 @@ export default function AuthPage() {
     <div className="min-h-screen bg-black text-white font-body flex flex-col items-center justify-center p-4 py-8 relative overflow-y-auto">
       {/* CRT Scanline and flicker overlay */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px]"></div>
-      
-      {/* Background neon grid grids */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] bg-[radial-gradient(circle,rgba(255,211,0,0.05)_0%,transparent_70%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      </div>
 
       <main className="relative z-10 w-full max-w-[440px] px-4 my-auto">
         {/* Glowing Terminal Card */}
-        <div className="bg-[#0b0b0b] border-2 border-primary/20 backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-[0_0_50px_rgba(255,211,0,0.1)] relative overflow-hidden">
+        <div className="curved-card screen-glow p-6 md:p-8 relative overflow-hidden"
+          style={{ animation: 'emerge 0.6s cubic-bezier(0.16,1,0.3,1) forwards' }}>
           
           {/* Custom retro-glowing SplitSmart logo */}
           <div className="flex justify-center mb-4">
@@ -183,7 +178,7 @@ export default function AuthPage() {
 
 
           {error && (
-            <div className="mb-6 p-4 border border-error/50 bg-error/10 font-mono text-[11px] text-error rounded-lg uppercase tracking-wide leading-relaxed">
+            <div className="mb-6 p-4 border border-error/50 bg-error/10 font-mono text-[11px] text-error rounded-none uppercase tracking-wide leading-relaxed">
               {error}
             </div>
           )}
@@ -232,7 +227,7 @@ export default function AuthPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={loading || demoLoading}
-                  className="w-full bg-black/60 border border-zinc-800 focus:border-primary px-5 py-3.5 font-mono text-xs uppercase tracking-wider text-white outline-none transition-all placeholder:text-zinc-700 rounded-xl"
+                  className="w-full bg-black/60 border border-zinc-800 focus:border-primary px-5 py-3.5 font-mono text-xs uppercase tracking-wider text-white outline-none transition-all placeholder:text-zinc-700 rounded-none"
                 />
               </div>
             )}
@@ -244,7 +239,7 @@ export default function AuthPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading || demoLoading}
-                className="w-full bg-black/60 border border-zinc-800 focus:border-primary px-5 py-3.5 font-mono text-xs uppercase tracking-wider text-white outline-none transition-all placeholder:text-zinc-700 rounded-xl"
+                className="w-full bg-black/60 border border-zinc-800 focus:border-primary px-5 py-3.5 font-mono text-xs uppercase tracking-wider text-white outline-none transition-all placeholder:text-zinc-700 rounded-none"
               />
             </div>
 
@@ -255,7 +250,7 @@ export default function AuthPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={loading || demoLoading}
-                className="w-full bg-black/60 border border-zinc-800 focus:border-primary px-5 py-3.5 font-mono text-xs uppercase tracking-wider text-white outline-none transition-all placeholder:text-zinc-700 rounded-xl"
+                className="w-full bg-black/60 border border-zinc-800 focus:border-primary px-5 py-3.5 font-mono text-xs uppercase tracking-wider text-white outline-none transition-all placeholder:text-zinc-700 rounded-none"
               />
             </div>
 

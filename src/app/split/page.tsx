@@ -7,6 +7,7 @@ import { useSplitStore } from '@/store/splitStore';
 import { simplifyDebts, calculateNetBalances } from '@/lib/debtSimplifier';
 import { generateUPILink, generateUPIQRCodeUrl } from '@/lib/upi';
 import Link from 'next/link';
+import AnimatedBackground from '@/components/layout/AnimatedBackground';
 
 export default function SplitDashboard() {
   const { 
@@ -156,16 +157,11 @@ export default function SplitDashboard() {
 
   return (
     <div className="min-h-screen bg-black text-white font-body pb-24 md:pb-8 pt-16 relative overflow-hidden">
+      <AnimatedBackground />
       <Header />
 
       {/* CRT scanline simulation */}
       <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.02] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px]"></div>
-
-      {/* Floating arcade background grid */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] bg-[radial-gradient(circle,rgba(255,211,0,0.03)_0%,transparent_70%)] opacity-70"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-      </div>
 
       {/* Hero Header */}
       <header className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8 relative z-30">
@@ -216,7 +212,7 @@ export default function SplitDashboard() {
                           <img
                             src={user.avatar}
                             alt={user.name}
-                            className="w-8 h-8 rounded-none object-cover border border-zinc-700 shrink-0 animate-none"
+                            className="w-8 h-8 rounded-xl object-cover border border-zinc-700 shrink-0 animate-none"
                           />
                           <div className="truncate min-w-0 flex-1">
                             <p className="truncate font-bold uppercase text-[11px] text-white">{user.name}</p>
@@ -231,19 +227,19 @@ export default function SplitDashboard() {
             </div>
             <button
               onClick={() => setShowUserModal(true)}
-              className="flex items-center gap-2 border border-secondary/40 bg-black px-4 py-2 text-xs font-bold text-secondary hover:bg-secondary/5 transition-all cursor-pointer uppercase tracking-wider font-mono animate-none"
+              className="flex items-center gap-2 border border-secondary/40 bg-black px-4 py-2 text-xs font-bold text-secondary hover:bg-secondary/5 transition-all cursor-pointer uppercase tracking-wider font-mono animate-none rounded-xl"
             >
               [+] ADD_FRIEND
             </button>
             <button
               onClick={() => setShowJoinModal(true)}
-              className="flex items-center gap-2 border border-tertiary/40 bg-black px-4 py-2 text-xs font-bold text-tertiary hover:bg-tertiary/5 transition-all cursor-pointer uppercase tracking-wider font-mono animate-none"
+              className="flex items-center gap-2 border border-tertiary/40 bg-black px-4 py-2 text-xs font-bold text-tertiary hover:bg-tertiary/5 transition-all cursor-pointer uppercase tracking-wider font-mono animate-none rounded-xl"
             >
               [*] JOIN_GROUP
             </button>
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-2 bg-primary px-4 py-2 text-xs font-black text-black hover:bg-white transition-all shadow-[0_0_15px_rgba(255,211,0,0.3)] cursor-pointer uppercase tracking-wider font-mono animate-none"
+              className="flex items-center gap-2 bg-primary px-4 py-2 text-xs font-black text-black hover:bg-white transition-all shadow-[0_0_15px_rgba(255,211,0,0.3)] cursor-pointer uppercase tracking-wider font-mono animate-none rounded-xl"
             >
               [+] NEW_GROUP
             </button>
@@ -258,7 +254,7 @@ export default function SplitDashboard() {
         <section className="grid gap-6 md:grid-cols-3">
           
           {/* Net balance */}
-          <div className="hud-card rounded-none p-5 flex flex-col justify-between relative overflow-hidden min-h-[140px]">
+          <div className="hud-card p-5 flex flex-col justify-between relative overflow-hidden min-h-[140px]">
             <div>
               <p className="text-[9px] font-bold uppercase tracking-widest text-primary font-mono">NET_LEDGER_BALANCE</p>
               <h3 className={`text-3xl font-black mt-3 italic tracking-tight font-headline ${netTotal >= 0 ? 'text-primary neon-primary' : 'text-error'}`}>
@@ -271,8 +267,8 @@ export default function SplitDashboard() {
           </div>
 
           {/* Owed to me */}
-          <div className="hud-card rounded-none p-5 flex items-start gap-4 border-l-4 border-l-primary">
-            <div className="rounded-none bg-primary/10 p-2.5 text-primary border border-primary/20 mt-1">
+          <div className="hud-card p-5 flex items-start gap-4 border-l-4 border-l-primary">
+            <div className="rounded-xl bg-primary/10 p-2.5 text-primary border border-primary/20 mt-1">
               <span className="material-symbols-outlined text-xl">trending_up</span>
             </div>
             <div>
@@ -283,8 +279,8 @@ export default function SplitDashboard() {
           </div>
 
           {/* You owe */}
-          <div className="hud-card rounded-none p-5 flex items-start gap-4 border-l-4 border-l-error">
-            <div className="rounded-none bg-error/10 p-2.5 text-error border border-error/20 mt-1">
+          <div className="hud-card p-5 flex items-start gap-4 border-l-4 border-l-error">
+            <div className="rounded-xl bg-error/10 p-2.5 text-error border border-error/20 mt-1">
               <span className="material-symbols-outlined text-xl">trending_down</span>
             </div>
             <div>
@@ -310,7 +306,7 @@ export default function SplitDashboard() {
             </div>
 
             {userGroups.length === 0 ? (
-              <div className="hud-card rounded-none p-12 text-center border-dashed border-primary/20">
+              <div className="hud-card p-12 text-center border-dashed border-primary/20">
                 <span className="material-symbols-outlined text-4xl text-primary/40 animate-pulse">groups</span>
                 <h3 className="mt-4 text-xs font-bold uppercase tracking-widest text-white font-headline">No active network groups</h3>
                 <p className="mt-2 text-[10px] text-zinc-500 max-w-xs mx-auto uppercase font-mono">
@@ -337,7 +333,7 @@ export default function SplitDashboard() {
                   <Link 
                     key={group.id}
                     href={`/split/groups/${group.id}`}
-                    className="group relative flex flex-col justify-between hud-card rounded-none p-5"
+                    className="group relative flex flex-col justify-between hud-card p-5"
                   >
                     <div>
                       <div className="flex items-start justify-between gap-4">
@@ -388,13 +384,13 @@ export default function SplitDashboard() {
               </h2>
 
               {pendingPaymentsToMake.length === 0 ? (
-                <div className="hud-card rounded-none p-5 text-center text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
+                <div className="hud-card p-5 text-center text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
                   🎉 ALL NODES DISCHARGED. NO OUTSTANDING DEBTS.
                 </div>
               ) : (
                 <div className="space-y-3">
                   {pendingPaymentsToMake.map((debt, idx) => (
-                    <div key={idx} className="hud-card rounded-none p-4 flex flex-col justify-between gap-3">
+                    <div key={idx} className="hud-card p-4 flex flex-col justify-between gap-3">
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-[8px] text-zinc-500 font-bold uppercase font-mono">{debt.groupName}</p>
@@ -416,7 +412,7 @@ export default function SplitDashboard() {
                               description: `Settle for ${debt.groupName}`
                             });
                           }}
-                          className="w-full flex items-center justify-center gap-1.5 border border-primary/40 hover:border-primary bg-primary/5 hover:bg-primary text-primary hover:text-black py-1.5 text-[10px] font-bold transition-all cursor-pointer uppercase tracking-wider font-mono"
+                          className="w-full flex items-center justify-center gap-1.5 border border-primary/40 hover:border-primary bg-primary/5 hover:bg-primary text-primary hover:text-black py-1.5 text-[10px] font-bold transition-all cursor-pointer uppercase tracking-wider font-mono rounded-xl"
                         >
                           <span className="material-symbols-outlined text-sm">qr_code</span> Settle via UPI
                         </button>
@@ -439,19 +435,19 @@ export default function SplitDashboard() {
               </h2>
 
               {incomingSettlementApprovals.length === 0 ? (
-                <div className="hud-card rounded-none p-5 text-center text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
+                <div className="hud-card p-5 text-center text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
                   NO PENDING CLEARANCE CERTIFICATES.
                 </div>
               ) : (
                 <div className="space-y-3">
                   {incomingSettlementApprovals.map((settlement) => (
-                    <div key={settlement.id} className="hud-card rounded-none p-4 border border-tertiary/30 bg-tertiary/5 space-y-3">
+                    <div key={settlement.id} className="hud-card p-4 border border-tertiary/30 bg-tertiary/5 space-y-3">
                       <div className="flex items-center gap-3">
                         {settlement.senderAvatar ? (
                           <img
                             src={settlement.senderAvatar}
                             alt={settlement.senderName}
-                            className="h-7 w-7 rounded-none object-cover border border-zinc-700"
+                            className="h-7 w-7 rounded-xl object-cover border border-zinc-700"
                           />
                         ) : (
                           <div className="h-7 w-7 bg-zinc-800 flex items-center justify-center text-[9px]">
@@ -466,7 +462,7 @@ export default function SplitDashboard() {
                         </div>
                       </div>
 
-                      <div className="flex justify-between items-center bg-black rounded-none px-3 py-1.5 border border-primary/10 font-mono">
+                      <div className="flex justify-between items-center bg-black rounded-xl px-3 py-1.5 border border-primary/10 font-mono">
                         <span className="text-[9px] text-zinc-500">Amount:</span>
                         <span className="text-xs font-bold text-primary">₹{settlement.amount.toFixed(2)}</span>
                       </div>
@@ -481,13 +477,13 @@ export default function SplitDashboard() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => rejectSettlement(settlement.id)}
-                          className="flex-1 flex items-center justify-center gap-1 border border-error bg-error/5 text-error text-[9px] py-1.5 font-bold hover:bg-error hover:text-black transition-colors cursor-pointer uppercase font-mono"
+                          className="flex-1 flex items-center justify-center gap-1 border border-error bg-error/5 text-error text-[9px] py-1.5 font-bold hover:bg-error hover:text-black transition-colors cursor-pointer uppercase font-mono rounded-xl"
                         >
                           <span className="material-symbols-outlined text-sm">cancel</span> Decline
                         </button>
                         <button
                           onClick={() => confirmSettlement(settlement.id)}
-                          className="flex-1 flex items-center justify-center gap-1 bg-primary text-black text-[9px] py-1.5 font-black hover:bg-white transition-colors cursor-pointer uppercase font-mono"
+                          className="flex-1 flex items-center justify-center gap-1 bg-primary text-black text-[9px] py-1.5 font-black hover:bg-white transition-colors cursor-pointer uppercase font-mono rounded-xl"
                         >
                           <span className="material-symbols-outlined text-sm">check_circle</span> Approve
                         </button>
@@ -512,7 +508,7 @@ export default function SplitDashboard() {
               // UPI_DEEP_LINK_DISPATCHER
             </div>
             
-            <div className="bg-white p-3 rounded-none inline-block mx-auto border-2 border-primary">
+            <div className="bg-white p-3 rounded-2xl inline-block mx-auto border-2 border-primary">
               <img
                 src={generateUPIQRCodeUrl(
                   activePaySettlement.upiId,
@@ -544,7 +540,7 @@ export default function SplitDashboard() {
                   activePaySettlement.amount,
                   activePaySettlement.description
                 )}
-                className="w-full flex items-center justify-center border border-primary bg-primary text-black py-2.5 text-xs font-bold hover:bg-white hover:shadow-[0_0_15px_rgba(255,211,0,0.5)] transition-all uppercase tracking-wider"
+                className="w-full flex items-center justify-center border border-primary bg-primary text-black py-2.5 text-xs font-bold hover:bg-white hover:shadow-[0_0_15px_rgba(255,211,0,0.5)] transition-all uppercase tracking-wider rounded-xl"
               >
                 Launch Mobile App Natively
               </a>
@@ -599,7 +595,7 @@ export default function SplitDashboard() {
                 placeholder="e.g. FLAT_204_ROOMIES"
                 value={groupName}
                 onChange={e => setGroupName(e.target.value)}
-                className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
+                className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono uppercase"
                 required
               />
             </div>
@@ -610,7 +606,7 @@ export default function SplitDashboard() {
                 placeholder="e.g. Monthly utilities, internet connection bills, room cleaning splits."
                 value={groupDesc}
                 onChange={e => setGroupDesc(e.target.value)}
-                className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary h-20 resize-none font-mono"
+                className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary h-20 resize-none font-mono"
               />
             </div>
 
@@ -618,13 +614,13 @@ export default function SplitDashboard() {
               <button
                 type="button"
                 onClick={() => setShowCreateModal(false)}
-                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-zinc-400 text-xs py-2 font-bold cursor-pointer uppercase"
+                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-zinc-400 text-xs py-2 font-bold cursor-pointer uppercase rounded-xl"
               >
                 Abort
               </button>
               <button
                 type="submit"
-                className="flex-1 bg-primary text-black hover:bg-white text-xs py-2 font-black transition-all cursor-pointer uppercase"
+                className="flex-1 bg-primary text-black hover:bg-white text-xs py-2 font-black transition-all cursor-pointer uppercase rounded-xl"
               >
                 Execute
               </button>
@@ -655,7 +651,7 @@ export default function SplitDashboard() {
                 placeholder="e.g. FLAT20"
                 value={inviteCode}
                 onChange={e => setInviteCode(e.target.value)}
-                className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary text-center font-bold tracking-widest uppercase font-mono"
+                className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary text-center font-bold tracking-widest uppercase font-mono"
                 maxLength={8}
                 required
               />
@@ -665,13 +661,13 @@ export default function SplitDashboard() {
               <button
                 type="button"
                 onClick={() => setShowJoinModal(false)}
-                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-zinc-400 text-xs py-2 font-bold cursor-pointer uppercase"
+                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-zinc-400 text-xs py-2 font-bold cursor-pointer uppercase rounded-xl"
               >
                 Abort
               </button>
               <button
                 type="submit"
-                className="flex-1 bg-primary text-black hover:bg-white text-xs py-2 font-black transition-all cursor-pointer uppercase"
+                className="flex-1 bg-primary text-black hover:bg-white text-xs py-2 font-black transition-all cursor-pointer uppercase rounded-xl"
               >
                 Sync Node
               </button>
@@ -702,7 +698,7 @@ export default function SplitDashboard() {
                 placeholder="e.g. Dev Patel"
                 value={newUserName}
                 onChange={e => setNewUserName(e.target.value)}
-                className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono"
+                className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono"
                 required
               />
             </div>
@@ -714,7 +710,7 @@ export default function SplitDashboard() {
                 placeholder="e.g. dev@college.edu"
                 value={newUserEmail}
                 onChange={e => setNewUserEmail(e.target.value)}
-                className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono"
+                className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono"
                 required
               />
             </div>
@@ -726,7 +722,7 @@ export default function SplitDashboard() {
                 placeholder="e.g. dev@okaxis"
                 value={newUserUpi}
                 onChange={e => setNewUserUpi(e.target.value)}
-                className="w-full bg-black border border-primary/30 rounded-none px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono"
+                className="w-full bg-black border border-primary/30 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-primary font-mono"
               />
             </div>
 
@@ -734,13 +730,13 @@ export default function SplitDashboard() {
               <button
                 type="button"
                 onClick={() => setShowUserModal(false)}
-                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-zinc-400 text-xs py-2 font-bold cursor-pointer uppercase"
+                className="flex-1 border border-zinc-700 hover:border-zinc-500 text-zinc-400 text-xs py-2 font-bold cursor-pointer uppercase rounded-xl"
               >
                 Abort
               </button>
               <button
                 type="submit"
-                className="flex-1 bg-primary text-black hover:bg-white text-xs py-2 font-black transition-all cursor-pointer uppercase"
+                className="flex-1 bg-primary text-black hover:bg-white text-xs py-2 font-black transition-all cursor-pointer uppercase rounded-xl"
               >
                 Register Node
               </button>

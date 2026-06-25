@@ -44,19 +44,19 @@ export default function RecurringPage() {
             <h1 className="text-2xl font-black italic tracking-tighter text-white uppercase font-headline">RECURRING_BILLING_REGISTRY</h1>
             <p className="text-gray-500 text-xs mt-1 uppercase font-mono">Automated split bills logged on active node schedule triggers.</p>
           </div>
-          <span className="text-[10px] text-secondary font-bold bg-secondary/10 border border-secondary/30 px-2.5 py-1 rounded-none flex items-center gap-1 font-mono">
+          <span className="text-[10px] text-secondary font-bold bg-secondary/10 border border-secondary/30 px-2.5 py-1 rounded-xl flex items-center gap-1 font-mono">
             <span className="material-symbols-outlined text-xs">schedule</span> {recurringExpenses.length} DAEMON_CRONS
           </span>
         </div>
 
         {recurringExpenses.length === 0 ? (
-          <div className="hud-card rounded-none p-12 text-center border-dashed border-primary/20 space-y-4 font-mono">
+          <div className="hud-card p-12 text-center border-dashed border-primary/20 space-y-4 font-mono">
             <span className="material-symbols-outlined text-4xl text-primary/40 animate-pulse block mx-auto">calendar_month</span>
             <h3 className="text-xs font-bold uppercase tracking-widest text-white">No active schedule crons</h3>
             <p className="text-[10px] text-zinc-500 max-w-sm mx-auto uppercase">
               Toggle the "Enable Cron Scheduler" parameter inside the expense logging interface to schedule automatic billing.
             </p>
-            <Link href="/split" className="inline-block border border-primary bg-primary/5 hover:bg-primary text-primary hover:text-black px-5 py-2 text-xs font-bold transition-all uppercase">
+            <Link href="/split" className="inline-block border border-primary bg-primary/5 hover:bg-primary text-primary hover:text-black px-5 py-2 text-xs font-bold transition-all uppercase rounded-xl">
               Configure Splits
             </Link>
           </div>
@@ -65,11 +65,11 @@ export default function RecurringPage() {
             {recurringExpenses.map((expense) => (
               <div 
                 key={expense.id} 
-                className="hud-card rounded-none p-5 flex flex-col justify-between gap-4"
+                className="hud-card p-5 flex flex-col justify-between gap-4"
               >
                 <div className="flex items-start justify-between gap-4 font-mono">
                   <div>
-                    <span className="inline-block rounded-none bg-secondary/10 border border-secondary/20 px-2 py-0.5 text-[8px] font-bold tracking-widest text-secondary uppercase mb-2">
+                    <span className="inline-block rounded bg-secondary/10 border border-secondary/20 px-2 py-0.5 text-[8px] font-bold tracking-widest text-secondary uppercase mb-2">
                       {expense.recurringInterval} TRIGGER
                     </span>
                     <h3 className="font-bold text-white text-sm uppercase tracking-tight">{expense.description}</h3>

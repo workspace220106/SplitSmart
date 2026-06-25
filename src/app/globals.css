@@ -21,33 +21,73 @@
   --color-surface-container-highest: #242424;
 
   /* Typography */
-  --font-headline: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-headline: var(--font-headline, 'Plus Jakarta Sans', sans-serif);
+  --font-body: var(--font-body, 'Inter', sans-serif);
+  --font-mono: var(--font-mono, 'JetBrains Mono', monospace);
 
-  --animate-pulse-soft: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  /* Animation tokens — keyframes must live at global scope below */
+  --animate-pulse-soft: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-scanline: scanline 8s linear infinite;
   --animate-shine: shine 0.5s ease-in-out forwards;
+}
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-  }
+/* ─── Global Keyframes (must be outside @theme in Tailwind v4) ─── */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
 
-  @keyframes scanline {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-  }
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
 
-  @keyframes shine {
-    0% { transform: translateX(-100%) skewX(12deg); }
-    100% { transform: translateX(400%) skewX(12deg); }
-  }
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(12deg); }
+  100% { transform: translateX(400%) skewX(12deg); }
+}
 
-  @keyframes scan {
-    0% { transform: translateY(-100vh); }
-    100% { transform: translateY(100vh); }
-  }
+@keyframes scan {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes orb-drift {
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.65; }
+  25%  { transform: translate(30px, -40px) scale(1.05); opacity: 0.85; }
+  50%  { transform: translate(-20px, -70px) scale(0.95); opacity: 0.5; }
+  75%  { transform: translate(-40px, -30px) scale(1.08); opacity: 0.8; }
+  100% { transform: translate(0px, 0px) scale(1); opacity: 0.65; }
+}
+
+@keyframes orb-drift-reverse {
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.55; }
+  25%  { transform: translate(-25px, 50px) scale(1.1); opacity: 0.75; }
+  50%  { transform: translate(40px, 60px) scale(0.9); opacity: 0.45; }
+  75%  { transform: translate(30px, 20px) scale(1.05); opacity: 0.7; }
+  100% { transform: translate(0px, 0px) scale(1); opacity: 0.55; }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes emerge {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0px) scale(1); }
+}
+
+@keyframes particle-float {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-80px) translateX(20px); opacity: 0; }
+}
+
+@keyframes grid-glow {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.55; }
 }
 
 :root {
@@ -99,6 +139,18 @@ body::after {
   text-shadow: 0 0 5px var(--color-secondary), 0 0 10px var(--color-secondary);
 }
 
+.neon-glow-primary { box-shadow: 0 0 32px rgba(255, 211, 0, 0.15); }
+.neon-text-primary { text-shadow: 0 0 8px rgba(255, 211, 0, 0.8); }
+.ghost-border { border: 1px solid rgba(255, 211, 0, 0.1); }
+
+.neon-glow-secondary { box-shadow: 0 0 32px rgba(0, 240, 255, 0.15); }
+.neon-text-secondary { text-shadow: 0 0 8px rgba(0, 240, 255, 0.8); }
+.ghost-border-secondary { border: 1px solid rgba(0, 240, 255, 0.15); }
+
+.neon-glow-tertiary { box-shadow: 0 0 32px rgba(255, 184, 255, 0.15); }
+.neon-text-tertiary { text-shadow: 0 0 8px rgba(255, 184, 255, 0.8); }
+.ghost-border-tertiary { border: 1px solid rgba(255, 184, 255, 0.15); }
+
 /* Bento Grid Transitions */
 .bento-item {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -127,19 +179,115 @@ body::after {
   background: radial-gradient(circle at top right, rgba(0, 163, 255, 0.05) 0%, transparent 50%),
               radial-gradient(circle at bottom left, rgba(0, 163, 255, 0.05) 0%, transparent 50%);
 }
-/* SplitSmart HUD Card */
+/* SplitSmart HUD Card — curved + depth elevation */
 .hud-card {
-  background: rgba(6, 6, 6, 0.85);
-  border: 1px solid rgba(255, 211, 0, 0.15);
-  backdrop-filter: blur(12px);
-  box-shadow: inset 0 0 10px rgba(255, 211, 0, 0.02);
+  background: rgba(8, 8, 8, 0.88);
+  border: 1px solid rgba(255, 211, 0, 0.2);
+  border-bottom-width: 3px !important;
+  border-right-width: 3px !important;
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.65),
+    0 2px 8px rgba(0, 0, 0, 0.45),
+    3px 3px 0px rgba(255, 211, 0, 0.15),
+    inset 0 1px 0 rgba(255, 211, 0, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hud-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 211, 0, 0.45);
-  box-shadow: inset 0 0 15px rgba(255, 211, 0, 0.05), 0 10px 30px rgba(255, 211, 0, 0.08);
+  transform: translateY(-3px) translateX(-1px) scale(1.005);
+  border-color: rgba(255, 211, 0, 0.35);
+  border-bottom-width: 4px !important;
+  border-right-width: 4px !important;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.75),
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    5px 5px 0px rgba(255, 211, 0, 0.25),
+    inset 0 1px 0 rgba(255, 211, 0, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 0 24px rgba(255, 211, 0, 0.06);
 }
+
+/* Curved card — stronger emerge effect, for modals and hero cards */
+.curved-card {
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid rgba(255, 211, 0, 0.2);
+  border-bottom-width: 3px !important;
+  border-right-width: 3px !important;
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.7),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    3px 3px 0px rgba(255, 211, 0, 0.18),
+    inset 0 1px 0 rgba(255, 211, 0, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.curved-card:hover {
+  transform: translateY(-4px) translateX(-2px) scale(1.008);
+  border-color: rgba(255, 211, 0, 0.38);
+  border-bottom-width: 4px !important;
+  border-right-width: 4px !important;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    0 6px 20px rgba(0, 0, 0, 0.55),
+    5px 5px 0px rgba(255, 211, 0, 0.28),
+    inset 0 1px 0 rgba(255, 211, 0, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 211, 0, 0.08);
+}
+
+/* 3D Curved Arcade Cards for custom styled components */
+.arcade-card-3d {
+  border-radius: 16px !important;
+  border-bottom-width: 3px !important;
+  border-right-width: 3px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.arcade-card-3d-primary {
+  border-color: rgba(255, 211, 0, 0.25) !important;
+  box-shadow: 3px 3px 0px rgba(255, 211, 0, 0.15) !important;
+}
+.arcade-card-3d-primary:hover {
+  border-color: rgba(255, 211, 0, 0.45) !important;
+  box-shadow: 5px 5px 0px rgba(255, 211, 0, 0.25) !important;
+  transform: translateY(-3px) translateX(-1px) !important;
+}
+
+.arcade-card-3d-secondary {
+  border-color: rgba(0, 240, 255, 0.25) !important;
+  box-shadow: 3px 3px 0px rgba(0, 240, 255, 0.15) !important;
+}
+.arcade-card-3d-secondary:hover {
+  border-color: rgba(0, 240, 255, 0.45) !important;
+  box-shadow: 5px 5px 0px rgba(0, 240, 255, 0.25) !important;
+  transform: translateY(-3px) translateX(-1px) !important;
+}
+
+.arcade-card-3d-white {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 3px 3px 0px rgba(255, 255, 255, 0.1) !important;
+}
+
+.arcade-card-3d-error {
+  border-color: rgba(255, 0, 0, 0.25) !important;
+  box-shadow: 3px 3px 0px rgba(255, 0, 0, 0.15) !important;
+}
+.arcade-card-3d-error:hover {
+  border-color: rgba(255, 0, 0, 0.45) !important;
+  box-shadow: 5px 5px 0px rgba(255, 0, 0, 0.25) !important;
+  transform: translateY(-3px) translateX(-1px) !important;
+}
+
+.arcade-card-3d-white:hover {
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 5px 5px 0px rgba(255, 255, 255, 0.18) !important;
+  transform: translateY(-3px) translateX(-1px) !important;
+}
+
 
 /* Screen Glow for Modals */
 .screen-glow {

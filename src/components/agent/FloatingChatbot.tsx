@@ -77,7 +77,7 @@ export default function FloatingChatbot() {
           isOpen 
             ? 'scale-100 opacity-100 pointer-events-auto' 
             : 'scale-90 opacity-0 pointer-events-none'
-        } w-[360px] h-[500px] max-h-[70vh] bg-[#0c0c0c] border border-outline/30 rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(0,240,255,0.1)] flex flex-col overflow-hidden relative`}
+        } w-[360px] h-[500px] max-h-[70vh] bg-[#0c0c0c] border-2 border-[#00abec]/30 border-b-[3px] border-r-[3px] rounded-2xl shadow-[3px_3px_0px_rgba(0,240,255,0.15),0_10px_40px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden relative`}
       >
         {/* Subtle glow background inside */}
         <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-secondary/5 to-transparent pointer-events-none"></div>
@@ -89,10 +89,10 @@ export default function FloatingChatbot() {
         >
           {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[85%] relative p-4 rounded-2xl text-[13px] leading-relaxed font-body transition-all ${
+              <div className={`max-w-[85%] relative p-4 text-[13px] leading-relaxed font-body transition-all ${
                 msg.role === 'user' 
-                  ? 'bg-[#183944] border border-[#235868] text-white ml-auto rounded-tr-sm shadow-md' 
-                  : 'bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-tl-sm shadow-md'
+                  ? 'bg-[#183944] border border-[#235868] text-white ml-auto shadow-md rounded-2xl rounded-tr-sm' 
+                  : 'bg-zinc-900 border border-zinc-800 text-zinc-300 shadow-md rounded-2xl rounded-tl-sm'
               }`}>
                 {msg.content}
                 <div className="mt-2 text-[9px] font-mono opacity-40 text-right">
@@ -117,7 +117,7 @@ export default function FloatingChatbot() {
 
         {/* Input Area */}
         <div className="p-4 bg-[#0a0a0a] border-t border-zinc-800 relative z-10">
-          <div className="flex gap-3 items-center bg-zinc-950 border border-zinc-800 rounded-full pr-1.5 pl-5 focus-within:border-[#00abec]/50 transition-colors">
+          <div className="flex gap-3 items-center bg-zinc-950 border border-zinc-800 rounded-2xl pr-1.5 pl-5 focus-within:border-[#00abec]/50 transition-colors">
             <input 
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -128,7 +128,7 @@ export default function FloatingChatbot() {
             <button 
               onClick={handleSend}
               disabled={!input.trim() || isThinking}
-              className="bg-[#1c4b5c] text-white p-2 rounded-full hover:bg-[#00abec] transition-all disabled:opacity-50 flex items-center justify-center min-w-[36px] min-h-[36px]"
+              className="bg-[#1c4b5c] text-white p-2 rounded-xl hover:bg-[#00abec] transition-all disabled:opacity-50 flex items-center justify-center min-w-[36px] min-h-[36px]"
             >
               <span className="material-symbols-outlined text-[16px]">near_me</span>
             </button>
@@ -139,7 +139,7 @@ export default function FloatingChatbot() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 bg-[#00abec] text-white rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,171,236,0.3)] hover:scale-105 hover:bg-[#00c0ff] transition-all relative group z-20"
+        className="w-14 h-14 bg-[#00abec] text-white rounded-2xl flex items-center justify-center border-b-[3px] border-r-[3px] border-[#007ba8] shadow-[3px_3px_0px_rgba(0,240,255,0.25)] hover:scale-105 hover:bg-[#00c0ff] transition-all relative group z-20"
       >
         <span className="material-symbols-outlined text-[28px] group-hover:scale-105 transition-transform text-white">
           {isOpen ? 'close' : 'smart_toy'}
