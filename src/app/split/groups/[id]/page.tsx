@@ -42,7 +42,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
       <div className="min-h-screen bg-black text-white flex flex-col font-mono">
         <Header />
         <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-          <p className="text-sm text-gray-500 uppercase tracking-widest">// GROUP_NODE_NOT_SYNCED</p>
+          <p className="text-sm text-gray-500 uppercase tracking-widest">GROUP_NODE_NOT_SYNCED</p>
           <Link href="/split" className="mt-4 border border-primary bg-primary/5 hover:bg-primary text-primary hover:text-black px-5 py-2 text-xs font-bold transition-all uppercase">
             Return to Terminal
           </Link>
@@ -104,10 +104,10 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
               <span className="material-symbols-outlined text-xs">arrow_back</span> [RETURN_TO_SYSTEM]
             </Link>
             <h1 className="text-3xl font-black italic tracking-tighter text-white uppercase font-headline">
-              CHANNEL // <span className="text-secondary neon-secondary">{group.name}</span>
+              CHANNEL <span className="text-secondary neon-secondary">{group.name}</span>
             </h1>
             {group.description && (
-              <p className="text-gray-500 text-xs lowercase max-w-2xl font-mono">// {group.description}</p>
+              <p className="text-gray-500 text-xs lowercase max-w-2xl font-mono">{group.description}</p>
             )}
           </div>
           
@@ -391,7 +391,7 @@ export default function GroupPage({ params }: { params: Promise<{ id: string }> 
       {activePaySettlement && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xs">
           <div className="hud-card max-w-sm w-full rounded-none p-6 text-center space-y-6 relative border-2 border-primary screen-glow font-mono">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2 font-headline">// UPI_INTENT_DISPATCH</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2 font-headline">UPI_INTENT_DISPATCH</h3>
             
             <div className="bg-white p-3 rounded-none inline-block mx-auto border-2 border-primary">
               <img

@@ -48,7 +48,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
       <div className="min-h-screen bg-black text-white flex flex-col font-mono">
         <Header />
         <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-          <p className="text-sm text-gray-500 uppercase tracking-widest">// GROUP_NODE_NOT_SYNCED</p>
+          <p className="text-sm text-gray-500 uppercase tracking-widest">GROUP_NODE_NOT_SYNCED</p>
           <Link href="/split" className="mt-4 border border-primary bg-primary/5 hover:bg-primary text-primary hover:text-black px-5 py-2 text-xs font-bold transition-all uppercase">
             Return to Dashboard
           </Link>
@@ -158,7 +158,7 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
 
         <div className="hud-card rounded-none p-6 md:p-8 space-y-6">
           <div className="border-b border-primary/20 pb-4">
-            <h1 className="text-xl font-bold uppercase tracking-widest text-primary font-headline">// LOG_TRANSACTION_SPLIT</h1>
+            <h1 className="text-xl font-bold uppercase tracking-widest text-primary font-headline">LOG_TRANSACTION_SPLIT</h1>
             <p className="text-[10px] text-gray-500 mt-1 uppercase font-mono">Define expense weights, payer metrics, and split parameters.</p>
           </div>
 
@@ -250,10 +250,10 @@ export default function AddExpensePage({ params }: { params: Promise<{ id: strin
             {/* Custom Split Details Allocator */}
             <div className="space-y-3 bg-black border border-primary/20 p-4 rounded-none">
               <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider font-mono">
-                {splitType === 'equal' && '// EQUAL SPLIT MATRIX'}
-                {splitType === 'percentage' && '// PERCENTAGE INDEX ALLOCATION'}
-                {splitType === 'exact' && '// EXACT NOMINAL VALUE DEPOSIT'}
-                {splitType === 'shares' && '// WEIGHTED SHARE DISTRIBUTION'}
+                {splitType === 'equal' && 'EQUAL SPLIT MATRIX'}
+                {splitType === 'percentage' && 'PERCENTAGE INDEX ALLOCATION'}
+                {splitType === 'exact' && 'EXACT NOMINAL VALUE DEPOSIT'}
+                {splitType === 'shares' && 'WEIGHTED SHARE DISTRIBUTION'}
               </p>
 
               <div className="space-y-3.5 max-h-60 overflow-y-auto pr-1">

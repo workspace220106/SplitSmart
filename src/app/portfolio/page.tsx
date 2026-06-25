@@ -25,7 +25,7 @@ export default function PortfolioPage() {
             Asset <span className="text-primary drop-shadow-[0_0_10px_rgba(255,211,0,0.5)]">Manifest</span>
           </h1>
           <p className="font-mono text-[9px] text-zinc-500 uppercase tracking-[0.5em] mt-2">
-            Player: {user.name.toUpperCase()} // Level {user.level}
+            Player: {user.name.toUpperCase()} - Level {user.level}
           </p>
         </div>
 

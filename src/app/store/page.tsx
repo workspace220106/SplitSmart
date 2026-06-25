@@ -65,7 +65,7 @@ export default function StorePage() {
           <h1 className="font-headline text-4xl font-black tracking-tight text-white uppercase italic">
             Neural <span className="text-secondary drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">Market</span>
           </h1>
-          <p className="font-mono text-[9px] text-zinc-500 uppercase tracking-[0.5em] mt-2">Black_Market_ID: 0xPAC_STORE // Protocol: ENCRYPTED</p>
+          <p className="font-mono text-[9px] text-zinc-500 uppercase tracking-[0.5em] mt-2">Black_Market_ID: 0xPAC_STORE - Protocol: ENCRYPTED</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

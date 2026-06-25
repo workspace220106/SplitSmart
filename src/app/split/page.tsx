@@ -172,7 +172,7 @@ export default function SplitDashboard() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-primary/20 pb-6">
           <div>
             <h1 className="font-headline text-3xl font-black italic tracking-tighter text-white uppercase">
-              SPLIT_LEDGER // <span className="text-primary neon-primary">{currentUser.name.split(' ')[0]}</span>
+              SPLIT_LEDGER <span className="text-primary neon-primary">{currentUser.name.split(' ')[0]}</span>
             </h1>
             <p className="font-mono text-zinc-500 text-xs mt-1.5 max-w-md uppercase tracking-wider">
               Resolve balance disputes. Optimize debt weights. Zero transacting logic active.
@@ -197,7 +197,7 @@ export default function SplitDashboard() {
                   <div className="fixed inset-0 z-30" onClick={() => setShowSwitchUserModal(false)} />
                   <div className="absolute right-0 mt-2 w-64 border-2 border-primary bg-[#050505] p-3.5 shadow-[0_0_30px_rgba(255,211,0,0.25)] z-40 font-mono text-xs">
                     <div className="pb-2.5 border-b border-primary/20 mb-2.5">
-                      <p className="text-[9px] font-bold uppercase tracking-widest text-primary">// CHOOSE_ACTIVE_NODE</p>
+                      <p className="text-[9px] font-bold uppercase tracking-widest text-primary">CHOOSE_ACTIVE_NODE</p>
                     </div>
                     <div className="space-y-1.5 max-h-60 overflow-y-auto">
                       {usersList.map((user) => (
@@ -260,7 +260,7 @@ export default function SplitDashboard() {
           {/* Net balance */}
           <div className="hud-card rounded-none p-5 flex flex-col justify-between relative overflow-hidden min-h-[140px]">
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-widest text-primary font-mono">// NET_LEDGER_BALANCE</p>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-primary font-mono">NET_LEDGER_BALANCE</p>
               <h3 className={`text-3xl font-black mt-3 italic tracking-tight font-headline ${netTotal >= 0 ? 'text-primary neon-primary' : 'text-error'}`}>
                 {netTotal >= 0 ? `+ ₹${netTotal.toFixed(2)}` : `- ₹${Math.abs(netTotal).toFixed(2)}`}
               </h3>
@@ -276,7 +276,7 @@ export default function SplitDashboard() {
               <span className="material-symbols-outlined text-xl">trending_up</span>
             </div>
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">// CREDITOR_MATRIX</p>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">CREDITOR_MATRIX</p>
               <h3 className="text-2xl font-black mt-2 text-white font-headline">₹{totalOwedToMe.toFixed(2)}</h3>
               <p className="text-[9px] text-zinc-500 mt-1.5 uppercase font-mono">Owed by other network nodes</p>
             </div>
@@ -288,7 +288,7 @@ export default function SplitDashboard() {
               <span className="material-symbols-outlined text-xl">trending_down</span>
             </div>
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">// DEBTOR_MATRIX</p>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 font-mono">DEBTOR_MATRIX</p>
               <h3 className="text-2xl font-black mt-2 text-white font-headline">₹{totalIOwe.toFixed(2)}</h3>
               <p className="text-[9px] text-zinc-500 mt-1.5 uppercase font-mono">Requires settlement clearance</p>
             </div>
@@ -590,7 +590,7 @@ export default function SplitDashboard() {
       {showCreateModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xs">
           <form onSubmit={handleCreateGroup} className="hud-card max-w-md w-full rounded-none p-6 space-y-4 relative border-2 border-primary screen-glow font-mono">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2">// INIT_NEW_SECTOR_LEDGER</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2">INIT_NEW_SECTOR_LEDGER</h3>
             
             <div className="space-y-1.5 text-xs">
               <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Channel Name</label>
@@ -645,7 +645,7 @@ export default function SplitDashboard() {
       {showJoinModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xs">
           <form onSubmit={handleJoinGroup} className="hud-card max-w-sm w-full rounded-none p-6 space-y-4 relative border-2 border-primary screen-glow font-mono">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2">// SYNC_LEDGER_CHANNEL</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2">SYNC_LEDGER_CHANNEL</h3>
             <p className="text-[9px] text-zinc-500 uppercase">Input the 6-character node sequence shared by the host.</p>
             
             <div className="space-y-1.5 text-xs">
@@ -692,11 +692,11 @@ export default function SplitDashboard() {
       {showUserModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xs">
           <form onSubmit={handleAddFriend} className="hud-card max-w-md w-full rounded-none p-6 space-y-4 relative border-2 border-primary screen-glow font-mono">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2">// INITIATE_NEW_NODE_ID</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-2">INITIATE_NEW_NODE_ID</h3>
             <p className="text-[9px] text-zinc-500 uppercase">Deposit a local simulated user onto your workspace grid.</p>
             
             <div className="space-y-1.5 text-xs">
-              <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Node / Friend Alias</label>
+              <label className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Node - Friend Alias</label>
               <input
                 type="text"
                 placeholder="e.g. Dev Patel"

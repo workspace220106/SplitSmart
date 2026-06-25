@@ -106,7 +106,7 @@ export default function RecurringPage() {
         <div className="border border-primary/20 bg-primary/5 p-5 flex items-start gap-3">
           <span className="material-symbols-outlined text-xl text-primary shrink-0 mt-0.5">help</span>
           <div className="text-[10px] text-zinc-400 space-y-1.5 uppercase font-mono tracking-wide leading-relaxed">
-            <h4 className="font-bold text-primary">// AUTOMATED_DAEMON_CRON_LOGIC</h4>
+            <h4 className="font-bold text-primary">AUTOMATED_DAEMON_CRON_LOGIC</h4>
             <p>
               On system initialization, SplitSmart compares localized time counters. If the interval duration threshold has been breached (e.g. daily/weekly/monthly rollover), the engine commits a fresh transaction entry to the ledger node and updates group balances.
             </p>

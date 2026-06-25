@@ -56,7 +56,7 @@ export default function ArenaPage() {
               Arcade <span className="text-primary drop-shadow-[0_0_10px_rgba(255,211,0,0.5)]">Finance</span>
             </h1>
             <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-[0.5em] mt-2 ml-1">
-              SPLITSMART // LIVE_MARKET_FEED
+              SPLITSMART - LIVE_MARKET_FEED
             </p>
           </div>
           <div className="hidden lg:flex items-center gap-6 text-[10px] font-mono">
