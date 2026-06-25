@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuthStore } from '@/store/authStore';
-import Header from '@/components/layout/Header';
-import BottomNav from '@/components/layout/BottomNav';
 
 export default function WelcomePage() {
   const { firebaseUser } = useAuthStore();
@@ -19,8 +17,7 @@ export default function WelcomePage() {
   }, []);
 
   return (
-    <div className={`min-h-screen bg-black text-white font-body overflow-hidden flex flex-col items-center justify-center p-6 relative ${firebaseUser ? 'pt-20 pb-24 md:pb-8' : ''}`}>
-      {firebaseUser && <Header />}
+    <div className="min-h-screen bg-black text-white font-body overflow-hidden flex flex-col items-center justify-center p-6 relative">
       
       {/* Arcade cabinet background effects */}
       <div className="absolute inset-0 z-0">
@@ -74,8 +71,6 @@ export default function WelcomePage() {
            </div>
         </div>
       </main>
-
-      {firebaseUser && <BottomNav />}
 
       {/* CRT flicker effect */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[size:100%_4px] animate-pulse"></div>
