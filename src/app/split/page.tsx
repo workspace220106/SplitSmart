@@ -171,9 +171,6 @@ export default function SplitDashboard() {
       <header className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8 relative z-30">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between border-b border-primary/20 pb-6">
           <div>
-            <div className="text-[9px] text-primary uppercase tracking-[0.4em] font-bold mb-1.5 flex items-center gap-1.5 font-mono">
-              <span className="w-2 h-2 bg-primary animate-ping rounded-full"></span> INITIALIZING_LEDGER_CORE // 0xNODE_{currentUser.id.toUpperCase()}
-            </div>
             <h1 className="font-headline text-3xl font-black italic tracking-tighter text-white uppercase">
               SPLIT_LEDGER // <span className="text-primary neon-primary">{currentUser.name.split(' ')[0]}</span>
             </h1>
