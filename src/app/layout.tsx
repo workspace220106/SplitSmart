@@ -22,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "SplitSmart - Retro Arcade Finance",
   description: "Elite Token Exchange Arena - Retro-futuristic financial terminal for the next generation of asset traders.",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
