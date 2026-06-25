@@ -40,10 +40,10 @@ export default function RootPage() {
         if (!user) {
           router.push('/setup-profile');
         } else {
-          router.push('/arena');
+          router.push('/welcome');
         }
       } else {
-        router.push('/welcome');
+        router.push('/auth');
       }
     }
   }, [bootProgress, isInitialized, isLoading, firebaseUser, user, router]);
